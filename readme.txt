@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.17.0
+Stable tag: 2.17.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.17.1 =
+* About page reorganized: quick anchor navigation, collapsible brand identity / roadmap / changelog sections, anchored section IDs and consistent card rhythm — the page reads top-down without endless scrolling.
 
 = 2.17.0 =
 * Guided order experience for downloading customers: automatic popup right after ordering (reference, amount, the three next steps, copy-reference button) and after declaring payment ("keep this page open"); real-time order watch that polls every 25 seconds and pops a celebration dialog the moment the vendor delivers — with the key, a copy button and a one-click "Activate now" that pre-fills the license form.

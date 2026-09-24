@@ -637,3 +637,12 @@
 .rcb-confirm-next { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 14px; }
 .rcb-confirm-next span { padding: 10px 8px; text-align: center; font-size: 12px; font-weight: 700; color: #334155; background: #F4F6FB; border-radius: 10px; line-height: 1.4; }
 .rcb-confirm-next small { display: block; margin-top: 3px; font-weight: 500; color: #64748B; font-size: 10.5px; }
+
+/* ===== Page À propos : sections repliables (2.17.1) ===== */
+.rcb-about-details { background: #fff; border: 1px solid var(--rcb-border); border-radius: var(--rcb-card-r); padding: 14px 18px; margin-bottom: 20px; box-shadow: var(--rcb-shadow); }
+.rcb-about-details > summary { cursor: pointer; font-weight: 700; font-size: 15px; color: var(--rcb-text); display: flex; align-items: center; gap: 8px; list-style: none; }
+.rcb-about-details > summary::-webkit-details-marker { display: none; }
+.rcb-about-details > summary::before { content: '▸'; font-size: 13px; color: var(--rcb-primary); transition: transform .15s; }
+.rcb-about-details[open] > summary::before { transform: rotate(90deg); }
+.rcb-about-details > summary small { font-weight: 400; color: var(--rcb-muted); font-size: 12px; }
+.rcb-changelog-card { max-height: 65vh; overflow: auto; scrollbar-width: thin; }

@@ -89,9 +89,22 @@ $compat = array(
 		</div>
 	</div>
 
-	<!-- ===== Identité de marque ===== -->
-	<div class="rcb-card">
-		<div class="rcb-card-head"><h2>🎨 Identité de marque</h2></div>
+
+	<!-- ===== Navigation rapide ===== -->
+	<div class="rcb-nav-chips">
+		<a class="rcb-nav-chip" href="#rcb-about-presentation">📌 À propos</a>
+		<a class="rcb-nav-chip" href="#rcb-about-mecanismes">⚙️ Mécanismes</a>
+		<a class="rcb-nav-chip" href="#rcb-about-licences">💎 Licences</a>
+		<a class="rcb-nav-chip" href="#rcb-about-fonctions">✨ Fonctionnalités</a>
+		<a class="rcb-nav-chip" href="#rcb-about-technique">🔧 Technique</a>
+		<a class="rcb-nav-chip" href="#rcb-integrity">🔒 Intégrité</a>
+		<a class="rcb-nav-chip" href="#rcb-about-versions">🗂️ Versions</a>
+	</div>
+
+	<!-- ===== Identité de marque (repliable) ===== -->
+	<details class="rcb-about-details">
+		<summary>🎨 Identité de marque &amp; charte graphique <small>(cliquer pour déplier)</small></summary>
+		<div class="rcb-card" style="margin-top:14px;">
 		<div class="rcb-brand-grid">
 			<div class="rcb-brand-demo rcb-brand-demo-dark">
 				<span class="rcb-brand-label">Lockup sur fond sombre</span>
@@ -125,8 +138,10 @@ $compat = array(
 		<p class="rcb-muted" style="margin:12px 0 0;">Logo, icône de menu, icônes des messages et bannières de distribution suivent cette charte. Fichiers : <code>assets/icon.svg</code>, <code>icon-128.png</code>, <code>icon-256.png</code>, <code>banner-1544x500.png</code>, <code>banner-772x250.png</code>.</p>
 	</div>
 
+	</details>
+
 	<!-- ===== Présentation ===== -->
-	<div class="rcb-card">
+	<div class="rcb-card" id="rcb-about-presentation">
 		<div class="rcb-card-head"><h2>📌 À propos du plugin</h2></div>
 		<div class="rcb-prose">
 			<p><strong>Infinity RCB Pro</strong> est une solution complète de protection de contenu développée par <?php if ( $options['developer']['website'] ) : ?><a href="<?php echo esc_url( $options['developer']['website'] ); ?>" target="_blank" rel="noopener"><?php endif; ?><?php echo esc_html( $options['developer']['name'] ); ?><?php if ( $options['developer']['website'] ) : ?></a><?php endif; ?>, conçue pour les créateurs, photographes, rédacteurs, e-commerçants et agences qui publient du contenu de valeur et veulent limiter son vol : textes, images, prix, fiches produits ou articles de blog.</p>
@@ -136,9 +151,9 @@ $compat = array(
 		</div>
 	</div>
 
-	<!-- ===== Comment ça marche ===== -->
-	<div class="rcb-card">
-		<div class="rcb-card-head"><h2>⚙️ Comment ça marche (en détail)</h2></div>
+	<!-- ===== Mécanismes ===== -->
+	<div class="rcb-card" id="rcb-about-mecanismes">
+		<div class="rcb-card-head"><h2>⚙️ Mécanismes de protection</h2></div>
 		<p class="rcb-muted" style="margin:0 0 14px;">Chaque mécanisme s’appuie sur les évènements standard du navigateur, interceptés <strong>en phase de capture</strong> pour passer avant les scripts des thèmes et page builders — c’est ce qui garantit le blocage quel que soit le thème utilisé.</p>
 		<div class="rcb-table-wrap">
 			<table class="rcb-table">
@@ -187,7 +202,7 @@ $compat = array(
 	</div>
 
 	<!-- ===== Licences ===== -->
-	<div class="rcb-card rcb-price-card">
+	<div class="rcb-card rcb-price-card" id="rcb-about-licences">
 		<div class="rcb-card-head"><h2>💎 Licences à vie — achat symbolique</h2></div>
 		<div class="rcb-plans">
 			<?php foreach ( $tiers as $key => $tier ) :
@@ -245,7 +260,7 @@ $compat = array(
 	</div>
 
 	<!-- ===== Fonctionnalités ===== -->
-	<div class="rcb-card">
+	<div class="rcb-card" id="rcb-about-fonctions">
 		<div class="rcb-card-head"><h2>✨ Fonctionnalités</h2></div>
 		<div class="rcb-features-grid">
 			<?php foreach ( $features as $feature ) : ?>
@@ -258,8 +273,8 @@ $compat = array(
 		</div>
 	</div>
 
-	<!-- ===== Informations techniques ===== -->
-	<div class="rcb-grid-2">
+	<!-- ===== Technique & Développeur ===== -->
+	<div class="rcb-grid-2" id="rcb-about-technique">
 		<div class="rcb-card">
 			<div class="rcb-card-head"><h2>🔧 Informations techniques</h2></div>
 			<ul class="rcb-syslist">
@@ -306,9 +321,10 @@ $compat = array(
 		</div>
 	</div>
 
-	<!-- ===== Feuille de route ===== -->
-	<div class="rcb-card">
-		<div class="rcb-card-head"><h2>🗺️ Feuille de route</h2></div>
+	<!-- ===== Feuille de route (repliable) ===== -->
+	<details class="rcb-about-details">
+		<summary>🗺️ Feuille de route <small>(cliquer pour déplier)</small></summary>
+		<div class="rcb-card" style="margin-top:14px;">
 		<div class="rcb-roadmap">
 			<div class="rcb-roadmap-step"><span class="rcb-pill rcb-pill-soft">T4 2026</span><div><strong>Exports PDF &amp; alertes e-mail</strong><p>Rapports statistiques en PDF et notification automatique au-delà d’un seuil de tentatives.</p></div></div>
 			<div class="rcb-roadmap-step"><span class="rcb-pill rcb-pill-soft">T1 2027</span><div><strong>Règles par rôle et par page</strong><p>Protection différenciée selon le rôle (abonné, client…) et exclusion de pages spécifiques.</p></div></div>
@@ -316,6 +332,8 @@ $compat = array(
 			<div class="rcb-roadmap-step"><span class="rcb-pill rcb-pill-soft">Idées</span><div><strong>API REST des statistiques &amp; watermarks sur images</strong><p>Intégrations externes et filigranes automatiques.</p></div></div>
 		</div>
 	</div>
+
+	</details>
 
 	<!-- ===== Intégrité des fichiers ===== -->
 	<?php
@@ -347,9 +365,10 @@ $compat = array(
 		<?php endif; ?>
 	</div>
 
-	<!-- ===== Journal des versions ===== -->
-	<div class="rcb-card">
-		<div class="rcb-card-head"><h2>🗂️ Journal des versions</h2></div>
+	<!-- ===== Journal des versions (repliable) ===== -->
+	<details class="rcb-about-details" id="rcb-about-versions">
+		<summary>🗂️ Journal des versions <small>(cliquer pour déplier l'historique complet)</small></summary>
+		<div class="rcb-card rcb-changelog-card" style="margin-top:14px;">
 		<div class="rcb-changelog">
 			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.17.0</span>
@@ -780,6 +799,8 @@ $compat = array(
 			<p>Lorsqu’une tentative est bloquée, le plugin enregistre la date, le type d’action, l’adresse IP et le user-agent du navigateur, uniquement à des fins de sécurité et de statistiques internes. Ces données restent sur votre serveur et peuvent être supprimées à tout moment (pages Statistiques et Journaux). Elles ne sont jamais partagées ni vendues, et aucun cookie n’est déposé par le plugin.</p>
 		</div>
 	</div>
+
+		</details>
 
 	<p class="rcb-credit">Infinity RCB Pro v<?php echo esc_html( INFINITY_RCB_VERSION ); ?> — développé avec ❤️ par <?php if ( $options['developer']['website'] ) : ?><a href="<?php echo esc_url( $options['developer']['website'] ); ?>" target="_blank" rel="noopener"><?php endif; ?><?php echo esc_html( $options['developer']['name'] ); ?><?php if ( $options['developer']['website'] ) : ?></a><?php endif; ?> — Licences à vie : 2 900 DA ≈ 11,90 € (1 site) · 4 800 DA ≈ 22,90 € (5 sites)</p>
 </div>
