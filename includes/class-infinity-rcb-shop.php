@@ -108,17 +108,37 @@ class Infinity_RCB_Shop {
 				$out .= '<p style="text-align:center;"><a class="rcb-shop-btn rcb-shop-btn-card" href="' . esc_url( $order['chargily_url'] ) . '" target="_blank" rel="noopener">💳 Payer par carte CIB / Edahabia</a></p>';
 			}
 
-			// Étape « J'ai payé » : déclenche la demande de licence au vendeur.
-			if ( 'pending' === $order['status'] ) {
-				$out .= '<div class="rcb-shop-declare"><h4>Vous avez payé ?</h4>';
-				$out .= '<p>Cliquez pour signaler votre paiement : la demande de licence part aussitôt au vendeur, puis votre clé arrive automatiquement par e-mail après vérification.</p>';
-				$out .= '<form method="post" action="' . esc_url( remove_query_arg( array( 'rcb-shop', 'ref' ) ) ) . '#rcb-commande">';
-				$out .= wp_nonce_field( 'infinity_rcb_shop', 'rcb_shop_nonce', true, false );
-				$out .= '<input type="hidden" name="rcb_paid_ref" value="' . esc_attr( $order['ref'] ) . '">';
-				$out .= '<button type="submit" name="rcb_shop_paid" value="1" class="rcb-shop-btn">✅ J\'ai payé — envoyer la demande de licence</button></form></div>';
-			} elseif ( 'declared' === $order['status'] ) {
-				$out .= '<div class="rcb-shop-success" style="margin-top:14px;"><h3>🕵️ Paiement signalé au vendeur</h3><p>Votre commande est en cours de vérification — la clé de licence vous sera envoyée automatiquement dès validation.</p></div>';
-			}
+				// Étape « J'ai payé » : déclenche la demande de licence au vendeur.
+				if ( 'pending' === $order['status'] ) {
+					$out .= '<div class="rcb-shop-declare"><h4>Vous avez payé ?</h4>';
+					$out .= '<p>Cliquez pour signaler votre paiement : la demande de licence part aussitôt au vendeur, puis votre clé arrive automatiquement par e-mail après vérification.</p>';
+					$out .= '<form method="post" action="' . esc_url( remove_query_arg( array( 'rcb-shop', 'ref' ) ) ) . '#rcb-commande">';
+					$out .= wp_nonce_field( 'infinity_rcb_shop', 'rcb_shop_nonce', true, false );
+					$out .= '<input type="hidden" name="rcb_paid_ref" value="' . esc_attr( $order['ref'] ) . '">';
+					$out .= '<button type="submit" name="rcb_shop_paid" value="1" class="rcb-shop-btn">✅ J\'ai payé — envoyer la demande de licence</button></form></div>';
+				} elseif ( 'declared' === $order['status'] ) {
+					$out .= '<div class="rcb-shop-success" style="margin-top:14px;"><h3>🕵️ Paiement signalé au vendeur</h3><p>Votre commande est en cours de vérification — la clé de licence vous sera envoyée automatiquement dès validation.</p></div>';
+				}
+
+				// Échec d'envoi e-mail (hébergement sans fonction mail) :
+				// la commande EST enregistrée — on donne les secours directs.
+				$emailed_status = isset( $_GET['rcb-emailed'] ) ? sanitize_key( wp_unslash( $_GET['rcb-emailed'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (bandeau d'état).
+				if ( in_array( $emailed_status, array( 'none', 'partial' ), true ) ) {
+					$out .= '<div class="rcb-shop-error" style="margin-top:12px;">';
+					$out .= '<strong>⚠️ E-mail non envoyé automatiquement</strong> (messagerie du site non configurée). Votre commande <strong>' . esc_html( $order['ref'] ) . '</strong> est bien enregistrée — contactez directement le vendeur :';
+					$out .= '<ul class="rcb-shop-pay" style="margin:8px 0 0;">';
+					if ( is_email( $opts['developer']['email'] ) ) {
+						$mail_subject = 'Commande ' . $order['ref'] . ' — licence Infinity RCB Pro';
+						$mail_body    = "Bonjour,\n\nJe viens de commander une licence (réf. " . $order['ref'] . ', ' . number_format( (float) $order['amount_da'], 0, ',', ' ' ) . " DA).\nNom : " . $order['buyer'] . "\nE-mail : " . $order['email'] . "\n\nMerci de me confirmer la réception.";
+						$fallback_url = 'mailto:' . rawurlencode( $opts['developer']['email'] ) . '?subject=' . rawurlencode( $mail_subject ) . '&body=' . rawurlencode( $mail_body );
+						$out .= '<li><strong>✉️ E-mail</strong> : <a href="' . esc_url( $fallback_url ) . '">écrire au vendeur</a> (' . esc_html( $opts['developer']['email'] ) . ')</li>';
+					}
+					$wa_fail = $this->whatsapp_url( sprintf( 'Bonjour, commande %s (%s DA) — licence Infinity RCB Pro.', $order['ref'], number_format( (float) $order['amount_da'], 0, ',', ' ' ) ) );
+					if ( '' !== $wa_fail ) {
+						$out .= '<li><strong>💬 WhatsApp</strong> : <a href="' . esc_url( $wa_fail ) . '" target="_blank" rel="noopener">message direct au vendeur</a></li>';
+					}
+					$out .= '</ul></div>';
+				}
 
 			// Commande directe par WhatsApp.
 			$wa = $this->whatsapp_url( sprintf( 'Bonjour, je souhaite payer la commande %1$s (%2$s DA) — Infinity RCB Pro.', $order['ref'], number_format( (float) $order['amount_da'], 0, ',', ' ' ) ) );
@@ -309,13 +329,17 @@ class Infinity_RCB_Shop {
 
 		$lic    = new Infinity_RCB_License();
 		$order  = $lic->create_order( $plan, $buyer, $email, $note, $promo );
-		$lic->email_order_to_seller( $order );
-		$lic->email_order_to_buyer( $order );
+		$to_seller = $lic->email_order_to_seller( $order );
+		$to_buyer  = $lic->email_order_to_buyer( $order );
+		// Statut d'envoi transmis à la page de succès : si l'hébergement
+		// bloque wp_mail, l'acheteur voit un avertissement + liens de secours
+		// (la commande reste enregistrée et suivie dans tous les cas).
+		$emailed = ( $to_seller && $to_buyer ) ? 'both' : ( ( $to_seller || $to_buyer ) ? 'partial' : 'none' );
 
 		// Paiement carte CIB / Edahabia : création du checkout Chargily et
 		// redirection vers la page de paiement (livraison auto par webhook).
 		if ( Infinity_RCB_Chargily::enabled() ) {
-			$back     = add_query_arg( array( 'rcb-shop' => 'ok', 'ref' => rawurlencode( $order['ref'] ) ) ) . '#rcb-commande';
+			$back     = add_query_arg( array( 'rcb-shop' => 'ok', 'ref' => rawurlencode( $order['ref'] ), 'rcb-emailed' => $emailed ) ) . '#rcb-commande';
 			$checkout = Infinity_RCB_Chargily::create_checkout( $order, $back, $back );
 			if ( ! empty( $checkout['url'] ) ) {
 				$lic->set_order_chargily( $order['ref'], $checkout['id'], $checkout['url'] );
@@ -325,7 +349,7 @@ class Infinity_RCB_Shop {
 			// Échec de création : on continue vers la page classique.
 		}
 
-		wp_safe_redirect( add_query_arg( array( 'rcb-shop' => 'ok', 'ref' => rawurlencode( $order['ref'] ) ) ) . '#rcb-commande' );
+		wp_safe_redirect( add_query_arg( array( 'rcb-shop' => 'ok', 'ref' => rawurlencode( $order['ref'] ), 'rcb-emailed' => $emailed ) ) . '#rcb-commande' );
 		exit;
 	}
 }

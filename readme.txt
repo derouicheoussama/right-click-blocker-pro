@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.16.4
+Stable tag: 2.16.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.16.5 =
+* The public shop now reports email delivery after ordering: if the host blocks wp_mail, the customer sees a clear warning with direct fallback links (vendor email with the order details pre-filled, WhatsApp) — the order itself is always registered and trackable.
 
 = 2.16.4 =
 * Promo codes entered on sites that don't know them are now stored with the order and flagged "to verify" in the vendor emails (instead of being silently dropped); the dashboard widget protection counter now derives from the registered types instead of a hardcoded value.
