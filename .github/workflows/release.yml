@@ -1,9 +1,13 @@
 name: Release
 
-# À chaque tag v*, GitHub Actions construit right-click-blocker-pro.zip
-# (dossier du plugin, sans les fichiers propres au dépôt) et publie la
-# release — c'est ce zip que les installations manuelles téléchargent via
-# le canal de mise à jour GitHub du plugin.
+# À chaque tag v*, GitHub Actions :
+# 1. construit right-click-blocker-pro.zip (dossier du plugin, sans les
+#    fichiers propres au dépôt) ;
+# 2. génère .rcb-manifest.json (SHA-256 de chaque fichier .php/.js/.css)
+#    embarqué dans le zip — la page « À propos » du plugin s'en sert pour
+#    détecter toute copie altérée avant redistribution ;
+# 3. publie la release avec le zip + SHA256SUMS.txt (vérification du zip
+#    téléchargé avant installation).
 on:
   push:
     tags: ['v*']
@@ -18,7 +22,7 @@ jobs:
       - name: Récupérer le code
         uses: actions/checkout@v4
 
-      - name: Construire right-click-blocker-pro.zip
+      - name: Construire le plugin + manifeste d'intégrité
         run: |
           mkdir -p build/right-click-blocker-pro
           rsync -a \
@@ -26,15 +30,33 @@ jobs:
             --exclude='.github' \
             --exclude='README.md' \
             --exclude='LICENSE.md' \
+            --exclude='SECURITY.md' \
             --exclude='.gitignore' \
             ./ build/right-click-blocker-pro/
-          cd build
+          cd build/right-click-blocker-pro
+          python3 - <<'PY'
+          import hashlib, json, os
+          manifest = {}
+          for root, dirs, files in os.walk('.'):
+              for f in sorted(files):
+                  if f.endswith(('.php', '.js', '.css')) and f != '.rcb-manifest.json':
+                      p = os.path.join(root, f)
+                      rel = os.path.relpath(p, '.').replace('\\', '/')
+                      manifest[rel] = hashlib.sha256(open(p, 'rb').read()).hexdigest()
+          with open('.rcb-manifest.json', 'w') as out:
+              json.dump(manifest, out, indent=1, sort_keys=True)
+          print('Manifeste :', len(manifest), 'fichiers')
+          PY
+          cd ..
           zip -r ../right-click-blocker-pro.zip right-click-blocker-pro
           cd ..
-          unzip -l right-click-blocker-pro.zip | head -20
+          sha256sum right-click-blocker-pro.zip > SHA256SUMS.txt
+          unzip -l right-click-blocker-pro.zip | tail -5
 
       - name: Publier la release GitHub
         uses: softprops/action-gh-release@v2
         with:
-          files: right-click-blocker-pro.zip
+          files: |
+            right-click-blocker-pro.zip
+            SHA256SUMS.txt
           generate_release_notes: true

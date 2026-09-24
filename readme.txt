@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.15.2
+Stable tag: 2.16.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.16.0 =
+* Tamper protection: every official release ships a SHA-256 manifest of all plugin files; the About page verifies each file against it and warns when a redistributed copy or zip has been modified (with the list of changed files and a link to the official sources). Releases also publish SHA256SUMS.txt so anyone can verify a downloaded zip before installing.
 
 = 2.15.2 =
 * Hardening: the tracking batch (sendBeacon payload) is normalized immediately after JSON decoding — type whitelist and capped counts before any use in stats, logs or alert emails.

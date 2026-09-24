@@ -76,8 +76,24 @@ Les sites installés depuis GitHub proposeront la mise à jour en 1 clic dans **
 |---|---|---|
 | ![](assets/screenshot-1.png) | ![](assets/screenshot-3.png) | ![](assets/screenshot-4.png) |
 
+## 🔒 Sécurité & protection du code
+
+Même si quelqu'un télécharge le code ou redistribue un zip modifié :
+
+- **Licences infalsifiables** : les clés de licence sont signées **ECDSA P-256** — impossible d'en générer hors du site du développeur (la clé privée ne quitte jamais le serveur du vendeur ; le plugin n'embarque que la clé publique).
+- **Manifeste d'intégrité SHA-256** : chaque release embarque `.rcb-manifest.json` (hachage de chaque fichier). Après activation, **Infinity RCB Pro → À propos → 🔒 Intégrité des fichiers** affiche « Installation intègre » ou **la liste des fichiers modifiés** d'une copie altérée.
+- **Zip vérifiable** : chaque release joint `SHA256SUMS.txt` :
+  ```bash
+  sha256sum right-click-blocker-pro.zip                 # Linux / macOS / Git Bash
+  certutil -hashfile right-click-blocker-pro.zip SHA256 # Windows
+  ```
+- **Webhook paiement signé** (HMAC-SHA256, comparaison en temps constant) : seul Chargily peut déclencher la livraison d'une clé.
+- **Nonces, capacités, échappement, ABSPATH** sur tous les points d'entrée ; aucune donnée sortante, aucun cookie.
+
+Signalement de vulnérabilité : voir [SECURITY.md](SECURITY.md) — divulgation responsable par e-mail, jamais en issue public.
+
 ## ⚖️ Licence
 
-GPL v2 ou ultérieure. Développé avec ❤️ par **Infinity Coder** — [hi@infinitycoder.dev](mailto:hi@infinitycoder.dev).
+GPL v2 ou ultérieure — voir [LICENSE.md](LICENSE.md). Développé avec ❤️ par **Infinity Coder** — [hi@infinitycoder.dev](mailto:hi@infinitycoder.dev).
 
 > Licence de support à vie optionnelle (à partir de 2 900 DA ≈ 11,90 €) : elle finance le développement et offre un support prioritaire — **toutes les fonctionnalités restent gratuites et complètes sans licence**.

@@ -622,6 +622,53 @@ class Infinity_RCB_Admin {
 	}
 
 	/* ---------------------------------------------------------------------
+	 * Intégrité des fichiers (anti-altération des copies redistribuées)
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Compare chaque fichier du plugin au manifeste de hachages SHA-256
+	 * généré à la release (GitHub Actions). Détecte tout zip ou copie
+	 * modifiés avant redistribution.
+	 *
+	 * @return array status: ok|tampered|no-manifest|invalid + détails.
+	 */
+	public function integrity_check() {
+		$manifest_path = INFINITY_RCB_DIR . '.rcb-manifest.json';
+		if ( ! is_readable( $manifest_path ) ) {
+			return array( 'status' => 'no-manifest' );
+		}
+		$manifest = json_decode( (string) file_get_contents( $manifest_path ), true );
+		if ( ! is_array( $manifest ) || empty( $manifest ) ) {
+			return array( 'status' => 'invalid' );
+		}
+
+		$ok       = 0;
+		$modified = array();
+		$missing  = array();
+		foreach ( $manifest as $rel => $hash ) {
+			$rel  = str_replace( array( '..', '\\' ), '', (string) $rel );
+			$file = INFINITY_RCB_DIR . $rel;
+			if ( ! is_readable( $file ) ) {
+				$missing[] = $rel;
+				continue;
+			}
+			if ( hash_equals( (string) $hash, hash_file( 'sha256', $file ) ) ) {
+				$ok++;
+			} else {
+				$modified[] = $rel;
+			}
+		}
+
+		return array(
+			'status'   => ( empty( $modified ) && empty( $missing ) ) ? 'ok' : 'tampered',
+			'ok'       => $ok,
+			'total'    => count( $manifest ),
+			'modified' => $modified,
+			'missing'  => $missing,
+		);
+	}
+
+	/* ---------------------------------------------------------------------
 	 * Widget du tableau de bord WordPress : mini-stats sans ouvrir le plugin
 	 * ------------------------------------------------------------------- */
 
@@ -935,7 +982,7 @@ class Infinity_RCB_Admin {
 		$log_rows    = $this->logger->rows( 300 );
 		$top_ips     = $this->stats->top_ips( 10 );
 		$styles      = infinity_rcb_message_styles();
-		$notice      = isset( $_GET['rcb-notice'] ) ? sanitize_key( wp_unslash( $_GET['rcb-notice'] ) ) : '';
+		$notice      = isset( $_GET['rcb-notice'] ) ? sanitize_key( wp_unslash( $_GET['rcb-notice'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (bandeau).
 		$cron_next   = wp_next_scheduled( INFINITY_RCB_CRON );
 		$lic_status  = $this->license->status();
 		$orders      = $this->license->get_orders();
@@ -948,6 +995,7 @@ class Infinity_RCB_Admin {
 			$gen_key = '';
 		}
 
+		$rcb_admin = $this; // Disponible pour les partials (contrôle d'intégrité).
 		include INFINITY_RCB_DIR . 'admin/partials/' . $partial . '.php';
 	}
 }

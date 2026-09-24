@@ -317,6 +317,36 @@ $compat = array(
 		</div>
 	</div>
 
+	<!-- ===== Intégrité des fichiers ===== -->
+	<?php
+	$integrity_status = array( 'status' => 'no-manifest' );
+	if ( isset( $rcb_admin ) && is_object( $rcb_admin ) && method_exists( $rcb_admin, 'integrity_check' ) ) {
+		$integrity_status = $rcb_admin->integrity_check();
+	}
+	?>
+	<div class="rcb-card" id="rcb-integrity">
+		<div class="rcb-card-head">
+			<h2>🔒 Intégrité des fichiers <span class="rcb-pill rcb-pill-soft">anti-altération</span></h2>
+		</div>
+		<?php if ( 'ok' === $integrity_status['status'] ) : ?>
+			<div class="rcb-notice rcb-notice-ok">✅ Installation intègre : <?php printf( '%d/%d fichiers conformes au manifeste de la release.', (int) $integrity_status['ok'], (int) $integrity_status['total'] ); ?></div>
+			<p class="rcb-muted" style="margin:10px 0 0;">Chaque fichier est comparé au manifeste SHA-256 généré à la publication officielle (GitHub Actions). Une copie ou un zip modifié avant redistribution serait signalé ici.</p>
+		<?php elseif ( 'tampered' === $integrity_status['status'] ) : ?>
+			<div class="rcb-notice rcb-notice-warn">⚠️ Fichiers différents de la release officielle — cette copie a été modifiée. Fichiers concernés :</div>
+			<ul class="rcb-syslist" style="margin-top:10px;">
+				<?php foreach ( array_slice( (array) $integrity_status['modified'], 0, 8 ) as $int_file ) : ?>
+					<li><span>Modifié</span><strong><code><?php printf( '%s', esc_html( $int_file ) ); ?></code></strong></li>
+				<?php endforeach; ?>
+				<?php foreach ( array_slice( (array) $integrity_status['missing'], 0, 5 ) as $int_file ) : ?>
+					<li><span>Manquant</span><strong><code><?php printf( '%s', esc_html( $int_file ) ); ?></code></strong></li>
+				<?php endforeach; ?>
+			</ul>
+			<p class="rcb-muted" style="margin:10px 0 0;">Téléchargez à nouveau le zip officiel depuis la <a href="https://github.com/derouicheoussama/right-click-blocker-pro/releases" target="_blank" rel="noopener">page des releases</a> (vérifiez SHA256SUMS.txt) ou depuis WordPress.org.</p>
+		<?php else : ?>
+			<div class="rcb-notice rcb-notice-warn">ℹ️ Manifeste d'intégrité absent (installation développeur ou installation manuelle hors release). Les installations officielles GitHub / WordPress.org embarquent automatiquement le manifeste SHA-256.</div>
+		<?php endif; ?>
+	</div>
+
 	<!-- ===== Journal des versions ===== -->
 	<div class="rcb-card">
 		<div class="rcb-card-head"><h2>🗂️ Journal des versions</h2></div>
