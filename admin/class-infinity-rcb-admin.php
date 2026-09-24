@@ -723,7 +723,7 @@ class Infinity_RCB_Admin {
 
 		echo '<p style="margin:0 0 6px;">'
 			. ( $options['master_enable']
-				? '<span style="display:inline-block;background:#DCFCE7;color:#15803D;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">● Protection active — ' . (int) $active_protections . '/11</span>'
+				? '<span style="display:inline-block;background:#DCFCE7;color:#15803D;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">● Protection active — ' . (int) $active_protections . '/' . count( $types ) . '</span>'
 				: '<span style="display:inline-block;background:#FEE2E2;color:#B91C1C;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">● Protection désactivée</span>' )
 			. ' <span style="display:inline-block;background:#EDEBFF;color:#6D28D9;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">Licence : ' . esc_html( $lic['label'] ) . '</span>'
 			. '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- pieces echappees (esc_html/int) en amont.

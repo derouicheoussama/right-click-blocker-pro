@@ -540,7 +540,10 @@ Lhr6NHXAYrMJLTc+ofHQvJlsOZ/3geEGaHaCyqrf9Xj5AYg3drWZulMP0g==
 			'note'        => sanitize_textarea_field( $note ),
 			'amount_da'   => $amount_da,
 			'amount_eur'  => $amount_eur,
-			'promo_code'  => $discount > 0 ? $promo_code : '',
+			// Le code tenté est TOUJOURS conservé (même sans remise locale,
+			// p. ex. code vendeur inconnu sur un site client) : le vendeur
+			// peut l'honorer manuellement — discount_pct reste la remise réelle.
+			'promo_code'  => $promo_code,
 			'discount_pct'=> $discount,
 			'status'      => 'pending',
 			'key'         => '',
@@ -1302,6 +1305,10 @@ E-mail automatique envoyé par le site ' . esc_html( wp_specialchars_decode( get
 		);
 		if ( (int) $order['discount_pct'] > 0 ) {
 			$rows['Remise'] = esc_html( $order['promo_code'] ) . ' (−' . (int) $order['discount_pct'] . '%)';
+		} elseif ( '' !== trim( (string) $order['promo_code'] ) ) {
+			// Code tenté mais sans remise locale (code vendeur inconnu ici) :
+			// le vendeur peut l'honorer manuellement lors de la vérification.
+			$rows['Code promo'] = esc_html( $order['promo_code'] ) . ' — remise non appliquée automatiquement, à vérifier';
 		}
 		if ( '' !== trim( (string) $order['note'] ) ) {
 			$rows['Note'] = esc_html( $order['note'] );
@@ -1561,6 +1568,8 @@ E-mail automatique envoyé par le site ' . esc_html( wp_specialchars_decode( get
 		);
 		if ( (int) $order['discount_pct'] > 0 ) {
 			$rows['Remise'] = esc_html( $order['promo_code'] ) . ' (−' . (int) $order['discount_pct'] . '%)';
+		} elseif ( '' !== trim( (string) $order['promo_code'] ) ) {
+			$rows['Code promo'] = esc_html( $order['promo_code'] ) . ' — remise non appliquée automatiquement, à vérifier';
 		}
 		$rows['Note acheteur'] = '' !== trim( (string) $order['note'] ) ? esc_html( $order['note'] ) : '—';
 

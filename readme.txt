@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.16.3
+Stable tag: 2.16.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.16.4 =
+* Promo codes entered on sites that don't know them are now stored with the order and flagged "to verify" in the vendor emails (instead of being silently dropped); the dashboard widget protection counter now derives from the registered types instead of a hardcoded value.
 
 = 2.16.3 =
 * Full-options logic audit: saving the settings no longer wipes the GitHub update channel on client sites (fields preserved unless the vendor form posts them) and no longer resurrects the first-run wizard; a failed key generation (OpenSSL unavailable) keeps the order pending instead of marking it paid with an empty key; the update check returns the neutral notice when the GitHub channel is deliberately disabled.
