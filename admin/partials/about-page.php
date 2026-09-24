@@ -352,6 +352,17 @@ $compat = array(
 		<div class="rcb-card-head"><h2>🗂️ Journal des versions</h2></div>
 		<div class="rcb-changelog">
 			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.17.0</span>
+			</div>
+			<div>
+				<strong>Commande guidée + notifications temps réel</strong>
+				<ul>
+					<li>Popup automatique après commande (réf, montant, étapes, copier) et après « J&#8217;ai payé ».</li>
+					<li>Surveillance 25 s : popup « votre clé est arrivée » avec copie + activation en 1 clic.</li>
+				</ul>
+			</div>
+		</div>
+		<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.15.0</span>
 			</div>
 			<div>

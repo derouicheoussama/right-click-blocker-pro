@@ -36,6 +36,7 @@ class Infinity_RCB_Admin {
 		add_action( 'admin_init', array( $this, 'handle_wizard' ) );
 		add_action( 'admin_bar_menu', array( $this, 'admin_bar_link' ), 100 );
 		add_action( 'wp_ajax_infinity_rcb_live', array( $this, 'ajax_live' ) );
+		add_action( 'wp_ajax_infinity_rcb_order_status', array( $this, 'ajax_order_status' ) );
 		add_action( 'admin_footer-plugins.php', array( $this, 'plugin_row_icon' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'register_dashboard_widget' ) );
 		add_filter( 'plugin_action_links_' . INFINITY_RCB_BASENAME, array( $this, 'action_links' ) );
@@ -873,6 +874,30 @@ class Infinity_RCB_Admin {
 			'summary' => $this->stats->summary(),
 			'chart'   => $this->stats->chart( 14 ),
 			'donut'   => $this->stats->donut(),
+		) );
+	}
+
+	/**
+	 * AJAX : statut d'une commande (surveillance temps réel de la page
+	 * Licence — notifie le client quand sa clé arrive, sans recharger).
+	 */
+	public function ajax_order_status() {
+		check_ajax_referer( 'infinity_rcb_admin', 'nonce' );
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => 'Permissions insuffisantes.' ), 403 );
+		}
+
+		$ref   = isset( $_POST['ref'] ) ? sanitize_text_field( wp_unslash( $_POST['ref'] ) ) : '';
+		$order = $ref ? $this->license->get_order( $ref ) : null;
+		if ( ! $order ) {
+			wp_send_json_error( array( 'message' => 'Commande inconnue.' ), 404 );
+		}
+
+		wp_send_json_success( array(
+			'ref'    => $order['ref'],
+			'status' => $order['status'],
+			'key'    => in_array( $order['status'], array( 'paid', 'delivered' ), true ) ? (string) $order['key'] : '',
 		) );
 	}
 

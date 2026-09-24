@@ -726,3 +726,62 @@ $status_badge = array(
 		</div>
 	</div>
 </div>
+
+<?php if ( $last_order && in_array( $last_order['status'], array( 'pending', 'declared' ), true ) ) : ?>
+<!-- Surveillance temps reel : JS interroge le serveur toutes les 25 s et
+     affiche la popup cle arrivee des que le vendeur livre. -->
+<div id="rcb-order-watch" data-ref="<?php echo esc_attr( $last_order['ref'] ); ?>" data-status="<?php echo esc_attr( $last_order['status'] ); ?>" hidden></div>
+
+<!-- Popup : commande creee / paiement signale (affichee automatiquement). -->
+<div class="rcb-modal" id="rcb-order-notice-modal" hidden>
+	<div class="rcb-modal-box" role="dialog" aria-modal="true" aria-labelledby="rcb-notice-modal-title">
+		<div class="rcb-modal-head">
+			<span class="rcb-modal-logo"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></span>
+			<h3 id="rcb-notice-modal-title"><?php echo 'declared' === $last_order['status'] ? '🕵️ Paiement signalé au vendeur' : '✅ Commande enregistrée'; ?></h3>
+		</div>
+		<p style="margin:0 0 12px;font-size:14px;color:#334155;">
+			<?php if ( 'declared' === $last_order['status'] ) : ?>
+				Le vendeur vérifie votre paiement <strong><?php echo esc_html( $last_order['ref'] ); ?></strong> — la clé arrivera par e-mail.
+				<strong>Laissez cette page ouverte</strong> : vous serez prévenu ici même dès qu'elle est livrée.
+			<?php else : ?>
+				Votre commande <strong><?php echo esc_html( $last_order['ref'] ); ?></strong> (
+				<strong><?php echo number_format( (float) $last_order['amount_da'], 0, ',', ' ' ); ?> DA</strong>) est enregistrée.
+				Une confirmation vient d'être envoyée à <strong><?php echo esc_html( $last_order['email'] ); ?></strong> — vérifiez aussi vos indésirables.
+			<?php endif; ?>
+		</p>
+		<div class="rcb-confirm-next">
+			<?php if ( 'pending' === $last_order['status'] ) : ?>
+				<span>1 · Payez<br><small>BaridiMob · CCP · carte · PayPal</small></span>
+				<span>2 · « J'ai payé »<br><small>la demande part au vendeur</small></span>
+				<span>3 · Clé par e-mail<br><small>envoyée automatiquement</small></span>
+			<?php else : ?>
+				<span>✓ Payé<br><small>paiement déclaré</small></span>
+				<span>⏳ Vérification<br><small>par le vendeur</small></span>
+				<span>🔑 Clé<br><small>notification ici + e-mail</small></span>
+			<?php endif; ?>
+		</div>
+		<div class="rcb-modal-actions">
+			<button type="button" class="rcb-btn rcb-btn-ghost" data-copy-copy="<?php echo esc_attr( $last_order['ref'] ); ?>">📋 Copier la référence</button>
+			<button type="button" class="rcb-btn rcb-btn-primary" id="rcb-order-notice-close">Continuer</button>
+		</div>
+	</div>
+</div>
+
+<!-- Popup : la cle est arrivee (remplie par la surveillance temps reel). -->
+<div class="rcb-modal" id="rcb-key-arrived-modal" hidden>
+	<div class="rcb-modal-box" role="dialog" aria-modal="true" aria-labelledby="rcb-key-arrived-title">
+		<div class="rcb-modal-head" style="background:linear-gradient(135deg,#10B981,#059669);">
+			<span class="rcb-modal-logo">🎉</span>
+			<h3 id="rcb-key-arrived-title">Votre clé de licence est arrivée !</h3>
+		</div>
+		<p style="margin:0 0 6px;font-size:14px;color:#334155;">La commande <strong id="rcb-arrived-ref"></strong> est livrée — elle vous a aussi été envoyée par e-mail.</p>
+		<div style="background:#0B0F1E;border-radius:10px;padding:14px;margin:12px 0;">
+			<div style="font-family:Consolas,'Courier New',monospace;font-size:12.5px;line-height:1.6;color:#fff;word-break:break-all;" id="rcb-arrived-key"></div>
+		</div>
+		<div class="rcb-modal-actions">
+			<button type="button" class="rcb-btn rcb-btn-ghost" id="rcb-arrived-copy">📋 Copier la clé</button>
+			<button type="button" class="rcb-btn rcb-btn-primary" id="rcb-arrived-activate">🚀 Activer maintenant</button>
+		</div>
+	</div>
+</div>
+<?php endif; ?>

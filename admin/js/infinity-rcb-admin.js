@@ -981,6 +981,90 @@
 		}
 	}
 
+
+	/* ==================================================================
+	 * Page Licence : popups de notification + surveillance temps réel
+	 * de la commande (prévient le client quand sa clé arrive).
+	 * ================================================================== */
+	function initOrderWatch() {
+		var watch = document.getElementById('rcb-order-watch');
+		var noticeModal = document.getElementById('rcb-order-notice-modal');
+		var arrivedModal = document.getElementById('rcb-key-arrived-modal');
+		var arrivedKey = '';
+		var noticeClose = document.getElementById('rcb-order-notice-close');
+
+		// 1. Popup automatique après commande / déclaration de paiement.
+		if (noticeModal) {
+			noticeModal.hidden = false;
+			if (noticeClose) { noticeClose.focus(); }
+		}
+
+		// 2. Boutons (liés avant tout retour anticipé).
+		var copyBtn = document.getElementById('rcb-arrived-copy');
+		if (copyBtn) {
+			copyBtn.addEventListener('click', function () {
+				if (navigator.clipboard && arrivedKey) { navigator.clipboard.writeText(arrivedKey); }
+				copyBtn.textContent = '✓ Copié';
+				window.setTimeout(function () { copyBtn.textContent = '📋 Copier la clé'; }, 1500);
+			});
+		}
+		var activateBtn = document.getElementById('rcb-arrived-activate');
+		if (activateBtn) {
+			activateBtn.addEventListener('click', function () {
+				if (arrivedModal) { arrivedModal.hidden = true; }
+				var keyInput = document.getElementById('rcb-key');
+				if (keyInput && arrivedKey) { keyInput.value = arrivedKey; }
+				var lic = document.getElementById('rcb-licence');
+				if (lic) { lic.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+				if (keyInput) { keyInput.focus(); }
+			});
+		}
+		if (noticeClose && noticeModal) {
+			noticeClose.addEventListener('click', function () { noticeModal.hidden = true; });
+			noticeModal.addEventListener('click', function (e) { if (e.target === noticeModal) { noticeModal.hidden = true; } });
+		}
+
+		// 3. Surveillance temps réel (25 s, onglet visible uniquement).
+		if (!watch || !window.RCBAdmin || !RCBAdmin.ajax) { return; }
+		var ref = watch.getAttribute('data-ref');
+		var lastStatus = watch.getAttribute('data-status');
+		var timer = null;
+
+		function showArrived() {
+			if (!arrivedModal) { return; }
+			document.getElementById('rcb-arrived-ref').textContent = ref;
+			document.getElementById('rcb-arrived-key').textContent = arrivedKey;
+			arrivedModal.hidden = false;
+		}
+
+		function poll() {
+			if (document.visibilityState === 'hidden') { return; }
+			var body = new URLSearchParams();
+			body.append('action', 'infinity_rcb_order_status');
+			body.append('nonce', RCBAdmin.nonce);
+			body.append('ref', ref);
+			window.fetch(RCBAdmin.ajax, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+				.then(function (r) { return r.json(); })
+				.then(function (r) {
+					if (!r || !r.success) { return; }
+					var st = r.data.status;
+					if (st !== lastStatus) {
+						lastStatus = st;
+						if (st === 'declared') {
+							window.location.reload();
+						} else if (st === 'paid' || st === 'delivered') {
+							arrivedKey = r.data.key || '';
+							window.clearInterval(timer);
+							showArrived();
+						}
+					}
+				})
+				.catch(function () { /* silencieux : nouvelle tentative dans 25 s */ });
+		}
+
+		timer = window.setInterval(poll, 25000);
+	}
+
 	/* ==================================================================
 	 * Lancement
 	 * ================================================================== */
@@ -992,6 +1076,7 @@
 		initPresets();
 		initLicensePage();
 		initOrderConfirm();
+		initOrderWatch();
 		initPreview();
 		initDashPreview();
 		initLogFilters();
