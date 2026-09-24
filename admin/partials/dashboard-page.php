@@ -126,6 +126,20 @@ foreach ( $types as $type => $meta ) {
 		</div>
 	</div>
 
+	<?php
+	$rcb_spam_count = (int) get_option( 'infinity_rcb_pro_spam_count', 0 );
+	if ( $rcb_spam_count > 0 ) :
+		?>
+	<!-- ===== Compteur antispam ===== -->
+	<div class="rcb-card" style="display:flex;align-items:center;gap:16px;padding:14px 20px;">
+		<span style="font-size:28px;">🚫</span>
+		<div style="flex:1;">
+			<strong style="font-size:16px;color:#DC2626;"><?php echo number_format( $rcb_spam_count ); ?> commentaires spam bloqués</strong>
+			<p style="margin:2px 0 0;font-size:13px;color:#64748B;">Antispam actif — honeypot, délai minimum, limite IP/heure, liste noire et limite de liens. Détails dans <a href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-rcb-pro-settings&tab=advanced' ) ); ?>#rcb-antispam">Réglages → Avancé → Antispam</a>.</p>
+		</div>
+	</div>
+	<?php endif; ?>
+
 	<!-- ===== Aperçu du message d'avertissement ===== -->
 	<?php $preview_context = 'dashboard'; include INFINITY_RCB_DIR . 'admin/partials/preview-card.php'; ?>
 

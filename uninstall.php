@@ -14,6 +14,7 @@ delete_option( 'infinity_rcb_pro_license' );
 delete_option( 'infinity_rcb_pro_orders' );
 delete_option( 'infinity_rcb_pro_maillog' );
 delete_option( 'infinity_rcb_pro_version' );
+delete_option( 'infinity_rcb_pro_spam_count' );
 wp_clear_scheduled_hook( 'infinity_rcb_daily_maintenance' );
 
 // Suppression récursive du dossier de journaux dans wp-uploads (WP_Filesystem).

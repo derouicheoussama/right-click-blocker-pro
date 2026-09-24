@@ -735,6 +735,14 @@ class Infinity_RCB_Admin {
 		}
 		echo '</div>';
 
+		// Antispam : compteur de spam bloqués.
+		$spam_count = (int) get_option( 'infinity_rcb_pro_spam_count', 0 );
+		if ( $spam_count > 0 ) {
+			echo '<div style="background:#FEF2F2;border-radius:10px;padding:10px;text-align:center;margin-bottom:10px;">'
+				. '<span style="font-size:18px;font-weight:700;color:#DC2626;">🚫 ' . number_format( $spam_count ) . '</span>'
+				. '<span style="font-size:11px;color:#64748B;"> spam bloqués</span></div>';
+		}
+
 		echo '<p style="margin:0 0 6px;">'
 			. ( $options['master_enable']
 				? '<span style="display:inline-block;background:#DCFCE7;color:#15803D;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">● Protection active — ' . (int) $active_protections . '/' . count( $types ) . '</span>'

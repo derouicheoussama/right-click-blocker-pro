@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.18.0
+Stable tag: 2.19.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,12 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.19.0 =
+* Antispam integration: dashboard shows blocked-spam counter, widget displays count, uninstall cleans up.
+
+= 2.18.1 =
+* Fixed: duplicate color picker section removed from the Behavior card (Appearance tab); the four-card layout is now clean with no duplicated fields, and the live preview sidebar is fully restored.
 
 = 2.18.0 =
 * Comment spam blocker with 5 protection layers: honeypot trap field, time-gate (minimum seconds before submission), per-IP hourly rate limit, keyword/IP/email blacklist, and link-count limit — suspicious comments are marked as spam (never deleted) and a badge on the Comments menu shows the total blocked.
