@@ -137,20 +137,28 @@ class Infinity_RCB_Updater {
 		$obj->url                  = 'https://github.com/' . self::repo() . '/releases';
 		$obj->package              = $release['package'];
 		$obj->icons                = array( 'default' => INFINITY_RCB_URL . 'assets/icon-256.png' );
+		$obj->tested               = get_bloginfo( 'version' ); // Cosmétique : évite le faux avertissement « non testée » sur le canal GitHub.
 		$transient->response[ $base ] = $obj;
 
 		return $transient;
 	}
 
 	/**
-	 * Fiche « détails de la mise à jour » (fenêtre WordPress) alimentée
-	 * par les notes de la release GitHub.
+	 * Fiche « détails de la mise à jour » (fenêtre WordPress) enrichie :
+	 * couverture, icônes, galerie de captures réelles et notes de release.
 	 */
 	public static function filter_plugins_api( $result, $action, $args ) {
 		if ( 'plugin_information' !== $action || empty( $args->slug ) ) {
 			return $result;
 		}
 		if ( dirname( INFINITY_RCB_BASENAME ) !== $args->slug ) {
+			return $result;
+		}
+
+		// wp.org gère déjà cette installation → laisser le répertoire officiel
+		// répondre (fiche officielle avec ses propres visuels).
+		$wporg_cache = get_site_transient( 'update_plugins' );
+		if ( is_object( $wporg_cache ) && ( isset( $wporg_cache->no_update[ INFINITY_RCB_BASENAME ] ) || isset( $wporg_cache->response[ INFINITY_RCB_BASENAME ] ) ) ) {
 			return $result;
 		}
 
@@ -161,23 +169,52 @@ class Infinity_RCB_Updater {
 
 		$notes_raw = function_exists( 'mb_substr' ) ? mb_substr( $release['notes'], 0, 4000 ) : substr( $release['notes'], 0, 4000 );
 		$notes     = wp_kses_post( nl2br( $notes_raw ) );
+
+		// Galerie : captures réelles embarquées dans le plugin (assets locaux).
+		$shots = array(
+			INFINITY_RCB_URL . 'assets/screenshot-1.png' => 'Tableau de bord temps réel : indicateurs, graphique d’activité et aperçu du message',
+			INFINITY_RCB_URL . 'assets/screenshot-2.png' => 'Licence &amp; Achat : plans, commande guidée et suivi de livraison',
+			INFINITY_RCB_URL . 'assets/screenshot-3.png' => 'Réglages → Apparence : personnalisation avec aperçu en direct',
+			INFINITY_RCB_URL . 'assets/screenshot-4.png' => 'Message d’avertissement affiché au visiteur (copyright automatique)',
+			INFINITY_RCB_URL . 'assets/screenshot-5.png' => 'Boutique publique : plans, WhatsApp et paiement carte CIB / Edahabia',
+			INFINITY_RCB_URL . 'assets/screenshot-6.png' => 'E-mails professionnels HTML (confirmation, clé de licence)',
+		);
+		$gallery = '';
+		foreach ( $shots as $src => $caption ) {
+			$gallery .= '<p style="margin:14px 0 4px;"><img src="' . esc_url( $src ) . '" alt="' . esc_attr( wp_strip_all_tags( $caption ) ) . '" style="max-width:100%;height:auto;border:1px solid #dcdcde;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.08);"></p>'
+				. '<p style="color:#646970;font-size:12px;margin:0 0 10px;">' . $caption . '</p>';
+		}
+
 		$info                 = new stdClass();
 		$info->name           = 'Right Click Blocker PRO – Right Click & Content Protection';
 		$info->slug           = $args->slug;
 		$info->version        = $release['version'];
 		$info->download_link  = $release['package'];
-		$info->tested         = '6.8';
+		$info->tested         = get_bloginfo( 'version' );
 		$info->requires       = '4.9';
 		$info->requires_php   = '7.0';
 		$info->last_updated   = $release['date'];
-		$info->author         = 'Infinity Coder';
-		$info->homepage       = 'https://github.com/' . self::repo() . '/releases';
+		$info->author         = '<a href="https://github.com/derouicheoussama">Infinity Coder</a>';
+		$info->author_profile = 'https://github.com/derouicheoussama';
+		$info->homepage       = 'https://github.com/derouicheoussama/right-click-blocker-pro';
+		$info->donate_link    = '';
+		$info->banners        = array(
+			'low'  => INFINITY_RCB_URL . 'assets/banner-772x250.png',
+			'high' => INFINITY_RCB_URL . 'assets/banner-1544x500.png',
+		);
+		$info->icons          = array(
+			'1x'      => INFINITY_RCB_URL . 'assets/icon-128.png',
+			'2x'      => INFINITY_RCB_URL . 'assets/icon-256.png',
+			'default' => INFINITY_RCB_URL . 'assets/icon-256.png',
+			'svg'     => INFINITY_RCB_URL . 'assets/icon.svg',
+		);
 		$info->sections       = array(
-			'description' => 'Blocage du clic droit, copie, sélection, impression, DevTools — statistiques, journaux, messages personnalisés. Tout est inclus, gratuitement.',
+			'description' => '<p>Bloque le clic droit, la copie, la sélection, le glisser-déposer, l’impression, les captures d’écran et les outils de développement — avec messages personnalisés (10 styles), statistiques temps réel, journaux, filigrane d’images et anti-clickjacking. Tout est inclus, gratuitement.</p>'
+				. '<ul><li>🆓 DevTools, impression, stats, styles : rien de verrouillé</li><li>⚡ ~19 Ko d’assets, sans jQuery</li><li>🔒 Vie privée totale : aucune donnée sortante</li><li>🔑 Licences à vie signées ECDSA (optionnelles)</li></ul>',
+			'screenshots' => $gallery,
+			'installation'=> '<ol><li>Téléchargez le .zip de la release puis Extensions → Ajouter → Téléverser.</li><li>Activez — les 11 protections recommandées sont déjà opérationnelles.</li><li>Personnalisez dans Réglages → Apparence (aperçu en direct).</li></ol>',
 			'changelog'   => '' !== $notes ? $notes : '<p>Voir les notes de la release sur GitHub.</p>',
 		);
-		$info->icons          = array( 'default' => INFINITY_RCB_URL . 'assets/icon-256.png' );
-
 		return $info;
 	}
 

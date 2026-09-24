@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.16.1
+Stable tag: 2.16.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.16.2 =
+* GitHub update details window redesigned: real banner cover, full icon set (SVG/1x/2x), a screenshots gallery of the actual plugin, installation steps and release notes; compatibility warning silenced on the GitHub channel (tested matches the running WordPress). The WordPress.org directory keeps answering with its own data when it manages the install.
 
 = 2.16.1 =
 * Plugin Check pass: escaping annotations for binary downloads (CSV/JSON), static brand SVG/wordmark helpers and pre-escaped dashboard widgets; one leftover date() call replaced with date_i18n(); the integrity manifest is renamed rcb-manifest.json (dot-files are not permitted in directory builds). Update system untouched: the optional GitHub updater file stays excluded from WordPress.org builds only.

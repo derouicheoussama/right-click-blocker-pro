@@ -21,7 +21,7 @@
 ## Mesures de protection intégrées
 
 - **Licences ECDSA P-256** : les clés de licence sont signées numériquement — impossible de les forger côté client (la clé privée ne quitte jamais le site du vendeur).
-- **Manifeste d'intégrité SHA-256** : chaque release embarque `rcb-manifest.json` (hachage de chaque fichier) ; la page « À propos » du plugin détecte toute copie ou zip modifiés avant redistribution.
+- **Manifeste d'intégrité SHA-256** : chaque release embarque `.rcb-manifest.json` (hachage de chaque fichier) ; la page « À propos » du plugin détecte toute copie ou zip modifiés avant redistribution.
 - **Sommes de contrôle** : chaque release publie `SHA256SUMS.txt` — vérifiez le zip téléchargé avant installation :
   ```bash
   sha256sum right-click-blocker-pro.zip        # Linux / macOS / Git Bash
