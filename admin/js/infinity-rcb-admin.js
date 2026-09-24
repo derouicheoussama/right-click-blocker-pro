@@ -1066,6 +1066,42 @@
 	}
 
 	/* ==================================================================
+	 * Apparence : palettes rapides + affichage hex des couleurs
+	 * ================================================================== */
+	function initColorPickers() {
+		var presets = document.querySelectorAll('.rcb-color-preset');
+		var bgInput = document.getElementById('rcb-bg');
+		var txInput = document.getElementById('rcb-tx');
+		var bgHex = document.getElementById('rcb-bg-hex');
+		var txHex = document.getElementById('rcb-tx-hex');
+		var customOn = document.getElementById('rcb-custom-on');
+
+		// Palettes : 1 clic → remplit les 2 champs + active le mode personnalisé.
+		presets.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var bg = btn.getAttribute('data-bg');
+				var tx = btn.getAttribute('data-tx');
+				if (bgInput) { bgInput.value = bg; }
+				if (txInput) { txInput.value = tx; }
+				if (customOn && !customOn.checked) { customOn.checked = true; customOn.dispatchEvent(new Event('change', { bubbles: true })); }
+				if (bgHex) { bgHex.textContent = bg; }
+				if (txHex) { txHex.textContent = tx; }
+				if (bgInput) { bgInput.dispatchEvent(new Event('input', { bubbles: true })); }
+			});
+		});
+
+		// Affichage hex en direct.
+		function syncHex(input, hexEl) {
+			if (!input || !hexEl) { return; }
+			var update = function () { hexEl.textContent = input.value.toUpperCase(); };
+			input.addEventListener('input', update);
+			update();
+		}
+		syncHex(bgInput, bgHex);
+		syncHex(txInput, txHex);
+	}
+
+	/* ==================================================================
 	 * Lancement
 	 * ================================================================== */
 	function boot() {
@@ -1079,6 +1115,7 @@
 		initOrderWatch();
 		initPreview();
 		initDashPreview();
+		initColorPickers();
 		initLogFilters();
 		initCharts();
 		animateCounters();

@@ -133,7 +133,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 				<div class="rcb-card-head">
 					<h2>Informations du développeur <span class="rcb-pill rcb-pill-gold">SITE VENDEUR</span></h2>
 				</div>
-				<p class="rcb-muted" style="margin:0 0 14px;">Signature des e-mails envoyés depuis <em>ce site</em>. Ces réglages n’existent que sur votre site vendeur — les sites clients affichent les coordonnées définies dans les valeurs par défaut du plugin.</p>
+				<p class="rcb-muted" style="margin:0 0 14px;">Signature des e-mails envoyés depuis <em>ce site</em>. Ces réglages n'existent que sur votre site vendeur — les sites clients affichent les coordonnées définies dans les valeurs par défaut du plugin.</p>
 				<div class="rcb-grid-2-col">
 					<div class="rcb-field">
 						<label for="rcb-dev-name">Nom / société</label>
@@ -230,35 +230,70 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 			<div class="rcb-appearance-split">
 				<div class="rcb-appearance-form">
 					<div class="rcb-card">
-						<div class="rcb-card-head"><h2>Style du message</h2></div>
-				<div class="rcb-style-grid">
-					<?php foreach ( $styles as $key => $style ) : ?>
-						<label class="rcb-style-option">
-							<input type="radio" name="infinity_rcb[appearance][style]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $options['appearance']['style'], $key ); ?>>
-							<span class="rcb-style-swatch" style="background:<?php echo esc_attr( $style['bg'] ); ?>;color:<?php echo esc_attr( $style['text'] ); ?>;">Message d’avertissement</span>
-							<span class="rcb-style-name"><?php echo esc_html( $style['label'] ); ?></span>
-						</label>
-					<?php endforeach; ?>
-				</div>
-			</div>
-
-			<div class="rcb-card">
-				<div class="rcb-card-head"><h2>Comportement</h2></div>
-				<div class="rcb-grid-2-col">
-					<div class="rcb-field">
-						<label for="rcb-pos">Position à l’écran</label>
-						<select id="rcb-pos" name="infinity_rcb[appearance][position]">
-							<option value="top" <?php selected( $options['appearance']['position'], 'top' ); ?>>Haut de l’écran</option>
-							<option value="center" <?php selected( $options['appearance']['position'], 'center' ); ?>>Centre de l’écran</option>
-							<option value="bottom" <?php selected( $options['appearance']['position'], 'bottom' ); ?>>Bas de l’écran</option>
-						</select>
+							<div class="rcb-card-head"><h2>🎨 Style &amp; couleurs</h2></div>
+					<div class="rcb-style-grid">
+						<?php foreach ( $styles as $key => $style ) : ?>
+							<label class="rcb-style-option">
+								<input type="radio" name="infinity_rcb[appearance][style]" value="<?php echo esc_attr( $key ); ?>" <?php checked( $options['appearance']['style'], $key ); ?>>
+								<span class="rcb-style-swatch" style="background:<?php echo esc_attr( $style['bg'] ); ?>;color:<?php echo esc_attr( $style['text'] ); ?>;">Message</span>
+								<span class="rcb-style-name"><?php echo esc_html( $style['label'] ); ?></span>
+							</label>
+						<?php endforeach; ?>
 					</div>
-					<div class="rcb-field">
-						<label for="rcb-dur">Durée d’affichage (ms)</label>
-						<input type="number" id="rcb-dur" name="infinity_rcb[appearance][duration]" min="500" max="10000" step="100" value="<?php echo esc_attr( $options['appearance']['duration'] ); ?>">
+
+						<div class="rcb-field-row" style="margin-top:16px;">
+							<div class="rcb-field-label"><strong>Couleurs personnalisées</strong><p>Remplacent le thème choisi ci-dessus.</p></div>
+							<label class="rcb-switch"><input type="checkbox" id="rcb-custom-on" name="infinity_rcb[appearance][custom_on]" value="1" <?php checked( ! empty( $options['appearance']['custom_bg'] ) || ! empty( $options['appearance']['custom_text'] ) ); ?>><span class="rcb-slider"></span></label>
+						</div>
+						<div class="rcb-grid-2-col">
+							<div class="rcb-color-field">
+								<label for="rcb-bg">Fond</label>
+								<input type="color" id="rcb-bg" name="infinity_rcb[appearance][custom_bg]" value="<?php echo esc_attr( $options['appearance']['custom_bg'] ? $options['appearance']['custom_bg'] : '#1e88e5' ); ?>">
+								<code id="rcb-bg-hex"><?php echo esc_html( $options['appearance']['custom_bg'] ? $options['appearance']['custom_bg'] : '#1e88e5' ); ?></code>
+							</div>
+							<div class="rcb-color-field">
+								<label for="rcb-tx">Texte</label>
+								<input type="color" id="rcb-tx" name="infinity_rcb[appearance][custom_text]" value="<?php echo esc_attr( $options['appearance']['custom_text'] ? $options['appearance']['custom_text'] : '#ffffff' ); ?>">
+								<code id="rcb-tx-hex"><?php echo esc_html( $options['appearance']['custom_text'] ? $options['appearance']['custom_text'] : '#ffffff' ); ?></code>
+							</div>
+						</div>
+						<div class="rcb-color-presets">
+							<span style="font-size:12px;color:#64748B;">Palettes rapides :</span>
+							<?php
+							$color_presets = array(
+								array( '#1E6FF0', '#ffffff', 'Bleu Infinity' ),
+								array( '#0B0F1E', '#f8fafc', 'Sombre' ),
+								array( '#7C3AED', '#ffffff', 'Violet' ),
+								array( '#10b981', '#ffffff', 'Vert' ),
+								array( '#f43f5e', '#ffffff', 'Rouge' ),
+								array( '#f1c40f', '#2c3e50', 'Or' ),
+								array( '#ff6b35', '#ffffff', 'Orange' ),
+								array( '#06b6d4', '#0f172a', 'Cyan' ),
+							);
+							foreach ( $color_presets as $cp ) : ?>
+								<button type="button" class="rcb-color-preset" data-bg="<?php echo esc_attr( $cp[0] ); ?>" data-tx="<?php echo esc_attr( $cp[1] ); ?>" title="<?php echo esc_attr( $cp[2] ); ?>" style="background:linear-gradient(135deg,<?php echo esc_attr( $cp[0] ); ?> 50%,<?php echo esc_attr( $cp[1] ); ?> 50%);"></button>
+							<?php endforeach; ?>
+						</div>
+					</div>
+
+				<div class="rcb-card">
+					<div class="rcb-card-head"><h2>⚙️ Comportement &amp; position</h2></div>
+					<div class="rcb-grid-2-col">
+						<div class="rcb-field">
+							<label for="rcb-pos">📍 Position à l'écran</label>
+							<select id="rcb-pos" name="infinity_rcb[appearance][position]">
+								<option value="top" <?php selected( $options['appearance']['position'], 'top' ); ?>>Haut de l'écran</option>
+								<option value="center" <?php selected( $options['appearance']['position'], 'center' ); ?>>Centre</option>
+								<option value="bottom" <?php selected( $options['appearance']['position'], 'bottom' ); ?>>Bas de l'écran</option>
+							</select>
+						</div>
+						<div class="rcb-field">
+							<label for="rcb-dur">⏱️ Durée (ms)</label>
+							<input type="number" id="rcb-dur" name="infinity_rcb[appearance][duration]" min="500" max="10000" step="100" value="<?php echo esc_attr( $options['appearance']['duration'] ); ?>">
+						</div>
 					</div>
 					<div class="rcb-field-row rcb-field-wide">
-						<div class="rcb-field-label"><strong>Couleurs personnalisées</strong><p>Remplacent les couleurs du style choisi lorsqu’elles sont activées.</p></div>
+						<div class="rcb-field-label"><strong>Couleurs personnalisées</strong><p>Remplacent les couleurs du style choisi lorsqu'elles sont activées.</p></div>
 						<label class="rcb-switch"><input type="checkbox" id="rcb-custom-on" name="infinity_rcb[appearance][custom_on]" value="1" <?php checked( ! empty( $options['appearance']['custom_bg'] ) || ! empty( $options['appearance']['custom_text'] ) ); ?>><span class="rcb-slider"></span></label>
 					</div>
 					<div class="rcb-grid-2-col">
@@ -283,20 +318,20 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 
 				<div class="rcb-card-head" style="margin-top:18px;"><h2>Message enrichi</h2></div>
 				<div class="rcb-field-row">
-					<div class="rcb-field-label"><strong>Mention copyright</strong><p>Ajoute une seconde ligne sous le message d’avertissement (droits réservés, interdiction de copie…).</p></div>
+					<div class="rcb-field-label"><strong>Mention copyright</strong><p>Ajoute une seconde ligne sous le message d'avertissement (droits réservés, interdiction de copie…).</p></div>
 					<label class="rcb-switch"><input type="checkbox" id="rcb-copyright-on" name="infinity_rcb[appearance][copyright_enable]" value="1" <?php checked( ! empty( $options['appearance']['copyright_enable'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
 				<div class="rcb-field rcb-field-wide">
 					<label for="rcb-copyright">Texte de la mention</label>
 					<input type="text" class="regular-text" id="rcb-copyright" name="infinity_rcb[appearance][copyright_text]" value="<?php echo esc_attr( $options['appearance']['copyright_text'] ); ?>">
-					<p class="rcb-muted">Variables disponibles : <code>{annee}</code> (année automatique), <code>{site}</code> (nom du site), <code>{url}</code> (adresse du site). S’applique à tous les messages.</p>
+					<p class="rcb-muted">Variables disponibles : <code>{annee}</code> (année automatique), <code>{site}</code> (nom du site), <code>{url}</code> (adresse du site). S'applique à tous les messages.</p>
 				</div>
 				<div class="rcb-field-row">
 					<div class="rcb-field-label"><strong>Bouton de fermeture (×)</strong><p>Permet au visiteur de refermer le message avant la fin du délai.</p></div>
 					<label class="rcb-switch"><input type="checkbox" id="rcb-close-on" name="infinity_rcb[appearance][show_close]" value="1" <?php checked( ! empty( $options['appearance']['show_close'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
 				<div class="rcb-field-row">
-					<div class="rcb-field-label"><strong>Barre de progression</strong><p>Fine barre animée montrant le temps restant d’affichage.</p></div>
+					<div class="rcb-field-label"><strong>Barre de progression</strong><p>Fine barre animée montrant le temps restant d'affichage.</p></div>
 					<label class="rcb-switch"><input type="checkbox" id="rcb-bar-on" name="infinity_rcb[appearance][show_progress]" value="1" <?php checked( ! empty( $options['appearance']['show_progress'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
 
@@ -321,7 +356,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<p class="rcb-muted">Sélecteurs principaux : <code>#rcb-toast</code>, <code>.rcb-inner</code>, <code>.rcb-title</code>, <code>.rcb-copy</code>, <code>.rcb-close</code>.</p>
 				</div>
 				<div class="rcb-preview-zone">
-					<p class="rcb-muted" style="margin:0;">👀 L’aperçu à droite reste visible pendant que vous personnalisez — il suit chaque réglage en direct.</p>
+					<p class="rcb-muted" style="margin:0;">👀 L'aperçu à droite reste visible pendant que vous personnalisez — il suit chaque réglage en direct.</p>
 				</div>
 				</div>
 				</div>
@@ -418,7 +453,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<div class="rcb-field">
 						<label for="rcb-interval">Intervalle de vérification (ms)</label>
 						<input type="number" id="rcb-interval" name="infinity_rcb[advanced][interval]" min="200" max="5000" step="100" value="<?php echo esc_attr( $options['advanced']['interval'] ); ?>">
-						<p class="rcb-muted">800 ms est un bon compromis détection / performance. La détection se met automatiquement en pause quand l’onglet est en arrière-plan.</p>
+						<p class="rcb-muted">800 ms est un bon compromis détection / performance. La détection se met automatiquement en pause quand l'onglet est en arrière-plan.</p>
 					</div>
 					<div class="rcb-field">
 						<label for="rcb-redirect">URL de redirection (facultatif)</label>
@@ -470,7 +505,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 						<p class="rcb-muted">Ajoute un bouton « Commander via WhatsApp » sur la boutique [rcb_plans]/[rcb_commande], avec message prérempli (plan + montant).</p>
 					</div>
 					<div class="rcb-field rcb-field-wide">
-						<label for="rcb-instructions">Instructions affichées à l’acheteur</label>
+						<label for="rcb-instructions">Instructions affichées à l'acheteur</label>
 						<textarea id="rcb-instructions" name="infinity_rcb[payment][instructions]" rows="3" placeholder="Après paiement, envoyez la référence de commande à …"><?php echo esc_textarea( $options['payment']['instructions'] ); ?></textarea>
 					</div>
 				</div>
@@ -526,7 +561,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 						<input type="number" id="rcb-retention" name="infinity_rcb[logging][retention_days]" min="1" max="365" value="<?php echo esc_attr( $options['logging']['retention_days'] ); ?>">
 					</div>
 					<div class="rcb-field">
-						<label for="rcb-maxlog">Nombre maximum d’entrées par fichier</label>
+						<label for="rcb-maxlog">Nombre maximum d'entrées par fichier</label>
 						<input type="number" id="rcb-maxlog" name="infinity_rcb[logging][max_entries]" min="100" max="50000" step="100" value="<?php echo esc_attr( $options['logging']['max_entries'] ); ?>">
 					</div>
 				</div>

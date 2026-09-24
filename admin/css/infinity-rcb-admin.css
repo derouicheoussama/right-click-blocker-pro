@@ -646,3 +646,16 @@
 .rcb-about-details[open] > summary::before { transform: rotate(90deg); }
 .rcb-about-details > summary small { font-weight: 400; color: var(--rcb-muted); font-size: 12px; }
 .rcb-changelog-card { max-height: 65vh; overflow: auto; scrollbar-width: thin; }
+
+/* ===== Apparence : couleurs (2.17.2) ===== */
+.rcb-color-field { display: flex; align-items: center; gap: 10px; }
+.rcb-color-field label { font-size: 13px; font-weight: 600; color: var(--rcb-text); white-space: nowrap; }
+.rcb-color-field input[type="color"] { width: 48px; height: 36px; padding: 2px; border: 2px solid var(--rcb-border); border-radius: 8px; cursor: pointer; background: #fff; }
+.rcb-color-field input[type="color"]:hover { border-color: var(--rcb-primary); }
+.rcb-color-field input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+.rcb-color-field input[type="color"]::-webkit-color-swatch { border: none; border-radius: 5px; }
+.rcb-color-field code { font-size: 12px; color: var(--rcb-muted); background: var(--rcb-bg); padding: 4px 8px; border-radius: 6px; }
+.rcb-color-presets { display: flex; align-items: center; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.rcb-color-preset { width: 28px; height: 28px; border-radius: 8px; border: 2px solid rgba(0,0,0,.08); cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.rcb-color-preset:hover { transform: scale(1.2); box-shadow: 0 3px 10px -3px rgba(0,0,0,.3); border-color: var(--rcb-primary); }
+.rcb-color-preset:active { transform: scale(1); }
