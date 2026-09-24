@@ -22,10 +22,10 @@ foreach ( $types as $type => $meta ) {
 	<!-- ===== En-tête ===== -->
 	<div class="rcb-hero">
 		<div class="rcb-hero-brand">
-			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg( 'large' ) ) ?></div>
+			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg( 'large' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 			<div>
 				<h1 class="rcb-hero-title">
-					<?php printf( '%s', infinity_rcb_wordmark( 'hero' ) ) ?>
+					<?php printf( '%s', infinity_rcb_wordmark( 'hero' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?>
 					<span class="rcb-pill rcb-pill-soft">v<?php echo esc_html( INFINITY_RCB_VERSION ); ?></span>
 				</h1>
 				<p>Protection de contenu professionnelle pour WordPress — Simple · Puissant · Léger</p>

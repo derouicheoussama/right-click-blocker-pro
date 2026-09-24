@@ -885,7 +885,7 @@ Lhr6NHXAYrMJLTc+ofHQvJlsOZ/3geEGaHaCyqrf9Xj5AYg3drWZulMP0g==
 		header( 'Content-Type: text/csv; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename="infinity-rcb-commandes.csv"' );
 		header( 'Content-Length: ' . strlen( $csv ) );
-		printf( '%s', $csv );
+		printf( '%s', $csv ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- telechargement de fichier : contenu genere par le plugin, echapper le corromprait.
 		exit;
 	}
 
@@ -1367,7 +1367,7 @@ E-mail automatique envoyé par le site ' . esc_html( wp_specialchars_decode( get
 		}
 
 		$waiting = array();
-		$cut     = date( 'Y-m-d H:i:s', strtotime( '-24 hours', current_time( 'timestamp' ) ) );
+		$cut     = date_i18n( 'Y-m-d H:i:s', strtotime( '-24 hours', current_time( 'timestamp' ) ) );
 		foreach ( $this->get_orders() as $raw ) {
 			$o = $this->normalize_order( $raw );
 			if ( 'declared' === $o['status'] && '' !== $o['declared_at'] && $o['declared_at'] < $cut ) {

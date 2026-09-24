@@ -3,7 +3,7 @@ name: Release
 # À chaque tag v*, GitHub Actions :
 # 1. construit right-click-blocker-pro.zip (dossier du plugin, sans les
 #    fichiers propres au dépôt) ;
-# 2. génère .rcb-manifest.json (SHA-256 de chaque fichier .php/.js/.css)
+# 2. génère rcb-manifest.json (SHA-256 de chaque fichier .php/.js/.css)
 #    embarqué dans le zip — la page « À propos » du plugin s'en sert pour
 #    détecter toute copie altérée avant redistribution ;
 # 3. publie la release avec le zip + SHA256SUMS.txt (vérification du zip
@@ -39,11 +39,11 @@ jobs:
           manifest = {}
           for root, dirs, files in os.walk('.'):
               for f in sorted(files):
-                  if f.endswith(('.php', '.js', '.css')) and f != '.rcb-manifest.json':
+                  if f.endswith(('.php', '.js', '.css')) and f != 'rcb-manifest.json':
                       p = os.path.join(root, f)
                       rel = os.path.relpath(p, '.').replace('\\', '/')
                       manifest[rel] = hashlib.sha256(open(p, 'rb').read()).hexdigest()
-          with open('.rcb-manifest.json', 'w') as out:
+          with open('rcb-manifest.json', 'w') as out:
               json.dump(manifest, out, indent=1, sort_keys=True)
           print('Manifeste :', len(manifest), 'fichiers')
           PY

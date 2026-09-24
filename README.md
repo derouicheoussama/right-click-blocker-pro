@@ -81,7 +81,7 @@ Les sites installés depuis GitHub proposeront la mise à jour en 1 clic dans **
 Même si quelqu'un télécharge le code ou redistribue un zip modifié :
 
 - **Licences infalsifiables** : les clés de licence sont signées **ECDSA P-256** — impossible d'en générer hors du site du développeur (la clé privée ne quitte jamais le serveur du vendeur ; le plugin n'embarque que la clé publique).
-- **Manifeste d'intégrité SHA-256** : chaque release embarque `.rcb-manifest.json` (hachage de chaque fichier). Après activation, **Infinity RCB Pro → À propos → 🔒 Intégrité des fichiers** affiche « Installation intègre » ou **la liste des fichiers modifiés** d'une copie altérée.
+- **Manifeste d'intégrité SHA-256** : chaque release embarque `rcb-manifest.json` (hachage de chaque fichier). Après activation, **Infinity RCB Pro → À propos → 🔒 Intégrité des fichiers** affiche « Installation intègre » ou **la liste des fichiers modifiés** d'une copie altérée.
 - **Zip vérifiable** : chaque release joint `SHA256SUMS.txt` :
   ```bash
   sha256sum right-click-blocker-pro.zip                 # Linux / macOS / Git Bash

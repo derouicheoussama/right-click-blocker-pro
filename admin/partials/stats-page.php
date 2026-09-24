@@ -19,7 +19,7 @@ $export_url = wp_nonce_url( admin_url( 'admin.php?page=infinity-rcb-pro-stats&rc
 
 	<div class="rcb-hero rcb-hero-compact">
 		<div class="rcb-hero-brand">
-			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) ?></div>
+			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 			<div>
 				<h1>Statistiques</h1>
 				<p>Analyse détaillée des tentatives de contournement</p>

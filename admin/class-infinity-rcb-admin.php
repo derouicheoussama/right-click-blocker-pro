@@ -380,7 +380,7 @@ class Infinity_RCB_Admin {
 
 			$raw = '';
 			if ( isset( $_FILES['rcb_settings_file']['tmp_name'] ) && is_uploaded_file( $_FILES['rcb_settings_file']['tmp_name'] ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- fichier téléversé lu localement puis validé JSON.
-				$raw = (string) file_get_contents( $_FILES['rcb_settings_file']['tmp_name'] );
+				$raw = (string) file_get_contents( $_FILES['rcb_settings_file']['tmp_name'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput -- chemin temporaire natif de PHP, contenu validé JSON ensuite.
 			}
 			$import = is_string( $raw ) ? json_decode( $raw, true ) : null;
 
@@ -633,7 +633,7 @@ class Infinity_RCB_Admin {
 	 * @return array status: ok|tampered|no-manifest|invalid + détails.
 	 */
 	public function integrity_check() {
-		$manifest_path = INFINITY_RCB_DIR . '.rcb-manifest.json';
+		$manifest_path = INFINITY_RCB_DIR . 'rcb-manifest.json';
 		if ( ! is_readable( $manifest_path ) ) {
 			return array( 'status' => 'no-manifest' );
 		}
@@ -713,10 +713,10 @@ class Infinity_RCB_Admin {
 				? '<span style="display:inline-block;background:#DCFCE7;color:#15803D;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">● Protection active — ' . (int) $active_protections . '/11</span>'
 				: '<span style="display:inline-block;background:#FEE2E2;color:#B91C1C;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">● Protection désactivée</span>' )
 			. ' <span style="display:inline-block;background:#EDEBFF;color:#6D28D9;font-weight:600;font-size:11px;padding:3px 10px;border-radius:999px;">Licence : ' . esc_html( $lic['label'] ) . '</span>'
-			. '</p>';
+			. '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- pieces echappees (esc_html/int) en amont.
 
 		if ( $top ) {
-			echo '<p style="margin:0 0 10px;font-size:12px;color:#334155;">Tentatives bloquées — ' . implode( ' · ', $top ) . '</p>';
+			echo '<p style="margin:0 0 10px;font-size:12px;color:#334155;">Tentatives bloquées — ' . implode( ' · ', $top ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- chaque element de \$top est echappe en amont.
 		}
 
 		echo '<p style="margin:0;"><a class="button button-small" href="' . esc_url( admin_url( 'admin.php?page=infinity-rcb-pro' ) ) . '">Tableau de bord</a> '
@@ -986,11 +986,11 @@ class Infinity_RCB_Admin {
 		$cron_next   = wp_next_scheduled( INFINITY_RCB_CRON );
 		$lic_status  = $this->license->status();
 		$orders      = $this->license->get_orders();
-		$order_ref   = isset( $_GET['ref'] ) ? sanitize_text_field( wp_unslash( $_GET['ref'] ) ) : '';
+		$order_ref   = isset( $_GET['ref'] ) ? sanitize_text_field( wp_unslash( $_GET['ref'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (suivi de commande).
 		$last_order  = $order_ref ? $this->license->get_order( $order_ref ) : null;
-		$emailed     = isset( $_GET['emailed'] ) ? sanitize_key( wp_unslash( $_GET['emailed'] ) ) : '';
-		$gen_key     = isset( $_GET['rcb-key'] ) ? sanitize_text_field( wp_unslash( $_GET['rcb-key'] ) ) : '';
-		$gen_plan    = isset( $_GET['rcb-plan'] ) ? sanitize_key( wp_unslash( $_GET['rcb-plan'] ) ) : '';
+		$emailed     = isset( $_GET['emailed'] ) ? sanitize_key( wp_unslash( $_GET['emailed'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (bandeau).
+		$gen_key     = isset( $_GET['rcb-key'] ) ? sanitize_text_field( wp_unslash( $_GET['rcb-key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (clé générée).
+		$gen_plan    = isset( $_GET['rcb-plan'] ) ? sanitize_key( wp_unslash( $_GET['rcb-plan'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (plan).
 		if ( $gen_key && ! preg_match( '/^RCB-[SF]-[A-Z0-9]{5}-[A-Z0-9]{5}-[A-Z0-9]{4}$/', $gen_key ) ) {
 			$gen_key = '';
 		}

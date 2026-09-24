@@ -262,7 +262,7 @@ class Infinity_RCB_Logger {
 		header( 'Content-Type: text/csv; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename="infinity-rcb-journaux.csv"' );
 		header( 'Content-Length: ' . strlen( $csv ) );
-		echo $csv;
+		printf( '%s', $csv ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- telechargement de fichier : contenu genere par le plugin, echapper le corromprait.
 		exit;
 	}
 }

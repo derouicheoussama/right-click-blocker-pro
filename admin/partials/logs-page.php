@@ -21,7 +21,7 @@ $level_colors = array(
 
 	<div class="rcb-hero rcb-hero-compact">
 		<div class="rcb-hero-brand">
-			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) ?></div>
+			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 			<div>
 				<h1>Journaux</h1>
 				<p>Historique complet des tentatives bloquées</p>

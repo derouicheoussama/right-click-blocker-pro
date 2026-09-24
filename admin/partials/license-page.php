@@ -86,7 +86,7 @@ $status_badge = array(
 	<!-- ===== Hero ===== -->
 	<div class="rcb-hero rcb-hero-compact">
 		<div class="rcb-hero-brand">
-			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) ?></div>
+			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 			<div>
 				<h1>Licence &amp; Achat</h1>
 				<p>Activez votre licence à vie ou commandez une nouvelle clé — dès 2 900 DA (1 site) · 4 800 DA (5 sites) · 12 000 DA (Agence, 20 sites)</p>
@@ -371,7 +371,7 @@ $status_badge = array(
 						<span style="width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
 							<?php if ( $done ) : ?>background:#10B981;color:#fff;
 							<?php elseif ( $curr ) : ?>background:linear-gradient(135deg,#1E6FF0,#7C3AED);color:#fff;
-							<?php else : ?>background:#E2E8F0;color:#94A3B8;<?php endif; ?>"><?php echo $done ? '✓' : ( $ti + 1 ); ?></span>
+							<?php else : ?>background:#E2E8F0;color:#94A3B8;<?php endif; ?>"><?php echo $done ? '&#10003;' : (string) ( $ti + 1 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- entier de boucle ou entite HTML numerique statique. ?></span>
 						<span style="font-size:12.5px;font-weight:600;color:<?php echo $curr ? '#0B0F1E' : '#64748B'; ?>;"><?php echo esc_html( $tlabel ); ?></span>
 					</span>
 					<?php if ( $ti < count( $track ) - 1 ) : ?>
@@ -701,7 +701,7 @@ $status_badge = array(
 <div class="rcb-modal" id="rcb-confirm-modal" hidden>
 	<div class="rcb-modal-box" role="dialog" aria-modal="true" aria-labelledby="rcb-confirm-title">
 		<div class="rcb-modal-head">
-			<span class="rcb-modal-logo"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ); ?></span>
+			<span class="rcb-modal-logo"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></span>
 			<h3 id="rcb-confirm-title">Confirmez votre commande</h3>
 		</div>
 		<ul class="rcb-syslist">

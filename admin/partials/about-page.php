@@ -72,10 +72,10 @@ $compat = array(
 	<!-- ===== Hero ===== -->
 	<div class="rcb-hero rcb-hero-about">
 		<div class="rcb-hero-brand">
-			<div class="rcb-logo rcb-logo-lg"><?php printf( '%s', infinity_rcb_shield_svg( 'large' ) ) ?></div>
+			<div class="rcb-logo rcb-logo-lg"><?php printf( '%s', infinity_rcb_shield_svg( 'large' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 			<div>
 				<h1 class="rcb-hero-title">
-					<?php printf( '%s', infinity_rcb_wordmark( 'hero' ) ) ?>
+					<?php printf( '%s', infinity_rcb_wordmark( 'hero' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?>
 					<span class="rcb-pill rcb-pill-soft">v<?php echo esc_html( INFINITY_RCB_VERSION ); ?></span>
 				</h1>
 				<p>« Infinity RCB Pro » — Protect Your Content · Simple · Powerful · Lightweight</p>
@@ -95,12 +95,12 @@ $compat = array(
 		<div class="rcb-brand-grid">
 			<div class="rcb-brand-demo rcb-brand-demo-dark">
 				<span class="rcb-brand-label">Lockup sur fond sombre</span>
-				<div class="rcb-brand-row"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ) ?><?php printf( '%s', infinity_rcb_wordmark( 'hero' ) ) ?></div>
+				<div class="rcb-brand-row"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?><?php printf( '%s', infinity_rcb_wordmark( 'hero' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 				<span class="rcb-brand-tag">Protect Your Content</span>
 			</div>
 			<div class="rcb-brand-demo">
 				<span class="rcb-brand-label">Lockup sur fond clair</span>
-				<div class="rcb-brand-row"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ) ?><?php printf( '%s', infinity_rcb_wordmark( 'light' ) ) ?></div>
+				<div class="rcb-brand-row"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?><?php printf( '%s', infinity_rcb_wordmark( 'light' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 				<span class="rcb-brand-tag rcb-brand-tag-light">Simple · Powerful · Lightweight</span>
 			</div>
 		</div>
@@ -283,7 +283,7 @@ $compat = array(
 		<div class="rcb-card">
 			<div class="rcb-card-head"><h2>👤 Développeur &amp; contact</h2></div>
 			<div class="rcb-dev-card">
-				<div class="rcb-dev-avatar"><?php printf( '%s', infinity_rcb_shield_svg( 'regular', 'plain' ) ) ?></div>
+				<div class="rcb-dev-avatar"><?php printf( '%s', infinity_rcb_shield_svg( 'regular', 'plain' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 				<div>
 					<h3><?php echo esc_html( $options['developer']['name'] ); ?></h3>
 					<p class="rcb-muted">Développement web &amp; plugins WordPress sur mesure</p>

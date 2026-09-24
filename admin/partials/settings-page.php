@@ -31,7 +31,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 
 	<div class="rcb-hero rcb-hero-compact">
 		<div class="rcb-hero-brand">
-			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) ?></div>
+			<div class="rcb-logo"><?php printf( '%s', infinity_rcb_shield_svg() ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></div>
 			<div>
 				<h1>Réglages</h1>
 				<p>Configurez la protection de votre site en quelques clics</p>
