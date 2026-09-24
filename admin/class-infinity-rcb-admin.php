@@ -561,6 +561,19 @@ class Infinity_RCB_Admin {
 			);
 		}
 
+		// Antispam commentaires (5 couches).
+		$out['antispam'] = array(
+			'enabled'      => ! empty( $input['antispam']['enabled'] ),
+			'honeypot'     => ! empty( $input['antispam']['honeypot'] ),
+			'timegate'     => ! empty( $input['antispam']['timegate'] ),
+			'min_seconds'  => min( 30, max( 1, absint( $input['antispam']['min_seconds'] ?? 3 ) ) ),
+			'ratelimit'    => ! empty( $input['antispam']['ratelimit'] ),
+			'max_per_hour' => min( 100, max( 1, absint( $input['antispam']['max_per_hour'] ?? 5 ) ) ),
+			'blacklist'    => sanitize_textarea_field( $input['antispam']['blacklist'] ?? '' ),
+			'linkcheck'    => ! empty( $input['antispam']['linkcheck'] ),
+			'max_links'    => min( 20, max( 0, absint( $input['antispam']['max_links'] ?? 2 ) ) ),
+		);
+
 		// L'assistant de premier démarrage ne doit pas réapparaître après
 		// un simple enregistrement des réglages.
 		$out['wizard_done'] = ! empty( $current['wizard_done'] );

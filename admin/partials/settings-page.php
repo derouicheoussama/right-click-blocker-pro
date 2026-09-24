@@ -538,6 +538,55 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 		</section>
 		<?php endif; ?>
 
+		<!-- ===== Antispam (carte affichée dans l'onglet Avancé) ===== -->
+		<?php if ( 'advanced' === $tab ) : ?>
+		<div class="rcb-card" id="rcb-antispam">
+			<div class="rcb-card-head">
+				<h2>Antispam commentaires</h2>
+				<span class="rcb-pill rcb-pill-soft">5 couches</span>
+			</div>
+			<div class="rcb-field-row">
+				<div class="rcb-field-label"><strong>Activer l'antispam</strong><p>Bloque les commentaires de robots — marques « Indesirable » (jamais perdus).</p></div>
+				<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[antispam][enabled]" value="1" <?php checked( ! empty( $options['antispam']['enabled'] ) ); ?>><span class="rcb-slider"></span></label>
+			</div>
+			<div class="rcb-grid-2-col" style="margin-top:12px;">
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>Champ piege (honeypot)</strong><p>Invisible, rempli uniquement par les robots.</p></div>
+					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[antispam][honeypot]" value="1" <?php checked( ! empty( $options['antispam']['honeypot'] ) ); ?>><span class="rcb-slider"></span></label>
+				</div>
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>Delai minimum</strong><p>Soumission trop rapide = robot.</p></div>
+					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[antispam][timegate]" value="1" <?php checked( ! empty( $options['antispam']['timegate'] ) ); ?>><span class="rcb-slider"></span></label>
+				</div>
+				<div class="rcb-field">
+					<label for="rcb-minsec">Delai minimum (s)</label>
+					<input type="number" id="rcb-minsec" name="infinity_rcb[antispam][min_seconds]" min="1" max="30" value="<?php echo esc_attr( (int) $options['antispam']['min_seconds'] ); ?>">
+				</div>
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>Limite par IP/heure</strong><p>Plafond de commentaires par adresse IP.</p></div>
+					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[antispam][ratelimit]" value="1" <?php checked( ! empty( $options['antispam']['ratelimit'] ) ); ?>><span class="rcb-slider"></span></label>
+				</div>
+				<div class="rcb-field">
+					<label for="rcb-maxhour">Max/heure</label>
+					<input type="number" id="rcb-maxhour" name="infinity_rcb[antispam][max_per_hour]" min="1" max="100" value="<?php echo esc_attr( (int) $options['antispam']['max_per_hour'] ); ?>">
+				</div>
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>Limiter les liens</strong><p>Trop de liens = spam.</p></div>
+					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[antispam][linkcheck]" value="1" <?php checked( ! empty( $options['antispam']['linkcheck'] ) ); ?>><span class="rcb-slider"></span></label>
+				</div>
+				<div class="rcb-field">
+					<label for="rcb-maxlinks">Max liens</label>
+					<input type="number" id="rcb-maxlinks" name="infinity_rcb[antispam][max_links]" min="0" max="20" value="<?php echo esc_attr( (int) $options['antispam']['max_links'] ); ?>">
+				</div>
+			</div>
+			<div class="rcb-field rcb-field-wide" style="margin-top:12px;">
+				<label for="rcb-blacklist">Liste noire (une entree par ligne)</label>
+				<textarea id="rcb-blacklist" name="infinity_rcb[antispam][blacklist]" rows="4" placeholder="192.168.1.1&#10;spam@bot.com&#10;viagra"><?php echo esc_textarea( $options['antispam']['blacklist'] ); ?></textarea>
+				<p class="rcb-muted">IP, e-mail, mot-cle ou expression.</p>
+			</div>
+		</div>
+		<?php endif; ?>
+
 		<!-- ================= ONGLET : JOURNALISATION ================= -->
 		<section class="rcb-tab-panel" id="rcb-tab-logging" <?php echo 'logging' !== $tab ? 'hidden' : ''; ?>>
 			<div class="rcb-card">

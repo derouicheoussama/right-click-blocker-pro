@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Right Click Blocker PRO – Right Click & Content Protection
  * Description:       Bloque le clic droit, la copie, la sélection, le glisser-déposer, l'impression, les captures d'écran et les outils de développement — avec messages personnalisés, statistiques temps réel et journaux. Tout est inclus, gratuitement.
- * Version:           2.17.2
+ * Version:           2.18.0
  * Author:            Infinity Coder
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'INFINITY_RCB_VERSION', '2.17.2' );
+define( 'INFINITY_RCB_VERSION', '2.18.0' );
 define( 'INFINITY_RCB_FILE', __FILE__ );
 define( 'INFINITY_RCB_DIR', plugin_dir_path( __FILE__ ) );
 define( 'INFINITY_RCB_URL', plugin_dir_url( __FILE__ ) );
@@ -37,6 +37,7 @@ require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-stats.php';
 require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-logger.php';
 require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-license.php';
 require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-chargily.php';
+require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-antispam.php';
 // Canal GitHub optionnel : le fichier de l'updater est EXCLU du build
 // WordPress.org (toute routine de mise à jour personnalisée y est
 // interdite) — il n'est chargé que s'il est présent (distribution GitHub).
@@ -185,6 +186,17 @@ function infinity_rcb_default_options() {
 		// Mises à jour : wp.org prioritaire + GitHub pour les installations
 		// manuelles (dépôt officiel du plugin ; surchargeable par la
 		// constante wp-config INFINITY_RCB_GITHUB_REPO).
+		'antispam'       => array(
+			'enabled'      => true,
+			'honeypot'     => true,
+			'timegate'     => true,
+			'min_seconds'  => 3,
+			'ratelimit'    => true,
+			'max_per_hour' => 5,
+			'blacklist'    => '',
+			'linkcheck'    => true,
+			'max_links'    => 2,
+		),
 		'updates'       => array(
 			'github_enabled' => true,
 			'github_repo'    => 'derouicheoussama/right-click-blocker-pro',
@@ -352,6 +364,12 @@ add_action( 'plugins_loaded', 'infinity_rcb_boot', 20 );
 if ( class_exists( 'Infinity_RCB_Updater' ) ) {
 	add_action( 'plugins_loaded', array( 'Infinity_RCB_Updater', 'register' ), 30 );
 }
+
+/**
+ * Bloqueur de spam de commentaires (5 couches : honeypot, time-gate,
+ * rate limit, blacklist, compteur de liens).
+ */
+add_action( 'plugins_loaded', array( 'Infinity_RCB_Antispam', 'register' ), 25 );
 
 /**
  * Migration à la montée de version : remplace les anciennes coordonnées
