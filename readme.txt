@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.15.1
+Stable tag: 2.15.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.15.2 =
+* Hardening: the tracking batch (sendBeacon payload) is normalized immediately after JSON decoding — type whitelist and capped counts before any use in stats, logs or alert emails.
 
 = 2.15.1 =
 * Official GitHub repository now configured by default (derouicheoussama/right-click-blocker-pro) for the secondary update channel — existing installs are migrated automatically; WordPress.org remains the primary source.

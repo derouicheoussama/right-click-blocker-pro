@@ -260,9 +260,18 @@ class Infinity_RCB {
 		$types = array_keys( Infinity_RCB_Stats::types() );
 
 		if ( isset( $_POST['data'] ) ) {
-			$counts = json_decode( wp_unslash( $_POST['data'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON décodé puis chaque type validé ci-dessous.
-			if ( ! is_array( $counts ) ) {
+			$raw = json_decode( wp_unslash( $_POST['data'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON brut normalisé clé/valeur immédiatement ci-dessous.
+			if ( ! is_array( $raw ) ) {
 				wp_send_json_error( array( 'message' => 'Lot invalide.' ), 400 );
+			}
+			// Normalisation immédiate : liste blanche des types + plafonnement
+			// des quantités — rien d'arbitraire n'entre dans stats/journaux.
+			$counts = array();
+			foreach ( $raw as $raw_type => $raw_n ) {
+				$raw_type = sanitize_key( (string) $raw_type );
+				if ( in_array( $raw_type, $types, true ) ) {
+					$counts[ $raw_type ] = min( 1000, absint( $raw_n ) );
+				}
 			}
 		} else {
 			$type   = isset( $_POST['type'] ) ? sanitize_key( wp_unslash( $_POST['type'] ) ) : '';
