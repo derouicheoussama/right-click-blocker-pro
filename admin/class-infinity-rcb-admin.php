@@ -544,12 +544,25 @@ class Infinity_RCB_Admin {
 			'address' => sanitize_textarea_field( $input['developer']['address'] ?? '' ),
 		);
 
-		// Mises à jour (dépôt GitHub — wp.org reste prioritaire automatiquement).
-		$github_repo = trim( (string) ( $input['updates']['github_repo'] ?? '' ) );
-		$out['updates'] = array(
-			'github_enabled' => ! empty( $input['updates']['github_enabled'] ),
-			'github_repo'    => preg_match( '/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/', $github_repo ) ? $github_repo : '',
-		);
+		// Mises à jour : les champs n'existent que sur le formulaire du site
+		// vendeur (marqueur « posted ») — sur les autres sites, on conserve
+		// les réglages courants au lieu de vider le canal GitHub.
+		if ( ! empty( $input['updates']['posted'] ) ) {
+			$github_repo = trim( (string) ( $input['updates']['github_repo'] ?? '' ) );
+			$out['updates'] = array(
+				'github_enabled' => ! empty( $input['updates']['github_enabled'] ),
+				'github_repo'    => preg_match( '/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/', $github_repo ) ? $github_repo : '',
+			);
+		} else {
+			$out['updates'] = array(
+				'github_enabled' => ! empty( $current['updates']['github_enabled'] ),
+				'github_repo'    => (string) ( $current['updates']['github_repo'] ?? '' ),
+			);
+		}
+
+		// L'assistant de premier démarrage ne doit pas réapparaître après
+		// un simple enregistrement des réglages.
+		$out['wizard_done'] = ! empty( $current['wizard_done'] );
 
 		return $out;
 	}
@@ -567,8 +580,8 @@ class Infinity_RCB_Admin {
 		// un formulaire imbriqué fermerait le formulaire des réglages.
 		if ( isset( $_GET['rcb_check_updates'] ) ) {
 			check_admin_referer( 'infinity_rcb_export', 'rcb_nonce' );
-			$notice = 'updates-wporg'; // Aucun dépôt configuré : état normal.
-			if ( class_exists( 'Infinity_RCB_Updater' ) && '' !== Infinity_RCB_Updater::repo() ) {
+			$notice = 'updates-wporg'; // Aucun dépôt configuré / canal coupé : état normal.
+			if ( class_exists( 'Infinity_RCB_Updater' ) && '' !== Infinity_RCB_Updater::repo() && Infinity_RCB_Updater::github_enabled() ) {
 				$release = Infinity_RCB_Updater::refresh();
 				if ( null === $release ) {
 					$notice = 'updates-none';

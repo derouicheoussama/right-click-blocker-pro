@@ -112,7 +112,8 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 						<li><span>Dernière release GitHub</span><strong>v<?php echo esc_html( $gh_rel['version'] ); ?> — <?php echo esc_html( mysql2date( 'd/m/Y', $gh_rel['date'] ) ); ?></strong></li>
 					<?php endif; ?>
 				</ul>
-				<?php if ( $vendor ) : ?>
+					<?php if ( $vendor ) : ?>
+					<input type="hidden" name="infinity_rcb[updates][posted]" value="1">
 					<div class="rcb-grid-2-col" style="margin-top:12px;">
 						<div class="rcb-field">
 							<label for="rcb-gh-repo">Dépôt GitHub (utilisateur/depot)</label>

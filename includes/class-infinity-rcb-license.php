@@ -588,13 +588,19 @@ Lhr6NHXAYrMJLTc+ofHQvJlsOZ/3geEGaHaCyqrf9Xj5AYg3drWZulMP0g==
 			return 'vendor';
 		}
 		$order = $this->update_order( $ref, function ( $order ) {
-			if ( '' === $order['key'] ) {
+			if ( empty( $order['key'] ) ) {
 				$order['key'] = self::generate_key( $order['plan'] );
+			}
+			// Génération impossible (OpenSSL absent) : la commande reste en
+			// attente plutôt que d'être marquée payée avec une clé vide.
+			if ( empty( $order['key'] ) ) {
+				$order['key'] = '';
+				return $order;
 			}
 			$order['status'] = 'paid';
 			return $order;
 		} );
-		if ( is_array( $order ) && '' !== $order['key'] ) {
+		if ( is_array( $order ) && ! empty( $order['key'] ) ) {
 			$this->email_key_to_buyer( $order );
 		}
 		return $order;
