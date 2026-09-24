@@ -1,0 +1,8 @@
+# Fichiers de développement locaux (jamais dans le dépôt)
+.mimosa/
+.zcode/
+.zcodeignore
+SOUMISSION-WPORG.md
+*.zip
+.DS_Store
+Thumbs.db

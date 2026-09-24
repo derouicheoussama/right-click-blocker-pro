@@ -1,0 +1,40 @@
+name: Release
+
+# À chaque tag v*, GitHub Actions construit right-click-blocker-pro.zip
+# (dossier du plugin, sans les fichiers propres au dépôt) et publie la
+# release — c'est ce zip que les installations manuelles téléchargent via
+# le canal de mise à jour GitHub du plugin.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Construire right-click-blocker-pro.zip
+        run: |
+          mkdir -p build/right-click-blocker-pro
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='README.md' \
+            --exclude='LICENSE.md' \
+            --exclude='.gitignore' \
+            ./ build/right-click-blocker-pro/
+          cd build
+          zip -r ../right-click-blocker-pro.zip right-click-blocker-pro
+          cd ..
+          unzip -l right-click-blocker-pro.zip | head -20
+
+      - name: Publier la release GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          files: right-click-blocker-pro.zip
+          generate_release_notes: true

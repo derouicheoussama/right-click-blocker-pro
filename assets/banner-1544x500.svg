@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1544 500" width="1544" height="500">
+	<!-- Infinity RCB Pro — bannière WordPress.org 1544×500 (style clair :
+	     fond blanc → lavande, vagues violettes, lockup + fonctionnalités). -->
+	<defs>
+		<linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#2E7BF6"/>
+			<stop offset="1" stop-color="#7C3AED"/>
+		</linearGradient>
+		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0" stop-color="#FFFFFF"/>
+			<stop offset="1" stop-color="#EDEBFF"/>
+		</linearGradient>
+		<linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+			<stop offset="0" stop-color="#2E7BF6" stop-opacity=".10"/>
+			<stop offset="1" stop-color="#7C3AED" stop-opacity=".16"/>
+		</linearGradient>
+	</defs>
+
+	<rect width="1544" height="500" fill="url(#bg)"/>
+	<path d="M0 380 C 320 300, 640 460, 980 380 S 1400 300, 1544 360 V 500 H 0 Z" fill="url(#wave)"/>
+	<path d="M0 430 C 300 370, 700 490, 1050 410 S 1420 360, 1544 410 V 500 H 0 Z" fill="#7C3AED" opacity=".08"/>
+
+	<!-- Lockup gauche : bouclier (charte v3) + wordmark -->
+	<g transform="translate(96 108)">
+		<path transform="scale(2.6667)" d="M13 10h22v13c0 8.6-4.7 14.7-11 17.3C17.7 37.7 13 31.6 13 23Z" fill="url(#tile)"/>
+		<path transform="scale(2.6667)" d="M16.4 13.2h15.2v9.6c0 6.7-3.5 11.3-7.6 13.6-4.1-2.3-7.6-6.9-7.6-13.6Z" fill="#ffffff"/>
+		<rect x="52.3" y="41.5" width="23.4" height="37.9" rx="11.7" fill="#0B0F1E"/>
+		<rect x="61.9" y="45.9" width="4.2" height="9.6" rx="2.1" fill="#fff" opacity=".92"/>
+		<path d="M40 49.1 94.3 74.1" stroke="#fff" stroke-width="12.3" stroke-linecap="round"/>
+		<path d="M40 49.1 94.3 74.1" stroke="#F43F5E" stroke-width="7.7" stroke-linecap="round"/>
+	</g>
+	<g transform="translate(256 122)" font-family="Segoe UI, system-ui, Arial, sans-serif">
+		<text x="0" y="46" font-size="64" font-weight="800" fill="#151B33" letter-spacing="1">INFINIT<tspan fill="#7C3AED">Y</tspan></text>
+		<text x="4" y="94" font-size="29" font-weight="700" letter-spacing="9" fill="#8A8F9E">RIGHT CLICK <tspan fill="#7C3AED">BLOCKER</tspan></text>
+		<text x="4" y="136" font-size="21" font-weight="600" fill="#64748B">Protect Your Content — WordPress Protection Plugin</text>
+	</g>
+
+	<!-- Fonctionnalités : 5 lignes avec pastilles dégradées -->
+	<g transform="translate(820 96)" font-family="Segoe UI, system-ui, Arial, sans-serif">
+		<defs>
+			<linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+				<stop offset="0" stop-color="#2E7BF6"/>
+				<stop offset="1" stop-color="#7C3AED"/>
+			</linearGradient>
+		</defs>
+		<g transform="translate(0 8)">
+			<rect width="40" height="40" rx="11" fill="url(#chip)"/>
+			<circle cx="20" cy="20" r="9" fill="none" stroke="#fff" stroke-width="3"/>
+		</g>
+		<text x="60" y="34" font-size="26" font-weight="600" fill="#151B33">Désactive le clic droit</text>
+
+		<g transform="translate(0 62)">
+			<rect width="40" height="40" rx="11" fill="url(#chip)"/>
+			<path d="M12 24 20 12 28 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+		</g>
+		<text x="60" y="88" font-size="26" font-weight="600" fill="#151B33">Bloque DevTools &amp; raccourcis clavier</text>
+
+		<g transform="translate(0 116)">
+			<rect width="40" height="40" rx="11" fill="url(#chip)"/>
+			<rect x="12" y="12" width="16" height="16" rx="4" fill="none" stroke="#fff" stroke-width="3"/>
+		</g>
+		<text x="60" y="142" font-size="26" font-weight="600" fill="#151B33">Stoppe la copie &amp; le vol de contenu</text>
+
+		<g transform="translate(0 170)">
+			<rect width="40" height="40" rx="11" fill="url(#chip)"/>
+			<path d="M13 20h14M20 13v14" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+		</g>
+		<text x="60" y="196" font-size="26" font-weight="600" fill="#151B33">Statistiques temps réel &amp; journaux</text>
+
+		<g transform="translate(0 224)">
+			<rect width="40" height="40" rx="11" fill="url(#chip)"/>
+			<path d="M13 20l5 5 9-10" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+		</g>
+		<text x="60" y="250" font-size="26" font-weight="600" fill="#151B33">Tableau de bord 100 % responsive</text>
+	</g>
+
+	<text x="1544" y="472" text-anchor="end" font-family="Segoe UI, system-ui, Arial, sans-serif"
+		font-size="22" font-weight="700" letter-spacing="6" fill="#7C3AED">SIMPLE · POWERFUL · LIGHTWEIGHT</text>
+</svg>

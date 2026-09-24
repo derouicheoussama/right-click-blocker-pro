@@ -1,0 +1,124 @@
+/**
+ * Infinity RCB Pro — Boutique publique (shortcodes rcb_plans / rcb_commande)
+ * Styles autonomes, préfixés .rcb-shop pour ne jamais toucher au thème.
+ */
+
+.rcb-shop{max-width:1080px;margin:24px auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1e293b}
+
+/* Cartes de plans */
+.rcb-shop .rcb-shop-plan{position:relative;display:inline-block;vertical-align:top;width:calc(33.33% - 14px);margin:0 14px 14px 0;padding:24px 22px 20px;background:#fff;border:2px solid #e2e8f0;border-radius:16px;box-sizing:border-box;transition:transform .18s ease,box-shadow .18s ease}
+.rcb-shop .rcb-shop-plan:hover{transform:translateY(-3px);box-shadow:0 14px 30px -14px rgba(15,23,42,.18)}
+.rcb-shop .rcb-shop-plan-featured{border-color:#f59e0b;background:linear-gradient(180deg,#fffbeb,#fff 60%)}
+.rcb-shop .rcb-shop-tag{position:absolute;top:-12px;left:18px;padding:4px 12px;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.rcb-shop .rcb-shop-label{display:block;text-transform:uppercase;letter-spacing:.08em;font-size:11.5px;font-weight:800;color:#b45309;margin-bottom:6px}
+.rcb-shop .rcb-shop-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rcb-shop .rcb-shop-price strong{font-size:34px;font-weight:800;letter-spacing:-.02em}
+.rcb-shop .rcb-shop-price span{font-size:16px;font-weight:700;color:#f59e0b}
+.rcb-shop .rcb-shop-domains{margin:6px 0 12px;color:#64748b;font-size:13px;font-weight:600}
+.rcb-shop .rcb-shop-features{list-style:none;margin:0 0 16px;padding:14px 16px;background:#fffbeb;border:1px solid #fde68a;border-radius:12px}
+.rcb-shop .rcb-shop-features li{padding:4px 0;font-weight:600;font-size:13px;color:#92400e}
+.rcb-shop .rcb-shop-features li::before{content:"✓ ";color:#10b981;font-weight:800}
+
+/* Boutons */
+.rcb-shop .rcb-shop-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 18px;border:0;border-radius:12px;background:linear-gradient(135deg,#1E6FF0,#7C3AED);color:#fff !important;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;transition:all .18s ease;box-shadow:0 8px 18px -8px rgba(30,111,240,.55)}
+.rcb-shop .rcb-shop-btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px -10px rgba(124,58,237,.6);color:#fff}
+.rcb-shop .rcb-shop-btn + .rcb-shop-btn{margin-top:10px}
+.rcb-shop .rcb-shop-btn-wa{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 8px 18px -8px rgba(37,211,102,.55);width:100%}
+.rcb-shop .rcb-shop-btn-wa:hover{box-shadow:0 12px 24px -10px rgba(18,140,126,.6)}
+.rcb-shop .rcb-shop-btn-card{background:linear-gradient(135deg,#0F172A,#334155);box-shadow:0 8px 18px -8px rgba(15,23,42,.55);width:auto;min-width:280px}
+.rcb-shop .rcb-shop-btn-card:hover{box-shadow:0 12px 24px -10px rgba(15,23,42,.6)}
+
+/* Déclaration de paiement (« J'ai payé ») */
+.rcb-shop .rcb-shop-declare{max-width:640px;margin:22px auto;padding:20px 24px;background:#F0FDFA;border:1px solid #99F6E4;border-radius:16px}
+.rcb-shop .rcb-shop-declare h4{margin:0 0 8px;font-size:15px;color:#0F766E}
+.rcb-shop .rcb-shop-declare p{margin:0 0 12px;font-size:13.5px;color:#334155;line-height:1.6}
+.rcb-shop .rcb-shop-paid-form{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+.rcb-shop .rcb-shop-paid-form input{flex:1 1 180px;padding:11px 14px;border:1px solid #5EEAD4;border-radius:10px;font-size:14px;font-family:inherit}
+.rcb-shop .rcb-shop-paid-form input:focus{outline:none;border-color:#14B8A6;box-shadow:0 0 0 3px rgba(20,184,166,.15)}
+.rcb-shop .rcb-shop-paid-form .rcb-shop-btn{flex:0 0 auto;width:auto}
+
+/* Formulaire */
+.rcb-shop .rcb-shop-form{max-width:640px;margin:26px auto;padding:24px;background:#fff;border:1px solid #e2e8f0;border-radius:16px}
+.rcb-shop .rcb-shop-radio{display:inline-block;width:calc(50% - 6px);margin:0 6px 10px 0;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;cursor:pointer;box-sizing:border-box;vertical-align:top;font-size:13px}
+.rcb-shop .rcb-shop-radio input{margin-right:8px}
+.rcb-shop .rcb-shop-radio:has(input:checked){border-color:#7C3AED;background:#EDEBFF}
+.rcb-shop .rcb-shop-form > label{display:block;margin:12px 0;font-weight:600;font-size:13.5px}
+.rcb-shop .rcb-shop-form input[type="text"],.rcb-shop .rcb-shop-form input[type="email"],.rcb-shop .rcb-shop-form textarea{display:block;width:100%;margin-top:6px;padding:10px 14px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;font-family:inherit;box-sizing:border-box}
+.rcb-shop .rcb-shop-form input:focus,.rcb-shop .rcb-shop-form textarea:focus{outline:none;border-color:#7C3AED;box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+
+/* Messages d'état */
+.rcb-shop .rcb-shop-success{margin:0 0 22px;padding:22px;background:#f0fdf4;border:1px solid #a7f3d0;border-radius:14px}
+.rcb-shop .rcb-shop-success h3{margin:0 0 8px;color:#047857;font-size:18px}
+.rcb-shop .rcb-shop-success p{margin:6px 0;line-height:1.6}
+.rcb-shop .rcb-shop-pay{list-style:none;margin:12px 0;padding:14px 18px;background:#fff;border:1px solid #d1fae5;border-radius:12px}
+.rcb-shop .rcb-shop-pay li{padding:4px 0}
+.rcb-shop .rcb-shop-pay a{color:#1D4ED8;font-weight:700}
+.rcb-shop .rcb-shop-note{font-size:12.5px;color:#64748b}
+.rcb-shop .rcb-shop-error{margin:0 0 22px;padding:16px 18px;background:#fffbeb;border:1px solid #fde68a;border-radius:12px;color:#92400e;font-weight:600}
+
+/* ============ DÉMO PUBLIQUE [rcb_demo] ============ */
+.rcb-demo{max-width:1080px;margin:24px auto;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#1e293b}
+.rcb-demo-hero{display:flex;align-items:center;gap:26px;padding:26px 30px;background:linear-gradient(135deg,#1E6FF0,#7C3AED 60%,#9333EA);border-radius:18px;color:#fff;box-shadow:0 14px 34px -14px rgba(30,111,240,.5)}
+.rcb-demo-count{display:flex;align-items:center;gap:12px}
+.rcb-demo-count span{font-size:52px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.rcb-demo-count small{font-size:11.5px;font-weight:700;line-height:1.4;opacity:.85;text-transform:uppercase;letter-spacing:.05em}
+.rcb-demo-lead h3{margin:0 0 6px;font-size:20px}
+.rcb-demo-lead p{margin:0;font-size:13.5px;opacity:.92;line-height:1.6}
+
+/* Grille de tests */
+.rcb-demo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:22px 0}
+.rcb-demo-test{position:relative;padding:18px 16px 34px;background:#fff;border:2px solid #e2e8f0;border-radius:14px;cursor:default;transition:all .16s ease}
+.rcb-demo-test:hover{border-color:#c7b3f7;transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(30,111,240,.25)}
+.rcb-demo-test.is-armed{border-color:#1E6FF0;background:#f0f7ff}
+.rcb-demo-emoji{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:11px;background:#EDEBFF;font-size:20px;margin-bottom:8px}
+.rcb-demo-test strong{display:block;font-size:14px;margin-bottom:4px}
+.rcb-demo-test p{margin:0;font-size:12.5px;color:#64748b;line-height:1.55}
+.rcb-demo-sample{background:#f8fafc;border:1px dashed #e2e8f0;border-radius:9px;padding:8px 10px;min-height:44px}
+.rcb-demo-sample img{display:block}
+.rcb-demo-sample a{color:#1D4ED8;font-weight:600}
+.rcb-demo-try{position:absolute;left:14px;bottom:10px;font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#7C3AED}
+.rcb-demo-arm{position:absolute;left:14px;bottom:10px;font-size:11px;font-weight:800;color:#1E6FF0;cursor:pointer}
+.rcb-demo-test[data-test="key_u"],.rcb-demo-test[data-test="key_s"],.rcb-demo-test[data-test="key_p"],.rcb-demo-test[data-test="key_f12"],.rcb-demo-test[data-test="screenshot"],.rcb-demo-test[data-test="devtools"]{cursor:pointer}
+
+/* Journal + galerie */
+.rcb-demo-bottom{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rcb-demo-log,.rcb-demo-styles{padding:18px;background:#fff;border:1px solid #e2e8f0;border-radius:14px}
+.rcb-demo-log{background:#0f172a;border-color:#1e293b;color:#e2e8f0}
+.rcb-demo-log h4,.rcb-demo-styles h4{margin:0 0 12px;font-size:13.5px}
+.rcb-demo-log h4{color:#a5b4fc}
+.rcb-demo-log ul{list-style:none;margin:0;padding:0}
+.rcb-demo-log li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px dashed #1e293b;font-size:12.5px}
+.rcb-demo-log li time{color:#64748b;font-variant-numeric:tabular-nums}
+.rcb-demo-badge{padding:2px 9px;border-radius:999px;font-weight:700;font-size:11px}
+.rcb-demo-empty{margin:6px 0 0;color:#64748b;font-size:12.5px}
+.rcb-demo-gallery{display:flex;flex-wrap:wrap;gap:9px}
+.rcb-demo-style-btn{padding:9px 14px;border:2px solid #e2e8f0;border-radius:10px;background:linear-gradient(135deg,transparent 55%,var(--sw) 55%);background-size:14px 14px;background-repeat:no-repeat;background-position:right 8px center;font-size:12.5px;font-weight:700;color:#1e293b;cursor:pointer;transition:all .15s ease}
+.rcb-demo-style-btn:hover{border-color:#7C3AED;transform:translateY(-1px)}
+.rcb-demo-styles .rcb-muted{margin:10px 0 0;font-size:11.5px;color:#64748b}
+
+/* CTA */
+.rcb-demo-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px;padding:18px 22px;background:#fff;border:1px solid #e2e8f0;border-radius:16px}
+.rcb-demo-price{display:flex;flex-direction:column;padding:4px 14px;border-left:3px solid #7C3AED}
+.rcb-demo-price strong{font-size:19px;font-weight:800}
+.rcb-demo-price span{font-size:11px;color:#64748b;font-weight:600}
+.rcb-demo-cta .rcb-shop-btn{width:auto;flex:0 0 auto;margin-left:auto}
+
+@media screen and (max-width:780px){
+	.rcb-shop .rcb-shop-plan{width:100%;margin-right:0}
+	.rcb-shop .rcb-shop-radio{width:100%;margin-right:0}
+	.rcb-demo-hero{flex-direction:column;text-align:center}
+	.rcb-demo-bottom{grid-template-columns:1fr}
+	.rcb-demo-cta .rcb-shop-btn{margin-left:0;width:100%}
+}
+
+/* Modale de confirmation compacte (2.15.0) */
+.rcb-shop .rcb-shop-modal { position: fixed; inset: 0; z-index: 99999; display: flex; align-items: center; justify-content: center; background: rgba(15, 23, 42, .55); backdrop-filter: blur(2px); }
+.rcb-shop .rcb-shop-modal[hidden] { display: none; }
+.rcb-shop .rcb-shop-modal-box { width: min(92vw, 420px); background: #fff; border-radius: 16px; padding: 0 20px 20px; box-shadow: 0 24px 60px -20px rgba(15, 23, 42, .45); }
+.rcb-shop .rcb-shop-modal-head { margin: 0 -20px 14px; padding: 14px 20px; background: linear-gradient(135deg, #1E6FF0, #7C3AED); border-radius: 16px 16px 0 0; }
+.rcb-shop .rcb-shop-modal-head h4 { margin: 0; color: #fff; font-size: 15px; }
+.rcb-shop .rcb-shop-modal-list { list-style: none; margin: 0 0 10px; padding: 0; }
+.rcb-shop .rcb-shop-modal-list li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid #eef2f7; font-size: 13px; }
+.rcb-shop .rcb-shop-modal-list li span { color: #64748B; }
+.rcb-shop .rcb-shop-modal-list li strong { color: #0B0F1E; text-align: right; }
+.rcb-shop .rcb-shop-modal-actions { display: flex; gap: 10px; justify-content: center; }

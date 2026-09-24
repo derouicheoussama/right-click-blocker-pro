@@ -1,0 +1,235 @@
+/**
+ * Infinity RCB Pro — Styles publics (v2)
+ * Notification enrichie (titre + copyright + fermeture + barre de progression),
+ * 10 styles prédéfinis, animations, flou anti-DevTools, anti-sélection.
+ *
+ * Les propriétés structurantes utilisent !important afin de résister aux
+ * feuilles de style agressives de certains thèmes/page builders.
+ * Les sélecteurs reposent sur la classe .rcb-toast (partagée entre la
+ * notification réelle du site et l'aperçu de la page Réglages).
+ */
+
+/* ============ Conteneur du toast ============ */
+body .rcb-toast {
+	position: fixed !important;
+	left: 50% !important;
+	transform: translateX(-50%) !important;
+	z-index: 2147483000 !important;
+	max-width: min(92vw, 560px) !important;
+	margin: 0 !important;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .25s ease, visibility .25s ease;
+	pointer-events: none;
+}
+body .rcb-toast.rcb-show {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+body .rcb-toast.rcb-pos-top { top: 28px !important; }
+body .rcb-toast.rcb-pos-center {
+	top: 50% !important;
+	transform: translate(-50%, -50%) !important;
+}
+body .rcb-toast.rcb-pos-bottom { bottom: 28px !important; top: auto !important; }
+
+/* ============ Message intérieur ============ */
+.rcb-toast .rcb-inner {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 13px;
+	padding: 15px 26px 15px 20px;
+	font: 600 15px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	box-shadow: 0 12px 40px rgba(15, 23, 42, .3), 0 2px 8px rgba(15, 23, 42, .15);
+	white-space: normal;
+	word-break: break-word;
+	overflow: hidden;
+}
+.rcb-toast .rcb-ico {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 30px;
+	height: 30px;
+	border-radius: 9px;
+	background: rgba(255, 255, 255, .14);
+}
+.rcb-toast .rcb-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.rcb-toast .rcb-title { display: block; font-weight: 700; font-size: 15px; }
+.rcb-toast .rcb-copy {
+	display: block;
+	font-size: 12px;
+	font-weight: 500;
+	opacity: .82;
+}
+.rcb-toast .rcb-close {
+	flex: 0 0 auto;
+	margin-left: 4px;
+	border: 0;
+	background: rgba(255, 255, 255, .16);
+	color: inherit;
+	width: 24px;
+	height: 24px;
+	border-radius: 7px;
+	font: 700 16px/1 system-ui, sans-serif;
+	cursor: pointer;
+	opacity: .75;
+	transition: opacity .15s ease, background .15s ease;
+	padding: 0;
+}
+.rcb-toast .rcb-close:hover { opacity: 1; background: rgba(255, 255, 255, .28); }
+
+/* Barre de progression (temps restant d'affichage). */
+.rcb-toast .rcb-bar {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 3px;
+	background: rgba(255, 255, 255, .18);
+	overflow: hidden;
+}
+.rcb-toast .rcb-bar i {
+	display: block;
+	height: 100%;
+	width: 100%;
+	background: currentColor;
+	animation: rcbBar linear forwards;
+}
+@keyframes rcbBar {
+	from { width: 100%; }
+	to { width: 0; }
+}
+
+/* ============ Styles prédéfinis (10) ============ */
+.rcb-toast .rcb-st1 { background: #1e88e5; color: #ffffff; border-radius: 12px; }
+.rcb-toast .rcb-st2 { background: #2c3e50; color: #ecf0f1; border-radius: 8px; }
+.rcb-toast .rcb-st3 { background: #9b59b6; color: #ffffff; border-radius: 16px; }
+.rcb-toast .rcb-st4 { background: #27ae60; color: #ffffff; border-radius: 11px; }
+.rcb-toast .rcb-st5 { background: #f1c40f; color: #2c3e50; border-radius: 13px; }
+.rcb-toast .rcb-st6 {
+	background: rgba(15, 23, 42, .85);
+	color: #f8fafc;
+	border-radius: 14px;
+	border: 1px solid rgba(248, 250, 252, .16);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}
+.rcb-toast .rcb-st7 {
+	background: #0f172a;
+	color: #22d3ee;
+	border-radius: 10px;
+	border: 1px solid #22d3ee;
+	box-shadow: 0 0 0 1px rgba(34, 211, 238, .25), 0 0 26px rgba(34, 211, 238, .45);
+}
+.rcb-toast .rcb-st8 {
+	background: linear-gradient(135deg, #1E6FF0 0%, #6D28D9 60%, #9333EA 100%);
+	color: #ffffff;
+	border-radius: 13px;
+}
+.rcb-toast .rcb-st9 {
+	background: #ffffff;
+	color: #1e293b;
+	border-radius: 12px;
+	border: 1px solid #e2e8f0;
+	box-shadow: 0 12px 40px rgba(15, 23, 42, .14), 0 2px 8px rgba(15, 23, 42, .08);
+}
+.rcb-toast .rcb-st9 .rcb-ico { background: #eef2ff; color: #4f46e5; }
+.rcb-toast .rcb-st9 .rcb-close { background: #f1f5f9; color: #1e293b; }
+.rcb-toast .rcb-st9 .rcb-bar { background: #e2e8f0; }
+.rcb-toast .rcb-st10 {
+	background: linear-gradient(135deg, #dc2626 0%, #ef4444 60%, #f87171 100%);
+	color: #ffffff;
+	border-radius: 12px;
+}
+
+/* ============ Animations d'apparition ============ */
+.rcb-toast .rcb-a-fade { animation: rcbFade .3s ease both; }
+.rcb-toast .rcb-a-slide { animation: rcbSlide .35s cubic-bezier(.2, .9, .3, 1.2) both; }
+.rcb-toast .rcb-a-bounce { animation: rcbBounce .55s ease both; }
+.rcb-toast .rcb-a-zoom { animation: rcbZoom .3s ease both; }
+.rcb-toast .rcb-a-flip { animation: rcbFlip .5s ease both; }
+
+@keyframes rcbFade {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+@keyframes rcbSlide {
+	from { opacity: 0; transform: translateY(-14px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+@keyframes rcbBounce {
+	0% { opacity: 0; transform: scale(.6); }
+	55% { opacity: 1; transform: scale(1.08); }
+	100% { opacity: 1; transform: scale(1); }
+}
+@keyframes rcbZoom {
+	from { opacity: 0; transform: scale(.85); }
+	to { opacity: 1; transform: scale(1); }
+}
+@keyframes rcbFlip {
+	from { opacity: 0; transform: perspective(400px) rotateX(70deg); }
+	to { opacity: 1; transform: perspective(400px) rotateX(0); }
+}
+
+/* ============ Sélection désactivée ============ */
+body.rcb-no-select {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+body.rcb-no-select input,
+body.rcb-no-select textarea,
+body.rcb-no-select select,
+body.rcb-no-select [contenteditable] {
+	-webkit-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+}
+
+/* ============ Flou anti-outils de développement ============ */
+body.rcb-guard-blur > *:not(.rcb-toast) {
+	filter: blur(6px);
+	transition: filter .3s ease;
+	pointer-events: none;
+}
+
+/* ============ Aperçu (page Réglages de l'admin) ============ */
+#rcb-preview-toast.rcb-toast {
+	z-index: 100000;
+}
+#rcb-preview-toast.rcb-pos-top { top: 46px; }
+#rcb-preview-toast.rcb-pos-bottom { bottom: 46px; }
+
+/* ============ Mobile ============ */
+@media screen and (max-width: 600px) {
+	body .rcb-toast.rcb-pos-top { top: 16px !important; }
+	body .rcb-toast.rcb-pos-bottom { bottom: 16px !important; }
+	.rcb-toast .rcb-inner {
+		font-size: 13.5px;
+		padding: 12px 20px 12px 15px;
+		gap: 10px;
+	}
+	.rcb-toast .rcb-ico { width: 24px; height: 24px; }
+	.rcb-toast .rcb-title { font-size: 13.5px; }
+	.rcb-toast .rcb-copy { font-size: 11px; }
+}
+
+/* ============ Impression ============ */
+@media print {
+	body.rcb-print-guard #rcb-print-warning { display: block !important; }
+}
+
+/* ============ Préférences d'accessibilité ============ */
+@media (prefers-reduced-motion: reduce) {
+	.rcb-toast .rcb-inner,
+	.rcb-toast .rcb-bar i {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
