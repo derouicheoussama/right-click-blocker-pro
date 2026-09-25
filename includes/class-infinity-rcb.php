@@ -243,10 +243,15 @@ class Infinity_RCB {
 	 * chaque image (texte affiché par le pseudo-élément ::after).
 	 */
 	private function watermark_css() {
+		$opts    = infinity_rcb_options();
+		$opacity = isset( $opts['appearance']['wm_opacity'] ) ? max( 10, min( 100, (int) $opts['appearance']['wm_opacity'] ) ) : 55;
+		$size    = isset( $opts['appearance']['wm_size'] ) ? max( 8, min( 48, (int) $opts['appearance']['wm_size'] ) ) : 13;
+		$alpha   = round( $opacity / 100, 2 );
+
 		return '.rcb-wm{position:relative;display:inline-block;max-width:100%}'
 			. '.rcb-wm>img{display:block;max-width:100%}'
 			. '.rcb-wm::after{content:attr(data-wm);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;'
-			. 'color:rgba(255,255,255,.55);font:600 13px/1.35 system-ui,sans-serif;text-align:center;padding:8px;'
+			. 'color:rgba(255,255,255,' . $alpha . ');font:600 ' . $size . 'px/1.35 system-ui,sans-serif;text-align:center;padding:8px;'
 			. 'text-shadow:0 1px 4px rgba(0,0,0,.8);pointer-events:none;user-select:none;word-break:break-word}';
 	}
 

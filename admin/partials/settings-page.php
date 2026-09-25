@@ -413,14 +413,28 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][noscript_warn]" value="1" <?php checked( ! empty( $options['advanced']['noscript_warn'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
 				<div class="rcb-field-row">
-					<div class="rcb-field-label"><strong>Filigrane sur les images</strong><p>Superpose votre texte (semi-transparent, non sélectionnable) sur toutes les images de plus de 80 px — dissuasion visuelle contre le vol. Exemptez une image avec <code>data-rcb-exempt</code>.</p></div>
+					<div class="rcb-field-label"><strong>Filigrane sur les images</strong><p>Superpose votre texte sur toutes les images de plus de 80 px. Exemptez avec <code>data-rcb-exempt</code>.</p></div>
 					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][watermark]" value="1" <?php checked( ! empty( $options['advanced']['watermark'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
+				<?php if ( ! empty( $options['advanced']['watermark'] ) ) : ?>
 				<div class="rcb-field">
 					<label for="rcb-wm-text">Texte du filigrane</label>
 					<input type="text" id="rcb-wm-text" name="infinity_rcb[appearance][wm_text]" value="<?php echo esc_attr( $options['appearance']['wm_text'] ); ?>">
-					<p class="rcb-muted">Variables : <code>{site}</code>, <code>{annee}</code>, <code>{url}</code>. Exemple : <code>© {site} — image protégée</code>.</p>
+					<p class="rcb-muted">Variables : <code>{site}</code>, <code>{annee}</code>, <code>{url}</code>.</p>
 				</div>
+				<div class="rcb-grid-2-col">
+					<div class="rcb-field">
+						<label for="rcb-wm-opacity">Opacité : <output id="rcb-wm-opacity-out"><?php echo (int) $options['appearance']['wm_opacity']; ?></output>%</label>
+						<input type="range" id="rcb-wm-opacity" name="infinity_rcb[appearance][wm_opacity]" min="10" max="100" step="5" value="<?php echo (int) $options['appearance']['wm_opacity']; ?>" oninput="document.getElementById('rcb-wm-opacity-out').value=this.value;">
+						<p class="rcb-muted">10% = discret · 100% = opaque</p>
+					</div>
+					<div class="rcb-field">
+						<label for="rcb-wm-size">Taille : <output id="rcb-wm-size-out"><?php echo (int) $options['appearance']['wm_size']; ?></output> px</label>
+						<input type="range" id="rcb-wm-size" name="infinity_rcb[appearance][wm_size]" min="8" max="48" value="<?php echo (int) $options['appearance']['wm_size']; ?>" oninput="document.getElementById('rcb-wm-size-out').value=this.value;">
+						<p class="rcb-muted">8 px = petit · 48 px = très grand</p>
+					</div>
+				</div>
+				<?php endif; ?>
 				<div class="rcb-field-row">
 					<div class="rcb-field-label"><strong>Anti-clickjacking (X-Frame-Options)</strong><p>Interdit l'affichage de votre site dans une iframe d'un autre site — empêche le détournement de votre contenu et les attaques par clic trompeur.</p></div>
 					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][xfo]" value="1" <?php checked( ! empty( $options['advanced']['xfo'] ) ); ?>><span class="rcb-slider"></span></label>

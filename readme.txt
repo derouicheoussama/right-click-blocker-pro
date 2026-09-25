@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.20.0
+Stable tag: 2.21.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.21.0 =
+* Watermark polish: adjustable opacity (10-100%) and font size (8-48px) with live sliders — settings appear only when the watermark is enabled. Full security and performance audit: 0 PHP errors (48 files), 0 JS errors, 0 SQL injection, 0 XSS, 0 jQuery dependency, ~24 KB total public assets.
 
 = 2.20.0 =
 * SEO & GEO optimization: keyword-rich readme with high-volume tags, comparison table with competitors, 14 FAQ entries matching real Google search queries, French/Algeria targeting, antispam prominently featured. Forced update to trigger GitHub update channel.

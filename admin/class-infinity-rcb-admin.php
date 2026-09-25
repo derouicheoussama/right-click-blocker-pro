@@ -465,6 +465,8 @@ class Infinity_RCB_Admin {
 			'shadow'           => ! empty( $input['appearance']['shadow'] ),
 			'custom_css'       => wp_strip_all_tags( (string) ( $input['appearance']['custom_css'] ?? '' ) ),
 			'wm_text'          => sanitize_text_field( $input['appearance']['wm_text'] ?? $defaults['appearance']['wm_text'] ),
+			'wm_opacity'       => min( 100, max( 10, absint( $input['appearance']['wm_opacity'] ?? 55 ) ) ),
+			'wm_size'          => min( 48, max( 8, absint( $input['appearance']['wm_size'] ?? 13 ) ) ),
 		);
 
 		// Avancé.
