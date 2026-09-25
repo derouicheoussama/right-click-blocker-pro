@@ -66,7 +66,10 @@
 	background: radial-gradient(420px 220px at 92% -20%, rgba(255, 255, 255, .22), transparent 65%),
 	            radial-gradient(320px 180px at -5% 120%, rgba(255, 255, 255, .12), transparent 60%);
 }
-.rcb-hero-brand { display: flex; align-items: center; gap: 18px; position: relative; z-index: 1; min-width: 0; }
+.rcb-hero-brand { display: flex; align-items: center; gap: 16px; position: relative; z-index: 1; min-width: 0; }
+.rcb-hero-brand .rcb-logo { width: 56px; height: 56px; flex-shrink: 0; }
+.rcb-hero-brand .rcb-logo svg { width: 56px !important; height: 56px !important; display: block; }
+.rcb-hero-brand > div:last-child { flex: 1; min-width: 0; }
 .rcb-logo { flex: 0 0 auto; display: grid; place-items: center; filter: drop-shadow(0 4px 12px rgba(21, 27, 51, .35)); }
 .rcb-logo-lg { }
 .rcb-hero h1 { margin: 0 0 4px; font-size: 24px; font-weight: 700; letter-spacing: -.02em; color: #fff; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }

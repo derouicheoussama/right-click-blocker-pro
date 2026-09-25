@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.22.1
+Stable tag: 2.23.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -164,7 +164,7 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 
 == Changelog ==
 
-= 2.22.1 =
+= 2.23.0 =
 * About page polish: compatibility updated (WP 4.9-7.1, PHP 7.0-8.3), FAQ styling harmonized with collapsible sections, presentation text tightened, antispam now counted in the feature total (16 protections).
 
 = 2.22.0 =

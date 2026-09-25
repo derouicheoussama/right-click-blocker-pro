@@ -102,8 +102,18 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<h2>🔄 Mises à jour</h2>
 					<!-- Lien signé (GET) : un formulaire imbriqué fermerait le
 					     grand formulaire des réglages avant l'onglet Apparence. -->
-					<a class="rcb-btn rcb-btn-ghost" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=infinity-rcb-pro-settings&tab=general&rcb_check_updates=1' ), 'infinity_rcb_export', 'rcb_nonce' ) ); ?>">🔄 Vérifier maintenant</a>
+					<a class="rcb-btn rcb-btn-primary" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=infinity-rcb-pro-settings&tab=general&rcb_check_updates=1' ), 'infinity_rcb_export', 'rcb_nonce' ) ); ?>">🔄 Vérifier maintenant</a>
 				</div>
+
+				<?php if ( 'updates-available' === $notice ) : ?>
+					<div class="rcb-notice rcb-notice-ok" style="margin-bottom:12px;">🔄 Une nouvelle version est disponible — <a href="<?php echo esc_url( admin_url( 'update-core.php' ) ); ?>">mettre à jour maintenant</a>.</div>
+				<?php elseif ( 'updates-checked' === $notice ) : ?>
+					<div class="rcb-notice rcb-notice-ok" style="margin-bottom:12px;">✅ Vérification terminée : vous êtes à jour.</div>
+				<?php elseif ( 'updates-wporg' === $notice ) : ?>
+					<div class="rcb-notice rcb-notice-ok" style="margin-bottom:12px;">✅ Mises à jour via WordPress.org — automatique, rien à faire.</div>
+				<?php elseif ( 'updates-none' === $notice ) : ?>
+					<div class="rcb-notice rcb-notice-warn" style="margin-bottom:12px;">⚠️ Dépôt GitHub injoignable (vérifiez votre connexion).</div>
+				<?php endif; ?>
 				<p class="rcb-muted" style="margin:0 0 12px;">Double canal, sans conflit : <strong>WordPress.org</strong> prend automatiquement le relais dès que l'extension y est publiée (ou si elle en provient) ; en attendant, <strong>GitHub</strong> livre les mises à jour des installations manuelles — le canal GitHub se désactive tout seul dès que wp.org gère l'extension.</p>
 				<ul class="rcb-syslist">
 					<li><span>Version installée</span><strong>v<?php echo esc_html( INFINITY_RCB_VERSION ); ?></strong></li>

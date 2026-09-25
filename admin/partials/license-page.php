@@ -118,6 +118,36 @@ $status_badge = array(
 		<div class="rcb-notice rcb-notice-<?php echo esc_attr( $notices[ $notice ][0] ); ?>"><?php echo esc_html( $notices[ $notice ][1] ); ?></div>
 	<?php endif; ?>
 
+	<?php if ( 'order-created' === $notice && $last_order ) : ?>
+		<div style="background:linear-gradient(135deg,#10B981,#059669);color:#fff;padding:18px 24px;border-radius:14px;margin:14px 0 20px;display:flex;align-items:center;gap:16px;box-shadow:0 8px 24px -8px rgba(16,185,129,.4);">
+			<span style="font-size:32px;flex-shrink:0;">✅</span>
+			<div style="flex:1;">
+				<strong style="font-size:16px;display:block;margin-bottom:4px;">Commande enregistree avec succes !</strong>
+				<span style="font-size:13.5px;opacity:.9;">Reference <strong style="font-family:monospace;"><?php echo esc_html( $last_order['ref'] ); ?></strong> — <?php echo number_format( (float) $last_order['amount_da'], 0, ',', ' ' ); ?> DA. Confirmation envoyee a <strong><?php echo esc_html( $last_order['email'] ); ?></strong>.</span>
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( 'order-declared' === $notice ) : ?>
+		<div style="background:linear-gradient(135deg,#0EA5E9,#0284C7);color:#fff;padding:18px 24px;border-radius:14px;margin:14px 0 20px;display:flex;align-items:center;gap:16px;box-shadow:0 8px 24px -8px rgba(14,165,233,.4);">
+			<span style="font-size:32px;flex-shrink:0;">🕵️</span>
+			<div style="flex:1;">
+				<strong style="font-size:16px;display:block;margin-bottom:4px;">Paiement signale au vendeur</strong>
+				<span style="font-size:13.5px;opacity:.9;">Le vendeur verifie votre paiement — la cle arrive automatiquement par e-mail.<strong style="display:block;margin-top:4px;">Laissez cette page ouverte pour etre prevenu ici des livraison.</strong></span>
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( 'order-fulfilled' === $notice ) : ?>
+		<div style="background:linear-gradient(135deg,#7C3AED,#6D28D9);color:#fff;padding:18px 24px;border-radius:14px;margin:14px 0 20px;display:flex;align-items:center;gap:16px;box-shadow:0 8px 24px -8px rgba(124,58,237,.4);">
+			<span style="font-size:32px;flex-shrink:0;">🔑</span>
+			<div style="flex:1;">
+				<strong style="font-size:16px;display:block;margin-bottom:4px;">Cle generee et envoyee automatiquement</strong>
+				<span style="font-size:13.5px;opacity:.9;">La cle de licence a ete envoyee a l'acheteur par e-mail. Aussi visible dans Mes commandes.</span>
+			</div>
+		</div>
+	<?php endif; ?>
+
 	<?php if ( ( 'order-created' === $notice || 'order-resent' === $notice ) && isset( $email_badges[ $emailed ] ) ) : ?>
 		<div class="rcb-notice rcb-notice-<?php echo esc_attr( $email_badges[ $emailed ][0] ); ?>"><?php echo esc_html( $email_badges[ $emailed ][1] ); ?></div>
 	<?php elseif ( 'order-created' === $notice ) : ?>
