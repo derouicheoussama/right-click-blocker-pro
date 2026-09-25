@@ -428,48 +428,44 @@ $compat = array(
 			</div>
 			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.17.0</span>
+				<div>
+					<strong>Commande guidée + notifications temps réel</strong>
+					<ul>
+						<li>Popup automatique après commande (réf, montant, étapes, copier) et après « J&#8217;ai payé ».</li>
+						<li>Surveillance 25 s : popup « votre clé est arrivée » avec copie + activation en 1 clic.</li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<strong>Commande guidée + notifications temps réel</strong>
-				<ul>
-					<li>Popup automatique après commande (réf, montant, étapes, copier) et après « J&#8217;ai payé ».</li>
-					<li>Surveillance 25 s : popup « votre clé est arrivée » avec copie + activation en 1 clic.</li>
-				</ul>
-			</div>
-		</div>
-		<div class="rcb-changelog-entry">
+			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.15.0</span>
+				<div>
+					<strong>Modale de commande repensée</strong>
+					<ul>
+						<li>En-tête de marque, montant en avant, étapes suivantes (payer → « J’ai payé » → clé), focus clavier et état d’envoi.</li>
+						<li>Bouton de commande dynamique (plan + prix) et wording corrigé (page Licence et boutique publique).</li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<strong>Modale de commande repensée</strong>
-				<ul>
-					<li>En-tête de marque, montant en avant, étapes suivantes (payer → « J’ai payé » → clé), focus clavier et état d’envoi.</li>
-					<li>Bouton de commande dynamique (plan + prix) et wording corrigé (page Licence et boutique publique).</li>
-				</ul>
-			</div>
-		</div>
-		<div class="rcb-changelog-entry">
+			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.14.5</span>
+				<div>
+					<strong>Vérification de mise à jour plus claire</strong>
+					<ul>
+						<li>Sans dépôt GitHub configuré : confirmation neutre « WordPress.org automatique » (plus de faux avertissement).</li>
+						<li>L’avertissement n’apparaît que si un dépôt configuré est injoignable.</li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<strong>Vérification de mise à jour plus claire</strong>
-				<ul>
-					<li>Sans dépôt GitHub configuré : confirmation neutre « WordPress.org automatique » (plus de faux avertissement).</li>
-					<li>L’avertissement n’apparaît que si un dépôt configuré est injoignable.</li>
-				</ul>
-			</div>
-		</div>
-		<div class="rcb-changelog-entry">
+			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.14.4</span>
+				<div>
+					<strong>Conformité Plugin Check</strong>
+					<ul>
+						<li>Updater GitHub exclu du build wp.org (chargé seulement si présent), désinstallation via WP_Filesystem.</li>
+						<li>Fonctions fichiers, dates et échappements conformes ; readme en anglais, Tested up to 7.1.</li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<strong>Conformité Plugin Check</strong>
-				<ul>
-					<li>Updater GitHub exclu du build wp.org (chargé seulement si présent), désinstallation via WP_Filesystem.</li>
-					<li>Fonctions fichiers, dates et échappements conformes ; readme en anglais, Tested up to 7.1.</li>
-				</ul>
-			</div>
-		</div>
 		<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.14.3</span>
 				<div>
