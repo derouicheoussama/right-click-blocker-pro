@@ -1,6 +1,6 @@
 === Right Click Blocker PRO – Right Click & Content Protection ===
 Contributors: infinitycoder
-Tags: right click, content protection, copy protection, disable right click, image protection
+Tags: right click, content protection, copy protection, anti spam, image protection
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
@@ -8,53 +8,77 @@ Stable tag: 2.19.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Disable right click, copy, selection, printing, screenshots and dev tools — with custom messages, real-time stats and logs. All free.
+Disable right click, stop content theft, block copy-paste and spam comments — with live preview, real-time stats, image watermark. Everything free.
 
 == Description ==
 
-Your texts, photos, prices and product sheets are your work. **Right Click Blocker PRO** protects them in seconds: one setup neutralizes right clicks, keyboard shortcuts (F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I…), copy-paste, text selection, drag & drop, printing and even screenshots — on desktop and mobile.
+**Stop content theft in 30 seconds.** Right Click Blocker PRO disables right click, copy-paste, text selection, drag & drop, keyboard shortcuts (F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I), printing, screenshots and dev tools — **plus a 5-layer comment spam blocker** — all in one lightweight plugin.
 
-Unlike plugins that lock advanced features behind a paid version, **Right Click Blocker PRO gives you everything, for free**: dev tools detection, print blocking, real-time statistics, detailed logs, 10 message styles. No external dependency, no data collection, no slowdown.
+Your texts, photos, prices and product sheets are your work. One setup neutralizes **11 content protections + 5 antispam layers**, with a **live preview** so you see exactly what your visitors see. Real-time statistics show you who's trying to steal your content, when and how.
 
-**Why choose Right Click Blocker PRO?**
+Unlike plugins that lock features behind a paid version, **everything is free**: dev tools detection, print blocking, image watermark, antispam, statistics, detailed logs, 10 message styles. No external dependency, no data collection, no slowdown.
 
-* 🆓 **Everything is free** — DevTools, printing, stats, styles: nothing is locked behind a Pro version.
-* ⚡ **Ultra light** — one CSS file (~7 Ko) and one JS file (~12 Ko), no jQuery, no framework; attempts are batched and sent in a single request via sendBeacon.
-* 🌐 **Compatible everywhere** — WordPress 4.9 → 7.1, PHP 7.0 → 8.3, Gutenberg/FSE themes, classic themes, Elementor, Divi, WPBakery, WooCommerce, multisite. Protections run before theme scripts (capture phase).
-* 📊 **You see everything** — every blocked attempt is counted, charted and logged (date, type, IP, browser), exportable as CSV.
-* 🔒 **Total privacy** — no data ever leaves your server, no cookie, no external call (the optional Chargily Pay gateway only runs if the vendor configures their own API key).
-* 💧 **Image watermark** — overlay your copyright text on every image; exempt specific images with data-rcb-exempt.
-* 🖼️ **Anti-clickjacking** — X-Frame-Options SAMEORIGIN header + optional JavaScript frame busting.
-* 🎨 **10 message styles** — Blue, Dark, Purple, Green, Gold, Frosted Glass, Neon, Gradient, Minimal White, Red Alert + custom colors, close button, progress bar and sound beep.
-* 🧩 **Presets & exclusions** — Soft / Balanced / Maximum in one click; exclude pages (ID, slug, URI), logged-in administrators and selected roles.
-* 💾 **Settings import/export** — full configuration as JSON, replicated on another site in two clicks.
-* 🧱 **Gutenberg block** — insert the interactive protection demo from the editor.
-* 🌐 **Fully responsive** — admin and messages adapt to mobile, tablet and desktop; respects prefers-reduced-motion.
+**Key features (100% free — no Pro version needed)**
 
-**Free features (often paid elsewhere)**
+* 🖱️ **Right click disabled** — context menu blocked site-wide with custom warning message
+* 📋 **Copy-paste blocked** — Ctrl+C, Ctrl+X, Ctrl+A neutralized outside form fields (WooCommerce checkout safe)
+* ⌨️ **Keyboard shortcuts blocked** — F12, Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+Shift+I/J/C/K
+* 🛠️ **DevTools detection** — real-time detection with content blur or auto-redirect
+* 🖨️ **Print blocking** — Ctrl+P shows a warning instead of your content
+* 📸 **Screenshot protection** — PrintScreen key detected, clipboard cleared
+* 💧 **Image watermark** — copyright text overlaid on every image (exempt with data-rcb-exempt)
+* 🖼️ **Anti-clickjacking** — X-Frame-Options header + optional JS frame busting
+* 🚫 **Comment spam blocker** — 5 layers: honeypot trap, time-gate, per-IP rate limit, keyword blacklist, link-count limit
+* 👀 **Live preview** — customize your message and see it in real time (10 styles, custom colors, 8 quick palettes)
+* 📊 **Real-time dashboard** — animated KPIs, activity charts, per-type breakdown, top IPs, CSV export
+* 📜 **Detailed logs** — every attempt logged with date, type, IP and browser; filterable and exportable
+* 🚨 **Attack alerts** — email notification when one IP exceeds your threshold (e.g. 50 attempts/hour)
+* 🎨 **10 message styles** — Blue, Dark, Purple, Green, Gold, Frosted Glass, Neon, Gradient, Minimal White, Red Alert
+* 🧩 **Presets & exclusions** — Soft / Balanced / Maximum one-click presets; exclude pages, admins, roles
+* 💾 **Settings import/export** — full JSON config, replicate on another site in two clicks
+* 🧱 **Gutenberg block** — insert the interactive protection demo from the editor
+* 🇫🇷 **French-first** — interface en français, parfait pour les sites francophones (Algérie, Maroc, Tunisie, France, Belgique, Suisse, Canada)
 
-| Protection | Right Click Blocker PRO (free) |
-|---|---|
-| Right click, copy, selection blocking | ✅ |
-| Dev tools detection | ✅ |
-| Print blocking | ✅ |
-| Screenshot protection | ✅ |
-| Custom message styles | ✅ (10 styles) |
-| Real-time stats & logs | ✅ |
-| Page / admin / role exclusions | ✅ |
-| External dependencies | None |
+**Why choose Right Click Blocker PRO over the competition?**
+
+| Feature | Right Click Blocker PRO | WP Content Copy Protection | Right Click Disable Or Ban |
+|---|---|---|---|
+| Right click + copy blocked | ✅ Free | ✅ Free | ✅ Free |
+| DevTools detection | ✅ Free | ❌ Pro only | ❌ Pro only |
+| Print blocking | ✅ Free | ❌ Pro only | ❌ |
+| Screenshot protection | ✅ Free | ❌ | ❌ |
+| Image watermark | ✅ Free | ❌ | ❌ |
+| Comment spam blocker | ✅ Free (5 layers) | ❌ | ❌ |
+| Live message preview | ✅ Free | ❌ | ❌ |
+| Real-time statistics | ✅ Free | ❌ Pro only | ❌ |
+| Attack alerts by email | ✅ Free | ❌ | ❌ |
+| Settings import/export | ✅ Free | ❌ | ❌ |
+| French interface | ✅ | ❌ | ❌ |
+| Weight on your site | ~19 KB | Heavy | Medium |
+| jQuery dependency | None | Required | Required |
+| External requests | Zero | Unknown | Unknown |
 
 **Who is it for?**
 
-* 📷 Photographers and designers — protect your portfolios.
-* ✍️ Bloggers and writers — keep your articles unique.
-* 🎓 Course creators — secure your premium content.
-* 🛒 E-commerce owners — protect product sheets and prices.
-* 🏢 Agencies and businesses — full shielding in 2 minutes.
+* 📷 **Photographers & designers** — protect your portfolios from image theft
+* ✍️ **Bloggers & writers** — keep your articles unique, stop plagiarism
+* 🎓 **Course creators** — secure your premium training content
+* 🛒 **E-commerce owners** — protect product sheets, prices and descriptions (WooCommerce compatible)
+* 🏢 **Agencies & businesses** — deploy consistent protection across all client sites (JSON import/export)
+* 🌍 **Francophone sites** — interface entièrement en français (Algérie, Afrique du Nord, Europe, Canada)
 
 **How does it work?**
 
-Each protection relies on standard browser events (contextmenu, keydown, copy, selectstart, dragstart, beforeprint…), intercepted in the **capture phase** to run before theme scripts. No content is sent to a third-party server: statistics and logs stay in your WordPress database and your wp-uploads folder. The plugin never slows your site down: the script does not load at all on excluded pages and pauses when the tab is in the background.
+Each protection uses standard browser events (contextmenu, keydown, copy, selectstart, dragstart, beforeprint…), intercepted in the **capture phase** to run before theme and page builder scripts. This ensures blocking works with any theme: Gutenberg, FSE, classic, Elementor, Divi, WPBakery.
+
+No content is sent to third-party servers. Statistics and logs stay in your WordPress database and wp-uploads folder. The plugin never slows your site: ~19 KB total, no jQuery, scripts don't load on excluded pages, and processing pauses when the tab is in background.
+
+**Performance & privacy**
+
+* ⚡ **Ultra light**: ~19 KB total assets (1 CSS ~7 KB + 1 JS ~12 KB), zero dependencies
+* 🔒 **Zero data collection**: no cookies, no external calls, GDPR-friendly
+* 📱 **Fully responsive**: admin and messages adapt to mobile, tablet and desktop
+* ♿ **Accessible**: respects prefers-reduced-motion, forms and checkout always work
 
 == Installation ==
 
@@ -73,65 +97,61 @@ Each protection relies on standard browser events (contextmenu, keydown, copy, s
 
 == Frequently Asked Questions ==
 
-= Does the plugin block 100% of content theft? =
+= How do I disable right click on my WordPress site? =
 
-No web solution blocks 100% of a determined visitor (disabling JavaScript, system tools). Right Click Blocker PRO neutralizes all common methods and deters the vast majority — while keeping the site perfectly usable.
+Install Right Click Blocker PRO and activate it — protection starts immediately with recommended settings. Go to Settings to toggle individual protections, or use the Soft / Balanced / Maximum presets. The right-click context menu is replaced by your custom warning message.
+
+= How do I stop people from copying my content? =
+
+Right Click Blocker PRO blocks copy-paste (Ctrl+C, Ctrl+X, Ctrl+A), text selection, and drag-and-drop in one click. Form fields remain usable (login, checkout, comments) so your site stays functional. A custom warning message appears each time someone tries to copy.
+
+= How do I protect my images from being stolen? =
+
+Three layers: (1) right-click Save-image-as is blocked, (2) drag-and-drop of images is disabled, and (3) an optional image watermark overlays your copyright text on every image. Exempt specific images with the data-rcb-exempt attribute.
+
+= How do I block spam comments without a paid service? =
+
+The built-in 5-layer antispam blocks bots automatically: honeypot trap field, time-gate, per-IP rate limit, keyword blacklist, and link-count limit. No external API, no captcha, no subscription. Blocked comments go to the spam folder, never deleted.
+
+= How do I stop dev tools inspection (F12)? =
+
+Enable DevTools detection — when someone opens developer tools, your content blurs automatically or the visitor is redirected to a page of your choice. Detection pauses when the tab is not visible.
+
+= How do I disable printing of my pages? =
+
+Print blocking replaces the printed page with a copyright warning instead of your content. Ctrl+P is intercepted and the beforeprint event is captured.
+
+= Does the plugin slow down my site? =
+
+No: about 19 KB total (1 CSS + 1 JS), zero jQuery, zero dependencies. Scripts do not load on excluded pages. Statistics are batched (one request max every 6 seconds). No measurable impact on PageSpeed.
 
 = Does it hurt SEO? =
 
-No. Content stays identical for search engines; only visitor actions (right click, copy…) are intercepted.
+No. Your content stays identical for search engines — only visitor interactions are intercepted. Google can still crawl, index and rank your pages normally.
 
-= Does the plugin slow my site down? =
+= Can administrators be excluded from protection? =
 
-No: ~19 Ko of assets total, no jQuery, loaded only when protection is active and never on excluded pages. Statistics are sent in batches (one request every 6 seconds maximum).
+Yes. A dedicated toggle disables protection for logged-in admins. You can also exclude other roles and specific pages by ID, slug or URI.
 
-= Can administrators be excluded? =
+= Does it work with Elementor, Divi, WPBakery, WooCommerce? =
 
-Yes, a dedicated setting disables protection for logged-in administrator accounts — handy to edit your site without constraints. Other roles (subscribers, authors…) can also be excluded one by one.
+Yes. Protections run in the capture phase (before theme and page builder scripts). WooCommerce checkout, login forms and comment fields always remain functional.
 
-= Can I watermark my images? =
+= Is it available in French? =
 
-Yes: Settings → Advanced → “Image watermark”. Your text ({site}, {year} variables) is overlaid semi-transparently on every image larger than 80px. Exempt a specific image by adding the data-rcb-exempt attribute.
+Oui, l'interface est entierement en francaise — parfaite pour les sites algeriens, marocains, tunisiens, francais, belges, suisses et canadiens.
 
-= Can I be alerted on attacks? =
+= Is there a Pro version or paid upgrade? =
 
-Yes: set a threshold (e.g. 50 attempts/hour from one IP) in Settings → Advanced; beyond it, an alert email is sent automatically (1 max per IP per hour).
+No. Everything is 100% free with no locked features. An optional symbolic lifetime license (from 2900 DZD) exists only to support development — it adds or removes nothing.
+
+= Can I see who is trying to steal my content? =
+
+Yes. The real-time dashboard shows every blocked attempt: date, type, IP address and browser. Export to CSV. Set up email alerts when one IP exceeds your threshold.
 
 = Can I copy my configuration to another site? =
 
-Yes: Settings → Tools → Export (JSON), then Import on the target site. Ideal for agencies managing several sites.
-
-= Does the plugin add a Gutenberg block? =
-
-Yes: the “Protection demo — Right Click Blocker PRO” block inserts the interactive demo (11 real tests, live log, 10 styles) into any page.
-
-= Do my forms and WooCommerce keep working? =
-
-Yes. Copy-paste and selection stay active inside input fields (input, textarea, select, contenteditable): login, comments and checkout are never blocked.
-
-= Does it work on mobile? =
-
-Yes: touch events and message layouts are designed for iOS and Android, on Chrome/Safari/Edge/Firefox/Opera/Samsung Internet.
-
-= Compatible with Elementor, Divi, WPBakery, Gutenberg? =
-
-Yes: protections run in the capture phase, before page builder scripts, and message styles are hardened against aggressive stylesheets.
-
-= Can I exclude specific pages? =
-
-Yes, by ID, slug or URI (Settings → Advanced). On those pages the script does not load at all.
-
-= Where are statistics stored? =
-
-In your WordPress database and your wp-uploads folder — nothing is sent outside, no cookie is set (GDPR-friendly).
-
-= How do I receive updates? =
-
-Two channels, without conflict: as soon as the plugin is published on WordPress.org (or installed from the directory), updates arrive automatically from there. In the meantime — or for a manual installation — a GitHub repository can deliver updates (releases with a .zip file); that channel disables itself as soon as WordPress.org takes over. “Check now” button in Settings → General.
-
-= Is there a Pro version? =
-
-All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 11.90 € single site, 4,800 DZD ≈ 22.90 € 5 sites) exists only to support development and get priority support — it adds or removes no functionality.
+Yes: Settings, Export (JSON), then Import on the target site. Perfect for agencies managing multiple sites.
 
 == Screenshots ==
 

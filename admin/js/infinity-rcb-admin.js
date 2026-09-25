@@ -1120,6 +1120,120 @@
 		syncHex(txInput, txHex);
 	}
 
+
+	/* ==================================================================
+	 * Page A propos : scroll smooth + back-to-top + nav active
+	 * ================================================================== */
+	function initAboutPage() {
+		var about = document.querySelector('.rcb-wrap .rcb-hero-about');
+		if (!about) { return; }
+
+		// 1. Bouton retour en haut ( apparait apres 300px de scroll ).
+		var backTop = document.createElement('a');
+		backTop.href = '#wpbody-content';
+		backTop.className = 'rcb-back-top';
+		backTop.innerHTML = '↑';
+		backTop.title = 'Retour en haut';
+		document.body.appendChild(backTop);
+
+		window.addEventListener('scroll', function () {
+			backTop.classList.toggle('visible', window.scrollY > 300);
+		}, { passive: true });
+
+		// 2. Nav chips : highlight de la section visible (scroll-spy).
+		var chips = document.querySelectorAll('.rcb-nav-chip[href^="#rcb-"]');
+		var sections = [];
+		chips.forEach(function (chip) {
+			var id = chip.getAttribute('href').substring(1);
+			var el = document.getElementById(id);
+			if (el) { sections.push({ chip: chip, el: el }); }
+		});
+
+		if (sections.length > 0) {
+			var spy = function () {
+				var current = '';
+				sections.forEach(function (s) {
+					if (s.el.getBoundingClientRect().top < 120) { current = s.el.id; }
+				});
+				chips.forEach(function (chip) {
+					chip.classList.toggle('is-here', chip.getAttribute('href') === '#' + current);
+				});
+			};
+			window.addEventListener('scroll', spy, { passive: true });
+			spy();
+		}
+
+		// 3. Ferme les autres sections repliables quand on en ouvre une.
+		var allDetails = document.querySelectorAll('.rcb-about-details');
+		allDetails.forEach(function (d) {
+			d.addEventListener('toggle', function () {
+				if (d.open) {
+					allDetails.forEach(function (other) {
+						if (other !== d) { other.open = false; }
+					});
+				}
+			});
+		});
+	}
+
+	/* ==================================================================
+	 * Lancement
+	 * ================================================================== */
+	/* ==================================================================
+	 * Page A propos : scroll smooth + back-to-top + nav active
+	 * ================================================================== */
+	function initAboutPage() {
+		var about = document.querySelector('.rcb-wrap .rcb-hero-about');
+		if (!about) { return; }
+
+		// 1. Bouton retour en haut ( apparait apres 300px de scroll ).
+		var backTop = document.createElement('a');
+		backTop.href = '#wpbody-content';
+		backTop.className = 'rcb-back-top';
+		backTop.innerHTML = '↑';
+		backTop.title = 'Retour en haut';
+		document.body.appendChild(backTop);
+
+		window.addEventListener('scroll', function () {
+			backTop.classList.toggle('visible', window.scrollY > 300);
+		}, { passive: true });
+
+		// 2. Nav chips : highlight de la section visible (scroll-spy).
+		var chips = document.querySelectorAll('.rcb-nav-chip[href^="#rcb-"]');
+		var sections = [];
+		chips.forEach(function (chip) {
+			var id = chip.getAttribute('href').substring(1);
+			var el = document.getElementById(id);
+			if (el) { sections.push({ chip: chip, el: el }); }
+		});
+
+		if (sections.length > 0) {
+			var spy = function () {
+				var current = '';
+				sections.forEach(function (s) {
+					if (s.el.getBoundingClientRect().top < 120) { current = s.el.id; }
+				});
+				chips.forEach(function (chip) {
+					chip.classList.toggle('is-here', chip.getAttribute('href') === '#' + current);
+				});
+			};
+			window.addEventListener('scroll', spy, { passive: true });
+			spy();
+		}
+
+		// 3. Ferme les autres sections repliables quand on en ouvre une.
+		var allDetails = document.querySelectorAll('.rcb-about-details');
+		allDetails.forEach(function (d) {
+			d.addEventListener('toggle', function () {
+				if (d.open) {
+					allDetails.forEach(function (other) {
+						if (other !== d) { other.open = false; }
+					});
+				}
+			});
+		});
+	}
+
 	/* ==================================================================
 	 * Lancement
 	 * ================================================================== */
@@ -1146,7 +1260,7 @@
 
 	function boot() {
 		initTabs();
-		initSettingsNav();
+		initAboutPage();
 		initConfirms();
 		initCheckAll();
 		initPlanPicker();

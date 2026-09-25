@@ -67,15 +67,6 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 		<input type="hidden" name="infinity_rcb_save_settings" value="1">
 		<input type="hidden" name="active_tab" id="rcb-active-tab" value="<?php echo esc_attr( $tab ); ?>">
 
-		<div class="rcb-nav-chips" style="margin-bottom:14px;">
-			<a class="rcb-nav-chip" href="#" data-tab="general">Général</a>
-			<a class="rcb-nav-chip" href="#" data-tab="protections">Protections</a>
-			<a class="rcb-nav-chip" href="#" data-tab="messages">Messages</a>
-			<a class="rcb-nav-chip" href="#" data-tab="appearance">Apparence</a>
-			<a class="rcb-nav-chip" href="#" data-tab="advanced">Avancé</a>
-			<a class="rcb-nav-chip" href="#" data-tab="logging">Journalisation</a>
-		</div>
-
 		<div class="rcb-tabs" role="tablist">
 			<?php foreach ( $tabs as $key => $label ) : ?>
 				<a href="#rcb-tab-<?php echo esc_attr( $key ); ?>" class="rcb-tab <?php echo $key === $tab ? 'is-active' : ''; ?>" data-tab="<?php echo esc_attr( $key ); ?>" role="tab"><?php echo esc_html( $label ); ?></a>
