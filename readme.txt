@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.19.2
+Stable tag: 2.20.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.20.0 =
+* SEO & GEO optimization: keyword-rich readme with high-volume tags, comparison table with competitors, 14 FAQ entries matching real Google search queries, French/Algeria targeting, antispam prominently featured. Forced update to trigger GitHub update channel.
 
 = 2.19.2 =
 * Professional layout polish: the admin wrapper is now centered on screen (max-width 1400px, auto margins) for a premium dashboard feel on any display size; responsive padding adjusted across all breakpoints.
