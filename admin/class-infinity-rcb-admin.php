@@ -39,9 +39,21 @@ class Infinity_RCB_Admin {
 		add_action( 'wp_ajax_infinity_rcb_order_status', array( $this, 'ajax_order_status' ) );
 		add_action( 'admin_footer-plugins.php', array( $this, 'plugin_row_icon' ) );
 		add_action( 'admin_footer', array( $this, 'admin_footer_notice' ) );
+		add_action( 'admin_head', array( $this, 'menu_icon_style' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'register_dashboard_widget' ) );
 		add_filter( 'plugin_action_links_' . INFINITY_RCB_BASENAME, array( $this, 'action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'row_meta' ), 10, 2 );
+	}
+
+	/**
+	 * Icône du menu latéral : le CSS cœur applique aux images de menu un
+	 * padding hérité des dashicons (9px en haut) qui décale et agrandit
+	 * l'icône SVG hors de son logement 20x20. Le SVG embarque désormais
+	 * ses dimensions intrinsèques ; ce style neutralise le décalage sur
+	 * TOUTES les pages admin (le menu y est présent partout).
+	 */
+	public function menu_icon_style() {
+		echo '<style id="rcb-menu-icon">#adminmenu div.wp-menu-image img[src*="menu-icon.svg"]{padding:0 !important;width:20px !important;height:20px !important;display:block;margin:7px auto 0;}</style>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS statique sans variable.
 	}
 
 	/* ---------------------------------------------------------------------
