@@ -103,6 +103,21 @@ $export_url = wp_nonce_url( admin_url( 'admin.php?page=infinity-rcb-pro-stats&rc
 
 		<div>
 			<div class="rcb-card">
+				<div class="rcb-card-head"><h2>Antispam — commentaires bloqués</h2></div>
+				<?php $rcb_spam = (int) get_option( 'infinity_rcb_pro_spam_count', 0 ); ?>
+				<div style="text-align:center;padding:20px 0;">
+					<div style="font-size:36px;font-weight:700;color:<?php echo $rcb_spam > 0 ? '#DC2626' : '#94A3B8'; ?>;">🚫 <?php echo number_format( $rcb_spam ); ?></div>
+					<p style="color:#64748B;font-size:13px;margin:6px 0 0;">
+						<?php if ( empty( $options['antispam']['enabled'] ) ) : ?>
+							Antispam désactivé — <a href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-rcb-pro-settings&tab=advanced' ) ); ?>#rcb-antispam">activer</a>
+						<?php else : ?>
+							Spam bloqués par le filtre antispam (honeypot, délai, blacklist, liens, limite IP)<br>
+							<small><a href="<?php echo esc_url( admin_url( 'edit-comments.php?comment_status=spam' ) ); ?>">Voir dans Commentaires → Indésirables</a></small>
+						<?php endif; ?>
+					</p>
+				</div>
+			</div>
+			<div class="rcb-card">
 				<div class="rcb-card-head"><h2>IP les plus actives</h2></div>
 				<?php if ( empty( $top_ips ) ) : ?>
 					<p class="rcb-empty">Aucune IP enregistrée pour le moment.</p>

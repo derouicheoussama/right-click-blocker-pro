@@ -862,6 +862,7 @@ class Infinity_RCB_Admin {
 		$csv .= '"30 derniers jours";"' . (int) $summary['month'] . '"' . "\r\n";
 		$csv .= '"IP uniques";"' . (int) $summary['unique'] . '"' . "\r\n";
 		$csv .= '"Suivi depuis";"' . $summary['since'] . '"' . "\r\n";
+		$csv .= '"Spam bloques";"' . (int) get_option( 'infinity_rcb_pro_spam_count', 0 ) . '"' . "\r\n";
 		$csv .= "\r\n\"Répartition par type\"\r\n";
 		foreach ( $types as $type => $meta ) {
 			$csv .= '"' . $meta['label'] . '";"' . (int) ( $summary['by_type'][ $type ] ?? 0 ) . '"' . "\r\n";

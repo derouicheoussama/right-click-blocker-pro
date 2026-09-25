@@ -67,6 +67,15 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 		<input type="hidden" name="infinity_rcb_save_settings" value="1">
 		<input type="hidden" name="active_tab" id="rcb-active-tab" value="<?php echo esc_attr( $tab ); ?>">
 
+		<div class="rcb-nav-chips" style="margin-bottom:14px;">
+			<a class="rcb-nav-chip" href="#" data-tab="general">Général</a>
+			<a class="rcb-nav-chip" href="#" data-tab="protections">Protections</a>
+			<a class="rcb-nav-chip" href="#" data-tab="messages">Messages</a>
+			<a class="rcb-nav-chip" href="#" data-tab="appearance">Apparence</a>
+			<a class="rcb-nav-chip" href="#" data-tab="advanced">Avancé</a>
+			<a class="rcb-nav-chip" href="#" data-tab="logging">Journalisation</a>
+		</div>
+
 		<div class="rcb-tabs" role="tablist">
 			<?php foreach ( $tabs as $key => $label ) : ?>
 				<a href="#rcb-tab-<?php echo esc_attr( $key ); ?>" class="rcb-tab <?php echo $key === $tab ? 'is-active' : ''; ?>" data-tab="<?php echo esc_attr( $key ); ?>" role="tab"><?php echo esc_html( $label ); ?></a>
@@ -345,16 +354,14 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 						</div>
 					</div>
 					<p class="rcb-muted">Sélecteurs principaux : <code>#rcb-toast</code>, <code>.rcb-inner</code>, <code>.rcb-title</code>, <code>.rcb-copy</code>, <code>.rcb-close</code>.</p>
-				</div>
-				<div class="rcb-preview-zone">
-					<p class="rcb-muted" style="margin:0;">👀 L'aperçu à droite reste visible pendant que vous personnalisez — il suit chaque réglage en direct.</p>
-				</div>
-				</div>
-				</div>
+					</div>
+
+				
 
 				<aside class="rcb-appearance-side">
 					<?php $preview_context = 'settings'; include INFINITY_RCB_DIR . 'admin/partials/preview-card.php'; ?>
 				</aside>
+
 			</div>
 		</section>
 

@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, disable right click, ima
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.19.0
+Stable tag: 2.19.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -143,6 +143,9 @@ All features are free and complete. A symbolic lifetime license (2,900 DZD ≈ 1
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.19.1 =
+* Quick navigation chips on the Settings page (jump between tabs in one click); antispam blocked-spam counter card added to the Statistics page with a link to the spam queue; CSV export now includes the spam count; sticky save bar with gradient fade.
 
 = 2.19.0 =
 * Antispam integration: dashboard shows blocked-spam counter, widget displays count, uninstall cleans up.

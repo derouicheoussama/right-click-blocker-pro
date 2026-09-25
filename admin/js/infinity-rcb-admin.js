@@ -1104,8 +1104,30 @@
 	/* ==================================================================
 	 * Lancement
 	 * ================================================================== */
+	/* Nav chips Réglagements : clic = change d'onglet */
+	function initSettingsNav() {
+		var chips = document.querySelectorAll('.rcb-nav-chips .rcb-nav-chip[data-tab]');
+		if (!chips.length) { return; }
+		chips.forEach(function (chip) {
+			chip.addEventListener('click', function (e) {
+				e.preventDefault();
+				var tab = chip.getAttribute('data-tab');
+				var target = document.getElementById('rcb-tab-' + tab);
+				if (!target) { return; }
+				document.querySelectorAll('.rcb-tab-panel').forEach(function (p) { p.hidden = true; });
+				target.hidden = false;
+				document.querySelectorAll('.rcb-tabs .rcb-tab').forEach(function (t) {
+					t.classList.toggle('is-active', t.getAttribute('data-tab') === tab);
+				});
+				var hidden = document.getElementById('rcb-active-tab');
+				if (hidden) { hidden.value = tab; }
+			});
+		});
+	}
+
 	function boot() {
 		initTabs();
+		initSettingsNav();
 		initConfirms();
 		initCheckAll();
 		initPlanPicker();

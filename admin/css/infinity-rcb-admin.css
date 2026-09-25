@@ -606,56 +606,23 @@
 
 /* ===== Onglet Apparence : formulaire à gauche, aperçu collant à droite (2.13.2) ===== */
 .rcb-preview-stage .rcb-toast { min-width: min(92%, 480px) !important; }
-.rcb-appearance-split { display: grid; grid-template-columns: minmax(0, 1fr) clamp(440px, 36vw, 600px); gap: 20px; align-items: start; }
+.rcb-appearance-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 30vw); gap: 16px; align-items: start; }
 .rcb-appearance-side { position: sticky; top: 46px; max-height: calc(100vh - 64px); overflow: auto; scrollbar-width: thin; }
-.rcb-appearance-side .rcb-card { margin-bottom: 0; padding: 16px 16px 14px; }
-.rcb-appearance-side .rcb-card-head { margin-bottom: 10px; }
-.rcb-appearance-side .rcb-preview-page { min-height: 168px; padding: 20px 24px 24px; }
+.rcb-appearance-side .rcb-card { margin-bottom: 0; padding: 14px 14px 12px; }
+.rcb-appearance-side .rcb-card-head { margin-bottom: 8px; }
+.rcb-appearance-side .rcb-preview-page { min-height: 150px; padding: 16px 20px 20px; }
 .rcb-appearance-side .rcb-preview-url { max-width: 100%; }
-.rcb-appearance-side .rcb-preview-controls { gap: 8px; }
-.rcb-appearance-side .rcb-preview-styles { gap: 5px; }
-.rcb-appearance-side .rcb-dash-chip { padding: 5px 10px; font-size: 11.5px; }
-@media screen and (max-width: 1180px) {
+.rcb-appearance-side .rcb-preview-controls { gap: 6px; }
+.rcb-appearance-side .rcb-preview-styles { gap: 4px; }
+.rcb-appearance-side .rcb-dash-chip { padding: 4px 8px; font-size: 11px; }
+@media screen and (max-width: 960px) {
 	.rcb-appearance-split { grid-template-columns: 1fr; }
-	.rcb-appearance-side { position: static; max-height: none; overflow: visible; order: -1; }
-	.rcb-appearance-side .rcb-card { padding: 20px 24px; }
+	.rcb-appearance-side { position: static !important; max-height: none !important; overflow: visible !important; order: -1; }
+	.rcb-appearance-side .rcb-card { padding: 18px 22px; }
 }
 
-/* ===== Aperçu : comportement réel (2.14.3) ===== */
-.rcb-preview-replay-hint { position: absolute; inset: 0; z-index: 6; display: none; align-items: center; justify-content: center; gap: 8px; border: 0; cursor: pointer; background: rgba(248, 250, 252, .55); color: #1E6FF0; font: 700 13px/1 'Segoe UI', Roboto, system-ui, sans-serif; letter-spacing: .02em; }
-.rcb-preview-replay-hint:hover { color: #7C3AED; }
-.rcb-preview-stage.is-idle .rcb-preview-replay-hint { display: flex; }
 
-/* ===== Modale de confirmation repensée (2.15.0) ===== */
-.rcb-modal-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; margin: -20px -20px 16px; background: linear-gradient(135deg, #1E6FF0 0%, #7C3AED 100%); border-radius: 14px 14px 0 0; }
-.rcb-modal-head h3 { margin: 0; color: #fff; font-size: 16px; }
-.rcb-modal-logo { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; background: rgba(255, 255, 255, .16); border-radius: 10px; }
-.rcb-confirm-amount { margin: 14px 0; padding: 14px 16px; text-align: center; background: #0B0F1E; border-radius: 10px; }
-.rcb-confirm-amount small { display: block; font-size: 10px; letter-spacing: 1.5px; font-weight: 700; color: #7C9BD9; margin-bottom: 4px; }
-.rcb-confirm-amount strong { font-size: 22px; color: #fff; }
-.rcb-confirm-amount em { display: block; margin-top: 5px; font-size: 11.5px; font-style: normal; color: #fbbf24; }
-.rcb-confirm-next { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 14px; }
-.rcb-confirm-next span { padding: 10px 8px; text-align: center; font-size: 12px; font-weight: 700; color: #334155; background: #F4F6FB; border-radius: 10px; line-height: 1.4; }
-.rcb-confirm-next small { display: block; margin-top: 3px; font-weight: 500; color: #64748B; font-size: 10.5px; }
-
-/* ===== Page À propos : sections repliables (2.17.1) ===== */
-.rcb-about-details { background: #fff; border: 1px solid var(--rcb-border); border-radius: var(--rcb-card-r); padding: 14px 18px; margin-bottom: 20px; box-shadow: var(--rcb-shadow); }
-.rcb-about-details > summary { cursor: pointer; font-weight: 700; font-size: 15px; color: var(--rcb-text); display: flex; align-items: center; gap: 8px; list-style: none; }
-.rcb-about-details > summary::-webkit-details-marker { display: none; }
-.rcb-about-details > summary::before { content: '▸'; font-size: 13px; color: var(--rcb-primary); transition: transform .15s; }
-.rcb-about-details[open] > summary::before { transform: rotate(90deg); }
-.rcb-about-details > summary small { font-weight: 400; color: var(--rcb-muted); font-size: 12px; }
-.rcb-changelog-card { max-height: 65vh; overflow: auto; scrollbar-width: thin; }
-
-/* ===== Apparence : couleurs (2.17.2) ===== */
-.rcb-color-field { display: flex; align-items: center; gap: 10px; }
-.rcb-color-field label { font-size: 13px; font-weight: 600; color: var(--rcb-text); white-space: nowrap; }
-.rcb-color-field input[type="color"] { width: 48px; height: 36px; padding: 2px; border: 2px solid var(--rcb-border); border-radius: 8px; cursor: pointer; background: #fff; }
-.rcb-color-field input[type="color"]:hover { border-color: var(--rcb-primary); }
-.rcb-color-field input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
-.rcb-color-field input[type="color"]::-webkit-color-swatch { border: none; border-radius: 5px; }
-.rcb-color-field code { font-size: 12px; color: var(--rcb-muted); background: var(--rcb-bg); padding: 4px 8px; border-radius: 6px; }
-.rcb-color-presets { display: flex; align-items: center; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
-.rcb-color-preset { width: 28px; height: 28px; border-radius: 8px; border: 2px solid rgba(0,0,0,.08); cursor: pointer; transition: transform .12s, box-shadow .12s; }
-.rcb-color-preset:hover { transform: scale(1.2); box-shadow: 0 3px 10px -3px rgba(0,0,0,.3); border-color: var(--rcb-primary); }
-.rcb-color-preset:active { transform: scale(1); }
+/* ===== Réglages : nav chips + bouton sauvegarde flottant ===== */
+.rcb-save-bar { position: sticky; bottom: 12px; z-index: 20; background: #fff; border: 1px solid var(--rcb-border); border-radius: 12px; padding: 12px 18px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; box-shadow: 0 -4px 20px -8px rgba(15, 23, 42, .15); }
+.rcb-save-bar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(255,255,255,.95) 30%); border-radius: 12px; pointer-events: none; }
+.rcb-save-bar > * { position: relative; z-index: 1; }
