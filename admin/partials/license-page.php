@@ -704,14 +704,18 @@ $status_badge = array(
 							'test'           => array( '🧪 Test', '#64748b' ),
 						);
 						foreach ( $maillog as $entry ) :
-							$tl = isset( $type_labels[ $entry['type'] ] ) ? $type_labels[ $entry['type'] ] : array( $entry['type'], '#64748b' );
+							// Lectures aveugles : les entrées anciennes peuvent
+							// manquer de clés ajoutées plus tard (ex. « type »).
+							$etype   = (string) ( $entry['type'] ?? '' );
+							$tl      = isset( $type_labels[ $etype ] ) ? $type_labels[ $etype ] : array( '' !== $etype ? $etype : 'e-mail', '#64748b' );
+							$e_ok    = ! empty( $entry['ok'] );
 							?>
 							<tr>
-								<td class="rcb-nowrap"><?php echo esc_html( $entry['time'] ); ?></td>
+								<td class="rcb-nowrap"><?php echo esc_html( $entry['time'] ?? '' ); ?></td>
 								<td><span class="rcb-badge" style="background:<?php echo esc_attr( $tl[1] ); ?>1a;color:<?php echo esc_attr( $tl[1] ); ?>;"><?php echo esc_html( $tl[0] ); ?></span></td>
-								<td><?php echo esc_html( $entry['to'] ); ?></td>
-								<td class="rcb-ua"><?php echo esc_html( $entry['subject'] ); ?></td>
-								<td><?php if ( $entry['ok'] ) : ?><span class="rcb-badge" style="background:#10b9811a;color:#10b981;">✅ Envoyé</span><?php else : ?><span class="rcb-badge" style="background:#ef44441a;color:#ef4444;">⛔ Échec</span><?php endif; ?></td>
+								<td><?php echo esc_html( $entry['to'] ?? '' ); ?></td>
+								<td class="rcb-ua"><?php echo esc_html( $entry['subject'] ?? '' ); ?></td>
+								<td><?php if ( $e_ok ) : ?><span class="rcb-badge" style="background:#10b9811a;color:#10b981;">✅ Envoyé</span><?php else : ?><span class="rcb-badge" style="background:#ef44441a;color:#ef4444;">⛔ Échec</span><?php endif; ?></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
