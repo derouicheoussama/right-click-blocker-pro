@@ -800,7 +800,5 @@ $compat = array(
 		</div>
 	</div>
 
-		</details>
-
 	<p class="rcb-credit">Infinity RCB Pro v<?php echo esc_html( INFINITY_RCB_VERSION ); ?> — développé avec ❤️ par <?php if ( $options['developer']['website'] ) : ?><a href="<?php echo esc_url( $options['developer']['website'] ); ?>" target="_blank" rel="noopener"><?php endif; ?><?php echo esc_html( $options['developer']['name'] ); ?><?php if ( $options['developer']['website'] ) : ?></a><?php endif; ?> — Licences à vie : 2 900 DA ≈ 11,90 € (1 site) · 4 800 DA ≈ 22,90 € (5 sites)</p>
 </div>

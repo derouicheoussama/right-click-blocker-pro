@@ -57,6 +57,26 @@ foreach ( $types as $type => $meta ) {
 		<div class="rcb-notice rcb-notice-ok">✅ Bienvenue ! Votre protection est configurée et active. Explorez le tableau de bord ci-dessous.</div>
 	<?php endif; ?>
 
+	<?php
+	// Bandeau non-licencié : informatif, dismissible 7 jours, ne bloque rien.
+	$rcb_show_nag = 'active' !== $lic_status['code'] && 'revoked' !== $lic_status['code'];
+	$rcb_nag_dismissed = (int) get_user_meta( get_current_user_id(), 'infinity_rcb_pro_nag_dismissed', true );
+	$rcb_nag_expired = $rcb_nag_dismissed && ( time() - $rcb_nag_dismissed ) > 7 * DAY_IN_SECONDS;
+	if ( $rcb_show_nag && ( ! $rcb_nag_dismissed || $rcb_nag_expired ) ) :
+	?>
+	<div class="rcb-card" id="rcb-license-nag" style="display:flex;align-items:center;gap:16px;padding:14px 20px;border-left:4px solid #f59e0b;margin-bottom:20px;">
+		<span style="font-size:24px;">💡</span>
+		<div style="flex:1;">
+			<strong style="font-size:14px;color:#92400e;">Installation non-licenciée — support non inclus</strong>
+			<p style="margin:2px 0 0;font-size:13px;color:#64748B;">Toutes les protections fonctionnent librement. Une licence à vie (dès 2 900 DA) ajoute le support prioritaire et les alertes e-mail. <a href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-rcb-pro-license' ) ); ?>#rcb-commande">Obtenir une licence</a></p>
+		</div>
+		<form method="post" action="">
+			<?php wp_nonce_field( 'infinity_rcb_license', 'infinity_rcb_license_nonce' ); ?>
+			<button type="submit" name="infinity_rcb_dismiss_nag" value="1" class="btn btn-sm" style="background:none;border:1px solid #e2e8f0;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12px;color:#64748B;">Plus tard</button>
+		</form>
+	</div>
+	<?php endif; ?>
+
 	<?php if ( empty( $options['wizard_done'] ) ) : ?>
 	<!-- ===== Assistant de premier démarrage ===== -->
 	<div class="rcb-card rcb-wizard">

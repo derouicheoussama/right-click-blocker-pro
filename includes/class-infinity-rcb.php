@@ -315,8 +315,12 @@ class Infinity_RCB {
 			if ( $count >= $threshold && ! get_transient( $guard ) ) {
 				set_transient( $guard, 1, HOUR_IN_SECONDS );
 				arsort( $counts );
+				// Alerte e-mail : fonctionnalite de la licence a vie.
 				$license = new Infinity_RCB_License();
-				$license->email_attack_alert( $ip, $count, implode( ', ', array_keys( array_slice( $counts, 0, 3, true ) ) ) );
+				$lic = $license->status();
+				if ( 'active' === $lic['code'] ) {
+					$license->email_attack_alert( $ip, $count, implode( ', ', array_keys( array_slice( $counts, 0, 3, true ) ) ) );
+				}
 			}
 		}
 

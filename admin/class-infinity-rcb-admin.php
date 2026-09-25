@@ -38,6 +38,7 @@ class Infinity_RCB_Admin {
 		add_action( 'wp_ajax_infinity_rcb_live', array( $this, 'ajax_live' ) );
 		add_action( 'wp_ajax_infinity_rcb_order_status', array( $this, 'ajax_order_status' ) );
 		add_action( 'admin_footer-plugins.php', array( $this, 'plugin_row_icon' ) );
+		add_action( 'admin_footer', array( $this, 'admin_footer_notice' ) );
 		add_action( 'wp_dashboard_setup', array( $this, 'register_dashboard_widget' ) );
 		add_filter( 'plugin_action_links_' . INFINITY_RCB_BASENAME, array( $this, 'action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'row_meta' ), 10, 2 );
@@ -968,6 +969,15 @@ class Infinity_RCB_Admin {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
+
+		// Bandeau non-licencié : dismiss (revient après 7 jours).
+		if ( isset( $_POST['infinity_rcb_dismiss_nag'] ) ) {
+			check_admin_referer( 'infinity_rcb_license', 'infinity_rcb_license_nonce' );
+			update_user_meta( get_current_user_id(), 'infinity_rcb_pro_nag_dismissed', time() );
+			wp_safe_redirect( admin_url( 'admin.php?page=infinity-rcb-pro' ) );
+			exit;
+		}
+
 		if ( ! isset( $_POST['infinity_rcb_wizard_done'] ) ) {
 			return;
 		}
@@ -978,6 +988,18 @@ class Infinity_RCB_Admin {
 		update_option( INFINITY_RCB_OPTION, $options, false );
 		wp_safe_redirect( admin_url( 'admin.php?page=infinity-rcb-pro&rcb-notice=wizard-done' ) );
 		exit;
+	}
+
+	/**
+	 * Footer admin : mention discret (informatif, non-bloquant).
+	 */
+	public function admin_footer_notice() {
+		$status = $this->license->status();
+		if ( 'active' === $status['code'] ) {
+			return;
+		}
+		$label = 'revoked' === $status['code'] ? 'Licence revoquee' : 'Installation non-licenciee';
+		echo '<style>#wpfooter{position:static !important;opacity:1 !important;}</style>';
 	}
 
 	public function admin_bar_link( $wp_admin_bar ) {
