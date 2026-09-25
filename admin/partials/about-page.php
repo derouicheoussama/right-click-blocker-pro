@@ -371,6 +371,15 @@ $compat = array(
 		<div class="rcb-card rcb-changelog-card" style="margin-top:14px;">
 		<div class="rcb-changelog">
 			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.25.0</span>
+				<div>
+					<strong>Logo personnalisé du message</strong>
+					<ul>
+						<li>Réglages → Apparence : remplacez le bouclier par votre propre logo PNG/SVG (médiathèque WordPress) — visible dans le message du visiteur et tous les aperçus.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.24.0</span>
 				<div>
 					<strong>Expérience Mises à jour WordPress</strong>

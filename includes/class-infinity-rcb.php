@@ -194,6 +194,7 @@ class Infinity_RCB {
 			'bg'     => $options['appearance']['custom_bg'],
 			'tx'     => $options['appearance']['custom_text'],
 			'icon'   => ! empty( $options['appearance']['show_icon'] ),
+			'icon_url' => esc_url_raw( (string) $options['appearance']['custom_icon'] ),
 			'sound'  => ! empty( $options['appearance']['sound'] ),
 			'copy'   => array(
 				'on'   => ! empty( $options['appearance']['copyright_enable'] ) && '' !== trim( $copyright ),

@@ -522,6 +522,8 @@
 
 			var closeOn = $('#rcb-close-on') ? $('#rcb-close-on').checked : true;
 			var barOn = $('#rcb-bar-on') ? $('#rcb-bar-on').checked : true;
+			var iconUrl = (($('input[name="infinity_rcb[appearance][custom_icon]"]') || {}).value || '').trim();
+			var iconHtml = iconUrl ? '<img src="' + iconUrl + '" alt="">' : shieldSvg();
 
 			var toast = $('#rcb-preview-toast');
 			if (!toast) {
@@ -529,7 +531,7 @@
 				toast.id = 'rcb-preview-toast';
 				toast.innerHTML =
 					'<div class="rcb-inner">' +
-					'<span class="rcb-ico">' + shieldSvg() + '</span>' +
+					'<span class="rcb-ico">' + iconHtml + '</span>' +
 					'<span class="rcb-body"><span class="rcb-title"></span><span class="rcb-copy"></span></span>' +
 					'<button type="button" class="rcb-close" aria-label="Fermer">&times;</button>' +
 					'<span class="rcb-bar"><i></i></span>' +
@@ -540,6 +542,9 @@
 					window.clearTimeout(toast._timer);
 				});
 			}
+			// Logo personnalisé appliqué aussi aux réutilisations du toast.
+			var toastIco = toast.querySelector('.rcb-ico');
+			if (toastIco) { toastIco.innerHTML = iconHtml; }
 
 			toast.className = 'rcb-toast rcb-pos-' + pos;
 			var inner = toast.firstChild;
@@ -1258,6 +1263,63 @@
 		});
 	}
 
+	/* ------------------------------------------------------------------
+	 * Sélecteur de logo personnalisé (onglet Apparence) : médiathèque,
+	 * vignette, bouton Retirer et mise à jour en direct de l'aperçu.
+	 * ------------------------------------------------------------------ */
+	function initIconPicker() {
+		var input = document.getElementById('rcb-custom-icon');
+		var choose = document.getElementById('rcb-icon-choose');
+		if (!input || !choose) { return; }
+
+		var remove = document.getElementById('rcb-icon-remove');
+		var thumb = document.getElementById('rcb-icon-thumb');
+		/* Défaut neutre = bouclier du plugin (jamais le logo courant, même
+		 * si l'option est déjà remplie côté serveur). */
+		var defaultHtml = (typeof shieldSvg === 'function') ? shieldSvg() : '';
+		if (thumb) { thumb.innerHTML = defaultHtml; }
+		/* Aperçus concernés : carte partagée (stage) + toast « Tester le message ». */
+		var previewIcos = Array.prototype.slice.call(document.querySelectorAll('#rcb-dash-toast .rcb-ico, #rcb-preview-toast .rcb-ico'));
+		previewIcos.forEach(function (el) { el.innerHTML = defaultHtml; });
+		var frame = null;
+
+		function applyIcon(url) {
+			url = (url || '').trim();
+			input.value = url;
+			if (thumb) {
+				thumb.innerHTML = url ? '<img src="' + url + '" alt="">' : defaultHtml;
+			}
+			if (remove) { remove.hidden = !url; }
+			previewIcos.forEach(function (el) {
+				el.innerHTML = url ? '<img src="' + url + '" alt="">' : defaultHtml;
+			});
+		}
+
+		choose.addEventListener('click', function () {
+			if (window.wp && window.wp.media) {
+				if (!frame) {
+					frame = window.wp.media({ title: 'Choisir le logo du message', multiple: false, library: { type: 'image' } });
+					frame.on('select', function () {
+						var att = frame.state().get('selection').first().toJSON();
+						var url = (att && (att.url || (att.sizes && att.sizes.thumbnail && att.sizes.thumbnail.url))) || '';
+						applyIcon(url);
+					});
+				}
+				frame.open();
+			} else {
+				var url = window.prompt('URL de l’icône (PNG/SVG) :', input.value);
+				if (url !== null) { applyIcon(url); }
+			}
+		});
+
+		if (remove) {
+			remove.addEventListener('click', function () { applyIcon(''); });
+		}
+		input.addEventListener('change', function () { applyIcon(input.value); });
+		// État initial : applique le logo enregistré (ou le bouclier si vide).
+		applyIcon(input.value);
+	}
+
 	function boot() {
 		initTabs();
 		initAboutPage();
@@ -1271,6 +1333,7 @@
 		initPreview();
 		initDashPreview();
 		initColorPickers();
+		initIconPicker();
 		initLogFilters();
 		initCharts();
 		animateCounters();

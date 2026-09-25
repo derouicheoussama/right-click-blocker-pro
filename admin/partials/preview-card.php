@@ -79,7 +79,14 @@ if ( empty( $ap['shadow'] ) )        { $pv_inner_style .= 'box-shadow:none;'; }
 
 		<div class="rcb-toast rcb-show rcb-pos-<?php echo esc_attr( $ap['position'] ); ?>" id="rcb-dash-toast" role="presentation" style="<?php echo esc_attr( $pv_toast_style ); ?>">
 			<div class="rcb-inner rcb-st-<?php echo esc_attr( $ap['style'] ); ?> rcb-a-<?php echo esc_attr( $style_meta['anim'] ); ?>" style="<?php echo esc_attr( $pv_inner_style ); ?>">
-				<span class="rcb-ico" <?php echo empty( $ap['show_icon'] ) ? 'style="display:none;"' : ''; ?>><?php printf( '%s', infinity_rcb_shield_svg( 'regular', 'plain' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></span>
+				<span class="rcb-ico" <?php echo empty( $ap['show_icon'] ) ? 'style="display:none;"' : ''; ?>><?php
+				if ( ! empty( $ap['custom_icon'] ) ) {
+					printf( '<img src="%s" alt="">', esc_url( $ap['custom_icon'] ) );
+				} else {
+					printf( '%s', infinity_rcb_shield_svg( 'regular', 'plain' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin).
+					;
+				}
+				?></span>
 				<span class="rcb-body">
 					<span class="rcb-title"><?php echo esc_html( $options['messages']['right_click'] ); ?></span>
 					<span class="rcb-copy" <?php echo ( empty( $ap['copyright_enable'] ) || '' === trim( $pv_copy ) ) ? 'style="display:none;"' : ''; ?>><?php echo esc_html( $pv_copy ); ?></span>

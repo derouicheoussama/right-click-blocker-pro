@@ -77,7 +77,10 @@
 
 		var ico = document.createElement('span');
 		ico.className = 'rcb-ico';
-		ico.innerHTML = SHIELD_SVG;
+		// Logo personnalisé (Réglages → Apparence) à la place du bouclier.
+		ico.innerHTML = (C.icon_url)
+			? '<img src="' + C.icon_url + '" alt="">'
+			: SHIELD_SVG;
 
 		var body = document.createElement('span');
 		body.className = 'rcb-body';

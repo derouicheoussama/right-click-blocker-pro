@@ -60,6 +60,14 @@ body .rcb-toast.rcb-pos-bottom { bottom: 28px !important; top: auto !important; 
 	border-radius: 9px;
 	background: rgba(255, 255, 255, .14);
 }
+.rcb-toast .rcb-ico svg { display: block; }
+.rcb-toast .rcb-ico img {       /* logo personnalisé (Réglages → Apparence) */
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+	border-radius: inherit;
+}
 .rcb-toast .rcb-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .rcb-toast .rcb-title { display: block; font-weight: 700; } /* hérite la taille de .rcb-inner (curseur Texte) */
 .rcb-toast .rcb-copy {

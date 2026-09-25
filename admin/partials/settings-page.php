@@ -306,6 +306,22 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 							<div class="rcb-field-label"><strong>Icone bouclier</strong><p>Logo du plugin dans le message.</p></div>
 							<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[appearance][show_icon]" value="1" <?php checked( ! empty( $options['appearance']['show_icon'] ) ); ?>><span class="rcb-slider"></span></label>
 						</div>
+						<div class="rcb-field-row rcb-icon-row">
+							<div class="rcb-field-label"><strong>Logo personnalise</strong><p>Remplace le bouclier par votre icone (PNG/SVG, carre 64×64+ recommande). Laissez vide pour le bouclier du plugin.</p></div>
+							<div class="rcb-icon-picker">
+								<span class="rcb-icon-thumb" id="rcb-icon-thumb"><?php
+								if ( ! empty( $options['appearance']['custom_icon'] ) ) {
+									printf( '<img src="%s" alt="">', esc_url( $options['appearance']['custom_icon'] ) );
+								} else {
+									printf( '%s', infinity_rcb_shield_svg( 'regular', 'plain' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin).
+									;
+								}
+								?></span>
+								<input type="hidden" id="rcb-custom-icon" name="infinity_rcb[appearance][custom_icon]" value="<?php echo esc_attr( $options['appearance']['custom_icon'] ); ?>">
+								<button type="button" class="rcb-btn rcb-btn-ghost" id="rcb-icon-choose">📁 Mediatheque</button>
+								<button type="button" class="rcb-btn rcb-btn-ghost" id="rcb-icon-remove" <?php echo empty( $options['appearance']['custom_icon'] ) ? 'hidden' : ''; ?>>✕ Retirer</button>
+							</div>
+						</div>
 						<div class="rcb-field-row">
 							<div class="rcb-field-label"><strong>Bip sonore</strong><p>Court signal audio.</p></div>
 							<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[appearance][sound]" value="1" <?php checked( ! empty( $options['appearance']['sound'] ) ); ?>><span class="rcb-slider"></span></label>

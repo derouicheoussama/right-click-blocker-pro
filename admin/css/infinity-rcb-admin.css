@@ -658,6 +658,17 @@
 }
 
 
+/* ===== Réglages : sélecteur de logo personnalisé du message ===== */
+.rcb-icon-picker { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.rcb-icon-thumb {
+	display: inline-flex; align-items: center; justify-content: center;
+	width: 42px; height: 42px; flex: 0 0 auto;
+	border-radius: 10px; background: #f1f5f9; border: 1px solid var(--rcb-border); overflow: hidden;
+}
+.rcb-icon-thumb svg { width: 26px; height: 26px; display: block; }
+.rcb-icon-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+#rcb-icon-remove[hidden] { display: none; } /* .rcb-btn fixe display:inline-flex, [hidden] doit gagner */
+
 /* ===== Réglages : nav chips + bouton sauvegarde flottant ===== */
 /* La barre collante participe au flux : la marge basse réserve le dégagement
  * pour qu'elle ne recouvre jamais les dernières lignes en fin de défilement. */

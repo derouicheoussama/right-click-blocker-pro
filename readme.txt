@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.24.1
+Stable tag: 2.25.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.25.0 =
+* New: custom logo for the protection message. Settings → Appearance now includes a "Custom logo" picker (WordPress media library) that replaces the default shield icon with your own PNG/SVG — in the visitor-facing message, the live preview and the dashboard preview card. Falls back to a URL prompt when the media library is unavailable; a "Remove" button restores the shield.
 
 = 2.24.1 =
 * Fix: the sticky save bar no longer overlaps the last settings rows when scrolling to the bottom of a tab (proper clearance is now reserved below the floating bar).

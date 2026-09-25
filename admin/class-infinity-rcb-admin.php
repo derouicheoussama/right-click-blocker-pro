@@ -154,6 +154,11 @@ class Infinity_RCB_Admin {
 		if ( in_array( $page, array( 'settings', 'dashboard' ), true ) ) {
 			wp_enqueue_style( 'infinity-rcb-public', INFINITY_RCB_URL . 'assets/css/infinity-rcb-public.css', array(), $this->version, 'all' );
 		}
+
+		// Médiathèque : choix du logo personnalisé du message (onglet Apparence).
+		if ( 'settings' === $page ) {
+			wp_enqueue_media();
+		}
 	}
 
 	/* ---------------------------------------------------------------------
@@ -456,6 +461,7 @@ class Infinity_RCB_Admin {
 			'custom_bg'        => $custom_on ? infinity_rcb_sanitize_hex( $input['appearance']['custom_bg'] ?? '' ) : '',
 			'custom_text'      => $custom_on ? infinity_rcb_sanitize_hex( $input['appearance']['custom_text'] ?? '' ) : '',
 			'show_icon'        => ! empty( $input['appearance']['show_icon'] ),
+			'custom_icon'      => esc_url_raw( wp_unslash( $input['appearance']['custom_icon'] ?? '' ) ),
 			'sound'            => ! empty( $input['appearance']['sound'] ),
 			'copyright_enable' => ! empty( $input['appearance']['copyright_enable'] ),
 			'copyright_text'   => sanitize_text_field( $input['appearance']['copyright_text'] ?? $defaults['appearance']['copyright_text'] ),
