@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.23.0
+Stable tag: 2.23.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.23.1 =
+* Fix: the "Text size" appearance setting now really controls the protection message. The message title inherited a hardcoded 15px; it now follows the slider, and the copyright line, shield icon and close button scale proportionally (em-based). Mobile no longer overrides the chosen size (only spacing shrinks). Font-size is applied with high priority to resist aggressive theme CSS.
 
 = 2.23.0 =
 * About page polish: compatibility updated (WP 4.9-7.1, PHP 7.0-8.3), FAQ styling harmonized with collapsible sections, presentation text tightened, antispam now counted in the feature total (16 protections).

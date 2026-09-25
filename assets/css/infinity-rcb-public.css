@@ -41,7 +41,10 @@ body .rcb-toast.rcb-pos-bottom { bottom: 28px !important; top: auto !important; 
 	align-items: center;
 	gap: 13px;
 	padding: 15px 26px 15px 20px;
-	font: 600 15px/1.35 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 1.35;
 	box-shadow: 0 12px 40px rgba(15, 23, 42, .3), 0 2px 8px rgba(15, 23, 42, .15);
 	white-space: normal;
 	word-break: break-word;
@@ -52,16 +55,16 @@ body .rcb-toast.rcb-pos-bottom { bottom: 28px !important; top: auto !important; 
 	align-items: center;
 	justify-content: center;
 	flex: 0 0 auto;
-	width: 30px;
-	height: 30px;
+	width: 2em;           /* suit la taille du texte (30px à 15px) */
+	height: 2em;
 	border-radius: 9px;
 	background: rgba(255, 255, 255, .14);
 }
 .rcb-toast .rcb-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.rcb-toast .rcb-title { display: block; font-weight: 700; font-size: 15px; }
+.rcb-toast .rcb-title { display: block; font-weight: 700; } /* hérite la taille de .rcb-inner (curseur Texte) */
 .rcb-toast .rcb-copy {
 	display: block;
-	font-size: 12px;
+	font-size: .8em;      /* 12px à 15px, suit la taille du texte */
 	font-weight: 500;
 	opacity: .82;
 }
@@ -71,10 +74,13 @@ body .rcb-toast.rcb-pos-bottom { bottom: 28px !important; top: auto !important; 
 	border: 0;
 	background: rgba(255, 255, 255, .16);
 	color: inherit;
-	width: 24px;
-	height: 24px;
+	width: 1.6em;         /* 24px à 15px, suit la taille du texte */
+	height: 1.6em;
 	border-radius: 7px;
-	font: 700 16px/1 system-ui, sans-serif;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	font-weight: 700;
+	font-size: 1.05em;    /* ≈16px à 15px, suit la taille du texte */
+	line-height: 1;
 	cursor: pointer;
 	opacity: .75;
 	transition: opacity .15s ease, background .15s ease;
@@ -207,17 +213,16 @@ body.rcb-guard-blur > *:not(.rcb-toast) {
 #rcb-preview-toast.rcb-pos-bottom { bottom: 46px; }
 
 /* ============ Mobile ============ */
+/* La taille du texte reste celle choisie dans Réglages (style inline du JS) ;
+   seul l'espacement est réduit sur petit écran. */
 @media screen and (max-width: 600px) {
 	body .rcb-toast.rcb-pos-top { top: 16px !important; }
 	body .rcb-toast.rcb-pos-bottom { bottom: 16px !important; }
 	.rcb-toast .rcb-inner {
-		font-size: 13.5px;
 		padding: 12px 20px 12px 15px;
 		gap: 10px;
 	}
-	.rcb-toast .rcb-ico { width: 24px; height: 24px; }
-	.rcb-toast .rcb-title { font-size: 13.5px; }
-	.rcb-toast .rcb-copy { font-size: 11px; }
+	.rcb-toast .rcb-ico { width: 1.6em; height: 1.6em; }
 }
 
 /* ============ Impression ============ */

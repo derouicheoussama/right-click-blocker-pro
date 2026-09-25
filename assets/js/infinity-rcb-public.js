@@ -149,7 +149,7 @@
 		// Finitions personnalisables (rayon, taille, ombre).
 		if (C.look) {
 			if (C.look.radius !== undefined) { inner.style.borderRadius = C.look.radius + 'px'; }
-			if (C.look.font) { inner.style.fontSize = C.look.font + 'px'; }
+			if (C.look.font) { inner.style.setProperty('font-size', parseInt(C.look.font, 10) + 'px', 'important'); }
 			if (C.look.shadow === false) { inner.style.boxShadow = 'none'; }
 		}
 
