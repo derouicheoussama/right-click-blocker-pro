@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📧 Contact direct (support licence / partenariat)
+    url: mailto:hi@infinitycoder.dev?subject=Right%20Click%20Blocker%20PRO
+    about: Pour tout ce qui ne rentre pas dans une issue (support de licence, demande privée).
+  - name: 📖 Documentation du plugin
+    url: https://github.com/derouicheoussama/right-click-blocker-pro#readme
+    about: Fonctionnalités, installation et mises à jour.
