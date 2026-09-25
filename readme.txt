@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.24.0
+Stable tag: 2.24.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.24.1 =
+* Fix: the sticky save bar no longer overlaps the last settings rows when scrolling to the bottom of a tab (proper clearance is now reserved below the floating bar).
 
 = 2.24.0 =
 * New: a branded update card now appears on WordPress Updates (wp-admin/update-core.php) when a GitHub-channel update is pending — installed → new version, release date, channel badge, release notes excerpt, one-click "Update now" (auto-checks and submits the form), full details in the modal, and a link to the GitHub release notes. It never shows when WordPress.org manages the plugin.
