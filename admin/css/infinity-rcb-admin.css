@@ -499,17 +499,50 @@
 .rcb-changelog-entry ul { margin: 0; padding-left: 18px; color: var(--rcb-muted); }
 .rcb-changelog-entry li { padding: 2px 0; line-height: 1.6; }
 
-.rcb-faq details { border: 1px solid var(--rcb-border); border-radius: 12px; padding: 0 18px; margin-bottom: 10px; background: #fff; }
-.rcb-faq details[open] { background: #fafbff; border-color: #c7d2fe; }
-.rcb-faq summary { cursor: pointer; padding: 14px 0; font-weight: 700; font-size: 13.5px; list-style: none; position: relative; padding-right: 26px; }
-.rcb-faq summary::-webkit-details-marker { display: none; }
-.rcb-faq summary::after {
-	content: "+"; position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
-	width: 20px; height: 20px; display: grid; place-items: center;
-	background: #eef2ff; color: var(--rcb-primary); border-radius: 6px; font-weight: 800;
+.rcb-faq details {
+	border: 1px solid var(--rcb-border);
+	border-radius: var(--rcb-card-r);
+	padding: 0 20px;
+	margin-bottom: 10px;
+	background: #fff;
+	overflow: hidden;
+	transition: box-shadow .2s ease, border-color .2s ease;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
 }
-.rcb-faq details[open] summary::after { content: "−"; }
-.rcb-faq details p { margin: 0 0 14px; color: var(--rcb-muted); line-height: 1.7; }
+.rcb-faq details:hover { box-shadow: 0 2px 6px rgba(15, 23, 42, .06), 0 8px 20px -10px rgba(15, 23, 42, .1); }
+.rcb-faq details[open] { background: #fafbff; border-color: #c7d2fe; box-shadow: 0 2px 6px rgba(15, 23, 42, .06), 0 12px 28px -12px rgba(30, 111, 240, .12); }
+.rcb-faq summary {
+	cursor: pointer;
+	padding: 14px 0;
+	font-weight: 700;
+	font-size: 14px;
+	color: var(--rcb-text);
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	user-select: none;
+	transition: color .15s;
+	padding-right: 8px;
+}
+.rcb-faq summary:hover { color: var(--rcb-primary); }
+.rcb-faq summary::-webkit-details-marker { display: none; }
+.rcb-faq summary::before {
+	content: 'B8';
+	font-size: 12px;
+	color: var(--rcb-primary);
+	transition: transform .2s ease;
+	flex-shrink: 0;
+	width: 20px;
+	height: 20px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--rcb-lav);
+	border-radius: 6px;
+}
+.rcb-faq details[open] summary::before { transform: rotate(90deg); }
+.rcb-faq details p { margin: 0 0 16px; color: var(--rcb-muted); line-height: 1.7; font-size: 13.5px; padding-left: 30px; }
 
 /* ============ CRÉDIT ============ */
 .rcb-credit { text-align: center; color: var(--rcb-muted); font-size: 12.5px; margin: 26px 0 6px; }

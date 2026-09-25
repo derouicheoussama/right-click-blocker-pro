@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.22.0
+Stable tag: 2.22.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.22.1 =
+* About page polish: compatibility updated (WP 4.9-7.1, PHP 7.0-8.3), FAQ styling harmonized with collapsible sections, presentation text tightened, antispam now counted in the feature total (16 protections).
 
 = 2.22.0 =
 * License nag system (wp.org compliant): dismissible "unlicensed" banner on the dashboard (returns after 7 days), discreet footer label, and email attack alerts now require an active license. All features remain fully functional without a license (no gating, no trialware).

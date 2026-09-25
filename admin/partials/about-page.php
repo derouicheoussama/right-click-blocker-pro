@@ -28,7 +28,7 @@ $features = array(
 	array( '🌐', '100 % responsive', 'Interface et messages parfaitement adaptés mobile, tablette et desktop, avec respect des préférences d’accessibilité.' ),
 	array( '⚡', 'Ultra léger', 'Aucune dépendance externe : 1 fichier CSS (~7 Ko) et 1 fichier JS (~12 Ko), chargés seulement si la protection est active.' ),
 	array( '🔒', 'Données 100 % locales', 'Aucune donnée envoyée à des services tiers : statistiques et journaux restent sur votre serveur.' ),
-	array( '🌍', 'Prêt pour l’international', 'Text domain complet, fonctionnement vérifié sur WordPress 4.9 à 6.8 et PHP 7.0 à 8.3.' ),
+	array( '🌍', 'Prêt pour l’international', 'Text domain complet, fonctionnement vérifié sur WordPress 4.9 à 7.1 et PHP 7.0 à 8.3.' ),
 );
 
 $mechanisms = array(
@@ -55,7 +55,7 @@ $browsers = array(
 );
 
 $compat = array(
-	'WordPress'    => '4.9 → 6.8 (testé jusqu’à 6.8)',
+	'WordPress'    => '4.9 → 7.1',
 	'PHP'          => '7.0 → 8.3',
 	'Thèmes blocks (Gutenberg, FSE)' => '✔',
 	'Thèmes classiques' => '✔',
@@ -147,7 +147,7 @@ $compat = array(
 			<p><strong>Infinity RCB Pro</strong> est une solution complète de protection de contenu développée par <?php if ( $options['developer']['website'] ) : ?><a href="<?php echo esc_url( $options['developer']['website'] ); ?>" target="_blank" rel="noopener"><?php endif; ?><?php echo esc_html( $options['developer']['name'] ); ?><?php if ( $options['developer']['website'] ) : ?></a><?php endif; ?>, conçue pour les créateurs, photographes, rédacteurs, e-commerçants et agences qui publient du contenu de valeur et veulent limiter son vol : textes, images, prix, fiches produits ou articles de blog.</p>
 			<p>Le principe est simple : <strong>toutes les méthodes courantes d’extraction de contenu sont neutralisées</strong> — clic droit, raccourcis d’inspection, copier-coller, sélection, glisser-déposer, impression et captures d’écran — avec un message d’avertissement professionnel, personnalisable dans sa forme comme dans son texte, assorti d’une mention copyright automatique (© année, nom du site).</p>
 			<p>Chaque tentative de contournement est <strong>enregistrée et analysée</strong> : statistiques temps réel, graphiques d’activité, répartition par type d’attaque, adresses IP les plus actives et journaux complets exportables en CSV. Vous savez ainsi qui tente de copier votre contenu, quand et comment.</p>
-			<p>Le plugin est pensé pour durer : code sans dépendance (aucun framework externe), compatibilité large (WordPress 4.9 → 6.8, PHP 7.0 → 8.3, tous les grands thèmes et page builders), et confidentialité totale — rien n’est envoyé vers l’extérieur, tout reste sur votre serveur.</p>
+			<p>Le plugin est pensé pour durer : code sans dépendance (aucun framework externe), compatibilité large (WordPress 4.9 → 7.1, PHP 7.0 → 8.3, tous les grands thèmes et page builders), et confidentialité totale — rien n’est envoyé vers l’extérieur, tout reste sur votre serveur.</p>
 		</div>
 	</div>
 
@@ -370,6 +370,34 @@ $compat = array(
 		<summary>🗂️ Journal des versions <small>(cliquer pour déplier l'historique complet)</small></summary>
 		<div class="rcb-card rcb-changelog-card" style="margin-top:14px;">
 		<div class="rcb-changelog">
+			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.22.1</span>
+				<div>
+					<strong>Optimisation générale + licence nag</strong>
+					<ul>
+						<li>Bandeau non-licencié dismissible (7 jours) + alertes e-mail réservées aux licenciés.</li>
+						<li>Page À propos : FAQ harmonisée, compatibilité WP 7.1, 16 protections.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.22.0</span>
+				<div>
+					<strong>Licence nag conforme wp.org</strong>
+					<ul>
+						<li>Bandeau « non-licencié » dismissible + footer + alertes e-mail gated.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.21.0</span>
+				<div>
+					<strong>Filigrane réglable + audit sécurité</strong>
+					<ul>
+						<li>Opacité (10-100%) et taille (8-48px) du filigrane réglables par curseurs. Audit : 0 erreur, 0 faille.</li>
+					</ul>
+				</div>
+			</div>
 			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.17.0</span>
 			</div>
@@ -718,7 +746,7 @@ $compat = array(
 						<li>Message d’avertissement repensé : titre + mention copyright automatique (<code>{annee}</code>, <code>{site}</code>, <code>{url}</code>), bouton de fermeture et barre de progression.</li>
 						<li>10 styles de messages (ajout : Verre Dépoli, Néon Cyber, Dégradé Infinity, Minimal Blanc, Alerte Rouge).</li>
 						<li>Licences à trois paliers : 2 900 DA ≈ 11,90 € (1 site), 4 800 DA ≈ 22,90 € (5 sites) et 12 000 DA ≈ 44,90 € (Agence, 20 sites), avec clé de licence.</li>
-						<li>Compatibilité élargie : WordPress 4.9 → 6.8, PHP 7.0 → 8.3, écouteurs en phase de capture pour passer avant tous les thèmes et page builders.</li>
+						<li>Compatibilité élargie : WordPress 4.9 → 7.1, PHP 7.0 → 8.3, écouteurs en phase de capture pour passer avant tous les thèmes et page builders.</li>
 						<li>Accessibilité : respect de <code>prefers-reduced-motion</code>, chargement des traductions.</li>
 						<li>Page « À propos » enrichie : fonctionnement détaillé, compatibilité, feuille de route, comparatif de licences.</li>
 					</ul>
@@ -763,7 +791,7 @@ $compat = array(
 			</details>
 			<details>
 				<summary>Le plugin bloque-t-il à 100 % le vol de contenu ?</summary>
-				<p>Aucune solution web ne peut bloquer à 100 % un visiteur déterminé (désactivation de JavaScript, outils système…). Infinity RCB Pro raise la barre très haut : il neutralise toutes les méthodes courantes, détecte les outils de développement et dissuade la grande majorité des tentatives — tout en laissant votre site parfaitement utilisable.</p>
+				<p>Aucune solution web ne peut bloquer à 100 % un visiteur déterminé (désactivation de JavaScript, outils système…). Infinity RCB Pro place la barre très haut : il neutralise toutes les méthodes courantes, détecte les outils de développement et dissuade la grande majorité des tentatives — tout en laissant votre site parfaitement utilisable.</p>
 			</details>
 			<details>
 				<summary>Mes données sont-elles envoyées à l’extérieur ?</summary>
