@@ -51,7 +51,7 @@
 .rcb-swatch strong { font-size: 12.5px; font-family: ui-monospace, Menlo, Consolas, monospace; }
 .rcb-swatch small { color: var(--rcb-muted); font-size: 11.5px; }
 
-.rcb-wrap { max-width: 1680px; margin: 16px 20px 40px; color: var(--rcb-text); font-size: 14px; }
+.rcb-wrap { max-width: 1400px; margin: 16px auto 40px; padding: 0 20px; color: var(--rcb-text); font-size: 14px; box-sizing: border-box; }
 
 /* ============ HERO ============ */
 .rcb-hero {
@@ -523,7 +523,7 @@
 }
 
 @media screen and (max-width: 900px) {
-	.rcb-wrap { margin: 12px 14px 32px; }
+	.rcb-wrap { margin: 12px auto 32px; padding: 0 14px; }
 	.rcb-hero { flex-direction: column; align-items: flex-start; padding: 22px; }
 	.rcb-hero-side { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
 	.rcb-price-amount strong { font-size: 34px; }
@@ -542,7 +542,7 @@
 }
 
 @media screen and (max-width: 600px) {
-	.rcb-wrap { margin: 10px 10px 28px; }
+	.rcb-wrap { margin: 10px auto 28px; padding: 0 10px; }
 	.rcb-hero { padding: 18px 16px; border-radius: 14px; }
 	.rcb-logo { width: 52px; height: 52px; }
 	.rcb-logo-lg { width: 64px; height: 64px; }
