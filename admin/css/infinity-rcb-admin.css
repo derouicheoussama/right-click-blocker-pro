@@ -669,6 +669,36 @@
 .rcb-icon-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 #rcb-icon-remove[hidden] { display: none; } /* .rcb-btn fixe display:inline-flex, [hidden] doit gagner */
 
+/* ===== Modale d'achat détaillée (page À propos) — .rcb-modal-head/.rcb-modal-close définis plus haut ===== */
+.rcb-buy-box { width: min(94vw, 620px); max-height: calc(100vh - 60px); overflow: auto; }
+.rcb-buy-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.rcb-buy-plan { border: 1.5px solid var(--rcb-border); background: #fff; border-radius: 12px; padding: 12px 10px; cursor: pointer; text-align: center; display: flex; flex-direction: column; gap: 3px; transition: border-color .15s ease, box-shadow .15s ease; }
+.rcb-buy-plan:hover { border-color: #93c5fd; }
+.rcb-buy-plan.is-active { border-color: #1E6FF0; box-shadow: 0 0 0 3px rgba(30, 111, 240, .15); }
+.rcb-buy-plan strong { font-size: 12.5px; }
+.rcb-buy-plan span { color: var(--rcb-muted); font-size: 11.5px; }
+.rcb-buy-plan em { font-style: normal; font-weight: 700; font-size: 14px; color: #1d2327; }
+.rcb-buy-plan em small { display: block; font-weight: 500; font-size: 11px; color: var(--rcb-muted); }
+.rcb-buy-amount { margin: 12px 0 4px; font-size: 13.5px; text-align: center; background: #f8fafc; border: 1px dashed var(--rcb-border); border-radius: 10px; padding: 8px 12px; }
+.rcb-buy-amount strong { color: #1E6FF0; font-size: 15px; }
+.rcb-buy-sub { margin: 14px 0 8px; font-size: 13px; color: var(--rcb-muted); text-transform: uppercase; letter-spacing: .4px; }
+.rcb-buy-pays { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.rcb-buy-pay { border: 1px solid var(--rcb-border); border-radius: 12px; padding: 12px 14px; background: #fff; display: flex; flex-direction: column; gap: 7px; }
+.rcb-buy-pay-head { display: flex; align-items: center; gap: 9px; }
+.rcb-buy-pay-head strong { font-size: 13.5px; }
+.rcb-buy-pay-ico { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 9px; font-size: 16px; flex: 0 0 auto; }
+.rcb-buy-pay > p { margin: 0; font-size: 12.5px; color: var(--rcb-muted); line-height: 1.45; }
+.rcb-buy-ref { font-size: 12.5px; color: var(--rcb-text); }
+.rcb-buy-ref code { background: #f1f5f9; border-radius: 6px; padding: 2px 7px; font-size: 12px; user-select: all; }
+.rcb-copy-btn { border: 0; background: #eef2ff; color: #4f46e5; border-radius: 6px; padding: 2px 9px; font-size: 11.5px; font-weight: 600; cursor: pointer; margin-left: 4px; }
+.rcb-copy-btn:hover { background: #e0e7ff; }
+.rcb-buy-pay .rcb-btn { align-self: flex-start; margin-top: auto; }
+.rcb-buy-note { margin: 14px 0 0; font-size: 12px; line-height: 1.5; border-top: 1px dashed var(--rcb-border); padding-top: 10px; }
+
+@media (max-width: 640px) {
+	.rcb-buy-plans { grid-template-columns: 1fr; }
+}
+
 /* ===== Réglages : nav chips + bouton sauvegarde flottant ===== */
 /* La barre collante participe au flux : la marge basse réserve le dégagement
  * pour qu'elle ne recouvre jamais les dernières lignes en fin de défilement. */

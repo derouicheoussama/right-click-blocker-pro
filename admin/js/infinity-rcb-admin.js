@@ -1320,9 +1320,99 @@
 		applyIcon(input.value);
 	}
 
+	/* ------------------------------------------------------------------
+	 * Modale d'achat détaillée (page À propos) : plans, montant, moyens
+	 * de paiement, copie RIP/CCP et liens vers la commande guidée.
+	 * ------------------------------------------------------------------ */
+	function initAboutBuyModal() {
+		var openBtn = document.getElementById('rcb-about-buy');
+		var modal = document.getElementById('rcb-about-buy-modal');
+		if (!openBtn || !modal) { return; }
+
+		var closeBtn = document.getElementById('rcb-buy-close');
+		var plans = Array.prototype.slice.call(modal.querySelectorAll('.rcb-buy-plan'));
+		var amount = document.getElementById('rcb-buy-amount');
+		var planLinks = Array.prototype.slice.call(modal.querySelectorAll('[data-plan-link]'));
+		var currentPlan = 'single';
+
+		function setPlan(plan) {
+			currentPlan = plan;
+			plans.forEach(function (b) {
+				var active = b.getAttribute('data-plan') === plan;
+				b.classList.toggle('is-active', active);
+				if (active && amount) { amount.textContent = b.getAttribute('data-price') || ''; }
+			});
+			planLinks.forEach(function (a) {
+				try {
+					var u = new URL(a.href, window.location.origin);
+					u.searchParams.set('rcb-plan', plan);
+					a.href = u.pathname + u.search;
+				} catch (e) { /* href relatif : ignore */ }
+			});
+		}
+
+		openBtn.addEventListener('click', function () { modal.hidden = false; });
+		function close() { modal.hidden = true; }
+		if (closeBtn) { closeBtn.addEventListener('click', close); }
+		modal.addEventListener('click', function (e) { if (e.target === modal) { close(); } });
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape' && !modal.hidden) { close(); }
+		});
+		plans.forEach(function (b) {
+			b.addEventListener('click', function () { setPlan(b.getAttribute('data-plan')); });
+		});
+		setPlan('single');
+
+		/* Copie du RIP / CCP. */
+		Array.prototype.slice.call(modal.querySelectorAll('.rcb-copy-btn')).forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				var val = btn.getAttribute('data-copy') || '';
+				var done = function () {
+					var old = btn.textContent;
+					btn.textContent = '✓ Copié';
+					window.setTimeout(function () { btn.textContent = old; }, 1600);
+				};
+				if (navigator.clipboard && navigator.clipboard.writeText) {
+					navigator.clipboard.writeText(val).then(done, done);
+				} else {
+					var ta = document.createElement('textarea');
+					ta.value = val;
+					document.body.appendChild(ta);
+					ta.select();
+					try { document.execCommand('copy'); } catch (e) {}
+					document.body.removeChild(ta);
+					done();
+				}
+			});
+		});
+	}
+
+	/* Présélection plan/mode depuis l'URL (modale À propos → page Licence). */
+	function initLicensePrefill() {
+		var params = new URLSearchParams(window.location.search);
+		var plan = params.get('rcb-plan');
+		if (!plan) { return; }
+		var radio = document.querySelector('.rcb-order-plan[value="' + plan + '"]');
+		if (radio) {
+			radio.checked = true;
+			radio.dispatchEvent(new Event('change', { bubbles: true }));
+			var opt = radio.closest('.rcb-plan-option');
+			if (opt && opt.parentElement) {
+				Array.prototype.slice.call(opt.parentElement.children).forEach(function (c) { c.classList.remove('is-selected'); });
+				opt.classList.add('is-selected');
+			}
+		}
+		var wrap = document.getElementById('rcb-order-form');
+		if (wrap) {
+			wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	}
+
 	function boot() {
 		initTabs();
 		initAboutPage();
+		initAboutBuyModal();
+		initLicensePrefill();
 		initConfirms();
 		initCheckAll();
 		initPlanPicker();

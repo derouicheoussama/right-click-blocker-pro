@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.25.1
+Stable tag: 2.26.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.26.0 =
+* New: detailed purchase modal on the About page. The "Buy a license" button now opens a popup with the three license plans (amount updates live), and one card per payment method — BaridiMob (RIP with one-click copy), CCP (account + copy), Edahabia/CIB card via Chargily, and PayPal (direct link when configured). Each card links to the guided order flow with the plan preselected and the form scrolled into view.
 
 = 2.25.1 =
 * Fix: About page layout — four changelog entries (2.17.0, 2.15.0, 2.14.5, 2.14.4) had mismatched markup that closed the content wrapper early, pushing the FAQ section outside the centered layout and causing a 164px horizontal overflow. Entries rebuilt, FAQ realigned, overflow gone.

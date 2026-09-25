@@ -251,10 +251,8 @@ $compat = array(
 					<?php endif; ?>
 				</ul>
 			<?php endif; ?>
-			<?php if ( $options['developer']['email'] ) : ?>
-				<a class="rcb-btn rcb-btn-primary" href="mailto:<?php echo esc_attr( $options['developer']['email'] ); ?>?subject=Achat%20licence%20Infinity%20RCB%20Pro">📩 Acheter / contacter pour l’achat</a>
-			<?php elseif ( current_user_can( 'manage_options' ) ) : ?>
-				<span class="rcb-muted">E-mail du vendeur non configuré — Réglages → Général → Développeur.</span>
+			<?php if ( $options['developer']['email'] || current_user_can( 'manage_options' ) ) : ?>
+				<button type="button" class="rcb-btn rcb-btn-primary" id="rcb-about-buy">📩 Acheter une licence — voir les paiements</button>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -370,6 +368,16 @@ $compat = array(
 		<summary>🗂️ Journal des versions <small>(cliquer pour déplier l'historique complet)</small></summary>
 		<div class="rcb-card rcb-changelog-card" style="margin-top:14px;">
 		<div class="rcb-changelog">
+			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.26.0</span>
+				<div>
+					<strong>Modale d'achat détaillée</strong>
+					<ul>
+						<li>« Acheter une licence » ouvre une fenêtre détaillée : choix du plan (montant en direct) + une carte par moyen de paiement — BaridiMob (RIP copiable), CCP (copiable), carte Edahabia/CIB, PayPal.</li>
+						<li>Chaque carte mène à la commande guidée avec le plan présélectionné.</li>
+					</ul>
+				</div>
+			</div>
 			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.25.0</span>
 				<div>
@@ -853,4 +861,83 @@ $compat = array(
 	</div>
 
 	<p class="rcb-credit">Infinity RCB Pro v<?php echo esc_html( INFINITY_RCB_VERSION ); ?> — développé avec ❤️ par <?php if ( $options['developer']['website'] ) : ?><a href="<?php echo esc_url( $options['developer']['website'] ); ?>" target="_blank" rel="noopener"><?php endif; ?><?php echo esc_html( $options['developer']['name'] ); ?><?php if ( $options['developer']['website'] ) : ?></a><?php endif; ?> — Licences à vie : 2 900 DA ≈ 11,90 € (1 site) · 4 800 DA ≈ 22,90 € (5 sites)</p>
+</div>
+
+<!-- ===== Modale d'achat détaillée (page À propos) ===== -->
+<?php
+$rcb_pay      = $options['payment'];
+$rcb_rip      = trim( (string) ( $rcb_pay['baridimob_rip'] ?? '' ) );
+$rcb_ccp      = trim( (string) ( $rcb_pay['ccp'] ?? '' ) );
+$rcb_rib      = trim( (string) ( $rcb_pay['rib'] ?? '' ) );
+$rcb_pp_me    = trim( (string) ( $rcb_pay['paypal_me'] ?? '' ) );
+$rcb_pp_mail  = trim( (string) ( $rcb_pay['paypal_email'] ?? '' ) );
+$rcb_pp_url   = $rcb_pp_me;
+if ( '' === $rcb_pp_url && $rcb_pp_mail ) {
+	$rcb_pp_url = 'https://www.paypal.com/paypalme/' . rawurlencode( $rcb_pp_mail );
+}
+$rcb_license_url = admin_url( 'admin.php?page=infinity-rcb-pro-license' );
+?>
+<div class="rcb-modal" id="rcb-about-buy-modal" hidden>
+	<div class="rcb-modal-box rcb-buy-box" role="dialog" aria-modal="true" aria-labelledby="rcb-buy-title">
+		<div class="rcb-modal-head">
+			<span class="rcb-modal-logo"><?php printf( '%s', infinity_rcb_shield_svg( 'regular' ) ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML statique de confiance (helper du plugin). ?></span>
+			<div>
+				<h3 id="rcb-buy-title">Acheter une licence — Right Click Blocker PRO</h3>
+				<p class="rcb-muted" style="margin:2px 0 0;">Licence à vie, paiement unique · sélectionnez un plan puis votre moyen de paiement.</p>
+			</div>
+			<button type="button" class="rcb-modal-close" id="rcb-buy-close" aria-label="Fermer">&times;</button>
+		</div>
+
+		<div class="rcb-buy-plans" id="rcb-buy-plans">
+			<?php foreach ( $options['license']['tiers'] as $key => $tier ) : ?>
+				<button type="button" class="rcb-buy-plan<?php echo 'single' === $key ? ' is-active' : ''; ?>" data-plan="<?php echo esc_attr( $key ); ?>" data-price="<?php echo esc_attr( number_format( (int) $tier['price_da'], 0, ',', ' ' ) . ' DA' ); ?>">
+					<strong><?php echo esc_html( $tier['label'] ); ?></strong>
+					<span><?php echo (int) $tier['domains']; ?> site<?php echo $tier['domains'] > 1 ? 's' : ''; ?></span>
+					<em><?php echo number_format( (int) $tier['price_da'], 0, ',', ' ' ); ?> DA <small>≈ <?php echo esc_html( number_format( (float) $tier['price_eur'], 2, ',', ' ' ) ); ?> €</small></em>
+				</button>
+			<?php endforeach; ?>
+		</div>
+		<p class="rcb-buy-amount">Montant à payer : <strong id="rcb-buy-amount">2 900 DA</strong></p>
+
+		<h4 class="rcb-buy-sub">Moyens de paiement</h4>
+		<div class="rcb-buy-pays">
+			<div class="rcb-buy-pay">
+				<div class="rcb-buy-pay-head"><span class="rcb-buy-pay-ico" style="background:#10b9811a;color:#10b981;">📱</span><strong>BaridiMob</strong></div>
+				<p>Virement instantané depuis l'application BaridiMob (Algérie Poste).</p>
+				<?php if ( $rcb_rip ) : ?>
+					<p class="rcb-buy-ref">RIP : <code><?php echo esc_html( $rcb_rip ); ?></code> <button type="button" class="rcb-copy-btn" data-copy="<?php echo esc_attr( $rcb_rip ); ?>">⧉ Copier</button></p>
+				<?php else : ?>
+					<p class="rcb-buy-ref">RIP communiqué à l'étape de paiement, après création de la commande.</p>
+				<?php endif; ?>
+				<a class="rcb-btn rcb-btn-ghost rcb-btn-sm" href="<?php echo esc_url( $rcb_license_url . '&rcb-plan=single&rcb-method=baridimob' ); ?>" data-plan-link="baridimob">Commander avec BaridiMob →</a>
+			</div>
+			<div class="rcb-buy-pay">
+				<div class="rcb-buy-pay-head"><span class="rcb-buy-pay-ico" style="background:#6366f11a;color:#6366f1;">📮</span><strong>CCP (Algérie Poste)</strong></div>
+				<p>Virement sur compte CCP ou versement en guichet.</p>
+				<?php if ( $rcb_ccp ) : ?>
+					<p class="rcb-buy-ref">CCP : <code><?php echo esc_html( $rcb_ccp ); ?></code> <button type="button" class="rcb-copy-btn" data-copy="<?php echo esc_attr( $rcb_ccp ); ?>">⧉ Copier</button></p>
+				<?php else : ?>
+					<p class="rcb-buy-ref">Numéro de compte communiqué après création de la commande.</p>
+				<?php endif; ?>
+				<a class="rcb-btn rcb-btn-ghost rcb-btn-sm" href="<?php echo esc_url( $rcb_license_url . '&rcb-plan=single&rcb-method=ccp' ); ?>" data-plan-link="ccp">Commander avec CCP →</a>
+			</div>
+			<div class="rcb-buy-pay">
+				<div class="rcb-buy-pay-head"><span class="rcb-buy-pay-ico" style="background:#f59e0b1a;color:#f59e0b;">💳</span><strong>Carte Edahabia / CIB</strong></div>
+				<p>Paiement en ligne sécurisé via Chargily Pay — la licence est délivrée automatiquement.</p>
+				<a class="rcb-btn rcb-btn-ghost rcb-btn-sm" href="<?php echo esc_url( $rcb_license_url . '&rcb-plan=single&rcb-method=chargily' ); ?>" data-plan-link="chargily">Payer par carte →</a>
+			</div>
+			<div class="rcb-buy-pay">
+				<div class="rcb-buy-pay-head"><span class="rcb-buy-pay-ico" style="background:#0ea5e91a;color:#0ea5e9;">🅿️</span><strong>PayPal</strong></div>
+				<p>Paiement international en euros (€) — idéal hors Algérie.</p>
+				<?php if ( $rcb_pp_url ) : ?>
+					<a class="rcb-btn rcb-btn-ghost rcb-btn-sm" href="<?php echo esc_url( $rcb_pp_url ); ?>" target="_blank" rel="noopener noreferrer">🅿️ Payer par PayPal ↗</a>
+				<?php else : ?>
+					<p class="rcb-buy-ref">Lien PayPal fourni à l'étape de paiement.</p>
+				<?php endif; ?>
+				<a class="rcb-btn rcb-btn-ghost rcb-btn-sm" href="<?php echo esc_url( $rcb_license_url . '&rcb-plan=single&rcb-method=paypal' ); ?>" data-plan-link="paypal">Commander avec PayPal →</a>
+			</div>
+		</div>
+
+		<p class="rcb-muted rcb-buy-note"><?php echo esc_html( $rcb_pay['instructions'] ); ?></p>
+	</div>
 </div>
