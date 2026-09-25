@@ -106,7 +106,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 				</div>
 
 				<?php if ( 'updates-available' === $notice ) : ?>
-					<div class="rcb-notice rcb-notice-ok" style="margin-bottom:12px;">🔄 Une nouvelle version est disponible — <a href="<?php echo esc_url( admin_url( 'update-core.php' ) ); ?>">mettre à jour maintenant</a>.</div>
+					<div class="rcb-notice rcb-notice-ok" style="margin-bottom:12px;">🔄 Une nouvelle version est disponible — <a href="<?php echo esc_url( admin_url( 'update-core.php' ) ); ?>">mettre à jour maintenant</a> (une carte dédiée vous attend sur la page Mises à jour de WordPress).</div>
 				<?php elseif ( 'updates-checked' === $notice ) : ?>
 					<div class="rcb-notice rcb-notice-ok" style="margin-bottom:12px;">✅ Vérification terminée : vous êtes à jour.</div>
 				<?php elseif ( 'updates-wporg' === $notice ) : ?>

@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.23.1
+Stable tag: 2.24.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,12 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.24.0 =
+* New: a branded update card now appears on WordPress Updates (wp-admin/update-core.php) when a GitHub-channel update is pending — installed → new version, release date, channel badge, release notes excerpt, one-click "Update now" (auto-checks and submits the form), full details in the modal, and a link to the GitHub release notes. It never shows when WordPress.org manages the plugin.
+* New: after a successful update, a "Discover what's new" link points to the plugin's changelog.
+* New: the release cache is purged right after any plugin upgrade, so stale "update available" rows disappear immediately.
+* Compatibility metadata (requires / requires_php) is now sent with update offers to avoid false compatibility warnings.
 
 = 2.23.1 =
 * Fix: the "Text size" appearance setting now really controls the protection message. The message title inherited a hardcoded 15px; it now follows the slider, and the copyright line, shield icon and close button scale proportionally (em-based). Mobile no longer overrides the chosen size (only spacing shrinks). Font-size is applied with high priority to resist aggressive theme CSS.

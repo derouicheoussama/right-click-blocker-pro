@@ -371,6 +371,25 @@ $compat = array(
 		<div class="rcb-card rcb-changelog-card" style="margin-top:14px;">
 		<div class="rcb-changelog">
 			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.24.0</span>
+				<div>
+					<strong>Expérience Mises à jour WordPress</strong>
+					<ul>
+						<li>Carte de mise à jour dédiée sur <code>wp-admin/update-core.php</code> : version, canal GitHub, extrait des notes, mise à jour en 1 clic.</li>
+						<li>Lien « Découvrir les nouveautés » après chaque mise à jour + purge immédiate du cache de release.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.23.1</span>
+				<div>
+					<strong>Curseur « Texte » réparé</strong>
+					<ul>
+						<li>La taille du message suit enfin le curseur : titre en héritage, copyright / icône / bouton proportionnels, mobile respecté.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.22.1</span>
 				<div>
 					<strong>Optimisation générale + licence nag</strong>
