@@ -975,6 +975,25 @@
 				el.addEventListener(evt, syncFromForm);
 			});
 			syncFromForm();
+
+			// Ecouteurs directs et robustes pour les curseurs Finitions :
+			// garantit que radius + taille du texte controlent l'apercu.
+			var radiusInput = document.getElementById('rcb-radius');
+			var fontInput = document.getElementById('rcb-font');
+			if (radiusInput) {
+				radiusInput.addEventListener('input', function () {
+					var out = document.getElementById('rcb-radius-out');
+					if (out) { out.value = radiusInput.value; }
+					if (inner) { inner.style.borderRadius = radiusInput.value + 'px'; }
+				});
+			}
+			if (fontInput) {
+				fontInput.addEventListener('input', function () {
+					var out = document.getElementById('rcb-font-out');
+					if (out) { out.value = fontInput.value; }
+					if (inner) { inner.style.fontSize = fontInput.value + 'px'; }
+				});
+			}
 		} else {
 			// Tableau de bord : démonstration du comportement réel au chargement.
 			window.setTimeout(function () { replay(false); }, 350);

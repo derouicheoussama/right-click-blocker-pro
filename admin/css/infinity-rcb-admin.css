@@ -626,3 +626,17 @@
 .rcb-save-bar { position: sticky; bottom: 12px; z-index: 20; background: #fff; border: 1px solid var(--rcb-border); border-radius: 12px; padding: 12px 18px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; box-shadow: 0 -4px 20px -8px rgba(15, 23, 42, .15); }
 .rcb-save-bar::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(255,255,255,.95) 30%); border-radius: 12px; pointer-events: none; }
 .rcb-save-bar > * { position: relative; z-index: 1; }
+
+/* ===== Apparence : palettes rapides + champs couleur ===== */
+.rcb-color-presets { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.rcb-color-presets > span { font-size: 13px; color: var(--rcb-muted); font-weight: 600; }
+.rcb-color-preset { width: 44px; height: 44px; border-radius: 12px; border: 3px solid rgba(255,255,255,.8); cursor: pointer; transition: all .15s ease; box-shadow: 0 3px 12px -4px rgba(15,23,42,.3); outline: 2px solid transparent; }
+.rcb-color-preset:hover { transform: scale(1.25); outline-color: var(--rcb-primary); box-shadow: 0 6px 20px -6px rgba(15,23,42,.4); }
+.rcb-color-preset:active { transform: scale(1.1); }
+.rcb-color-field { display: flex; align-items: center; gap: 12px; }
+.rcb-color-field label { font-size: 13.5px; font-weight: 600; color: var(--rcb-text); white-space: nowrap; }
+.rcb-color-field input[type="color"] { width: 56px; height: 42px; padding: 3px; border: 2px solid var(--rcb-border); border-radius: 10px; cursor: pointer; background: #fff; transition: border-color .15s; }
+.rcb-color-field input[type="color"]:hover { border-color: var(--rcb-primary); }
+.rcb-color-field input[type="color"]::-webkit-color-swatch-wrapper { padding: 3px; }
+.rcb-color-field input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; }
+.rcb-color-field code { font-size: 13px; color: var(--rcb-muted); background: var(--rcb-bg); padding: 6px 10px; border-radius: 8px; font-family: ui-monospace, Menlo, Consolas, monospace; }
