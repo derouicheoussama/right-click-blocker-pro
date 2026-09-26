@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.26.2
+Stable tag: 2.27.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.27.0 =
+* Pro module (vendor channel only, excluded from this WordPress.org build): the optional lifetime license now also unlocks Pro extras — custom message logo (PNG/SVG), adjustable image watermark and custom message CSS. The 16 protections remain completely free in every edition; this WordPress.org build keeps all features free with no gating whatsoever.
 
 = 2.26.2 =
 * Fix: the admin sidebar menu icon (shield) rendered oversized (~36x45) and bled out of its 20px slot, shifted low — the SVG lacked intrinsic dimensions and WordPress core adds a legacy 9px top padding to menu images. The icon now embeds width/height and a small admin-wide style neutralizes the offset: perfectly centered 20x20 on every admin page.

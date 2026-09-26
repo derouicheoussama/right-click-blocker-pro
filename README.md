@@ -22,6 +22,8 @@
 
 > ### ✅ Conformité WordPress.org
 > Ce plugin respecte les directives du répertoire officiel : **guides 5 & 6 (pas de trialware)** — chaque fonctionnalité est gratuite et pleinement fonctionnelle sans aucune clé de licence. Les licences à vie mentionnées ci-dessous sont **symboliques et optionnelles** : elles financent le support, ne verrouillent rien et n'activent rien. Le canal de mise à jour GitHub de ce dépôt est **exclu du build WordPress.org** et se désactive automatiquement dès que le répertoire officiel gère l'extension.
+>
+> **Édition duale** : la version **WordPress.org** est l'édition complète et 100 % gratuite. La version distribuée ici (canal vendeur) ajoute un **module Pro** — options cosmétiques avancées débloquées par la licence à vie : **logo personnalisé du message, filigrane d'images réglable, CSS personnalisé** (+ support prioritaire et alertes e-mail). Les 16 protections restent intégralement libres dans les deux éditions.
 
 ## ✨ Fonctionnalités
 
@@ -37,7 +39,7 @@
 | 🖨️ Anti impression (avertissement à la place du contenu) | ✅ |
 | 📸 Anti capture d'écran (PrintScreen + presse-papiers vidé) | ✅ |
 | 🛠️ Détection des outils de développement (flou / redirection) | ✅ |
-| 💧 Filigrane d'images (texte, opacité et taille réglables) | ✅ |
+| 💧 Filigrane d'images (texte, opacité et taille réglables) | ✅ * 🔓 |
 | 🖼️ Anti-clickjacking (X-Frame-Options + frame busting) | ✅ |
 | 📱 Protection tactile iOS/Android (long-press) | ✅ |
 | 🍯 Antispam commentaires — honeypot | ✅ |
@@ -46,9 +48,12 @@
 | 🚫 Antispam — liste noire de mots-clés | ✅ |
 | 🔗 Antispam — plafond de liens par commentaire | ✅ |
 
+*\* 🔓 : libre dans l'édition WordPress.org · option Pro (licence à vie) dans le canal vendeur de ce dépôt.*
+
 ### Le confort en plus
 
-- 🎨 **Message d'avertissement personnalisable** : 10 styles, couleurs libres, **logo personnalisé PNG/SVG** (votre marque à la place du bouclier), copyright automatique `{annee} {site}`, bouton de fermeture, barre de progression, bip sonore — taille et arrondi au pixel
+- 🎨 **Message d'avertissement personnalisable** : 10 styles, couleurs libres, copyright automatique `{annee} {site}`, bouton de fermeture, barre de progression, bip sonore — taille et arrondi au pixel
+- 🔓 **Options Pro (licence, canal vendeur uniquement)** : logo personnalisé PNG/SVG à la place du bouclier · filigrane d'images réglable (texte, opacité, taille) · CSS personnalisé du message
 - 👀 **Aperçu en temps réel** : le message se comporte comme chez le visiteur (apparition → durée → disparition), chaque réglage s'y reflète instantanément
 - 📊 **Tableau de bord temps réel** : KPI animés, graphiques 14/30 jours, répartition par type, IP uniques, widget d'accueil WordPress
 - 📜 **Journaux détaillés** filtrables et exportables CSV, rétention automatique

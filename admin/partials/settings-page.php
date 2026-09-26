@@ -306,6 +306,10 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 							<div class="rcb-field-label"><strong>Icone bouclier</strong><p>Logo du plugin dans le message.</p></div>
 							<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[appearance][show_icon]" value="1" <?php checked( ! empty( $options['appearance']['show_icon'] ) ); ?>><span class="rcb-slider"></span></label>
 						</div>
+						<?php if ( class_exists( 'Infinity_RCB_Pro' ) && ! Infinity_RCB_Pro::unlocked() ) : ?>
+							<?php Infinity_RCB_Pro::lock_card( 'logo' ); ?>
+						<?php else : ?>
+							<?php if ( class_exists( 'Infinity_RCB_Pro' ) ) { Infinity_RCB_Pro::badge(); } ?>
 						<div class="rcb-field-row rcb-icon-row">
 							<div class="rcb-field-label"><strong>Logo personnalise</strong><p>Remplace le bouclier par votre icone (PNG/SVG, carre 64×64+ recommande). Laissez vide pour le bouclier du plugin.</p></div>
 							<div class="rcb-icon-picker">
@@ -322,6 +326,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 								<button type="button" class="rcb-btn rcb-btn-ghost" id="rcb-icon-remove" <?php echo empty( $options['appearance']['custom_icon'] ) ? 'hidden' : ''; ?>>✕ Retirer</button>
 							</div>
 						</div>
+						<?php endif; ?>
 						<div class="rcb-field-row">
 							<div class="rcb-field-label"><strong>Bip sonore</strong><p>Court signal audio.</p></div>
 							<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[appearance][sound]" value="1" <?php checked( ! empty( $options['appearance']['sound'] ) ); ?>><span class="rcb-slider"></span></label>
@@ -365,10 +370,14 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 							<div class="rcb-field-label"><strong>Ombre portee</strong><p>Profondeur visuelle.</p></div>
 							<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[appearance][shadow]" value="1" <?php checked( ! empty( $options['appearance']['shadow'] ) ); ?>><span class="rcb-slider"></span></label>
 						</div>
-						<div class="rcb-field rcb-field-wide">
-							<label for="rcb-css">CSS personnalise</label>
-							<textarea id="rcb-css" name="infinity_rcb[appearance][custom_css]" rows="3" spellcheck="false"><?php echo esc_textarea( $options['appearance']['custom_css'] ); ?></textarea>
-						</div>
+						<?php if ( class_exists( 'Infinity_RCB_Pro' ) && ! Infinity_RCB_Pro::unlocked() ) : ?>
+							<?php Infinity_RCB_Pro::lock_card( 'css' ); ?>
+						<?php else : ?>
+							<div class="rcb-field rcb-field-wide">
+								<label for="rcb-css">CSS personnalise<?php if ( class_exists( 'Infinity_RCB_Pro' ) ) { Infinity_RCB_Pro::badge(); } ?></label>
+								<textarea id="rcb-css" name="infinity_rcb[appearance][custom_css]" rows="3" spellcheck="false"><?php echo esc_textarea( $options['appearance']['custom_css'] ); ?></textarea>
+							</div>
+						<?php endif; ?>
 					</div>
 					<p class="rcb-muted">Sélecteurs principaux : <code>#rcb-toast</code>, <code>.rcb-inner</code>, <code>.rcb-title</code>, <code>.rcb-copy</code>, <code>.rcb-close</code>.</p>
 					</div>
@@ -438,28 +447,32 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<div class="rcb-field-label"><strong>Bandeau sans JavaScript</strong><p>Si un visiteur désactive JavaScript, un bandeau discret l'invite à le réactiver pour profiter du site.</p></div>
 					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][noscript_warn]" value="1" <?php checked( ! empty( $options['advanced']['noscript_warn'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
-				<div class="rcb-field-row">
-					<div class="rcb-field-label"><strong>Filigrane sur les images</strong><p>Superpose votre texte sur toutes les images de plus de 80 px. Exemptez avec <code>data-rcb-exempt</code>.</p></div>
-					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][watermark]" value="1" <?php checked( ! empty( $options['advanced']['watermark'] ) ); ?>><span class="rcb-slider"></span></label>
-				</div>
-				<?php if ( ! empty( $options['advanced']['watermark'] ) ) : ?>
-				<div class="rcb-field">
-					<label for="rcb-wm-text">Texte du filigrane</label>
-					<input type="text" id="rcb-wm-text" name="infinity_rcb[appearance][wm_text]" value="<?php echo esc_attr( $options['appearance']['wm_text'] ); ?>">
-					<p class="rcb-muted">Variables : <code>{site}</code>, <code>{annee}</code>, <code>{url}</code>.</p>
-				</div>
-				<div class="rcb-grid-2-col">
-					<div class="rcb-field">
-						<label for="rcb-wm-opacity">Opacité : <output id="rcb-wm-opacity-out"><?php echo (int) $options['appearance']['wm_opacity']; ?></output>%</label>
-						<input type="range" id="rcb-wm-opacity" name="infinity_rcb[appearance][wm_opacity]" min="10" max="100" step="5" value="<?php echo (int) $options['appearance']['wm_opacity']; ?>" oninput="document.getElementById('rcb-wm-opacity-out').value=this.value;">
-						<p class="rcb-muted">10% = discret · 100% = opaque</p>
+				<?php if ( class_exists( 'Infinity_RCB_Pro' ) && ! Infinity_RCB_Pro::unlocked() ) : ?>
+					<?php Infinity_RCB_Pro::lock_card( 'watermark' ); ?>
+				<?php else : ?>
+					<div class="rcb-field-row">
+						<div class="rcb-field-label"><strong>Filigrane sur les images<?php if ( class_exists( 'Infinity_RCB_Pro' ) ) { Infinity_RCB_Pro::badge(); } ?></strong><p>Superpose votre texte sur toutes les images de plus de 80 px. Exemptez avec <code>data-rcb-exempt</code>.</p></div>
+						<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][watermark]" value="1" <?php checked( ! empty( $options['advanced']['watermark'] ) ); ?>><span class="rcb-slider"></span></label>
 					</div>
+					<?php if ( ! empty( $options['advanced']['watermark'] ) ) : ?>
 					<div class="rcb-field">
-						<label for="rcb-wm-size">Taille : <output id="rcb-wm-size-out"><?php echo (int) $options['appearance']['wm_size']; ?></output> px</label>
-						<input type="range" id="rcb-wm-size" name="infinity_rcb[appearance][wm_size]" min="8" max="48" value="<?php echo (int) $options['appearance']['wm_size']; ?>" oninput="document.getElementById('rcb-wm-size-out').value=this.value;">
-						<p class="rcb-muted">8 px = petit · 48 px = très grand</p>
+						<label for="rcb-wm-text">Texte du filigrane</label>
+						<input type="text" id="rcb-wm-text" name="infinity_rcb[appearance][wm_text]" value="<?php echo esc_attr( $options['appearance']['wm_text'] ); ?>">
+						<p class="rcb-muted">Variables : <code>{site}</code>, <code>{annee}</code>, <code>{url}</code>.</p>
 					</div>
-				</div>
+					<div class="rcb-grid-2-col">
+						<div class="rcb-field">
+							<label for="rcb-wm-opacity">Opacité : <output id="rcb-wm-opacity-out"><?php echo (int) $options['appearance']['wm_opacity']; ?></output>%</label>
+							<input type="range" id="rcb-wm-opacity" name="infinity_rcb[appearance][wm_opacity]" min="10" max="100" step="5" value="<?php echo (int) $options['appearance']['wm_opacity']; ?>" oninput="document.getElementById('rcb-wm-opacity-out').value=this.value;">
+							<p class="rcb-muted">10% = discret · 100% = opaque</p>
+						</div>
+						<div class="rcb-field">
+							<label for="rcb-wm-size">Taille : <output id="rcb-wm-size-out"><?php echo (int) $options['appearance']['wm_size']; ?></output> px</label>
+							<input type="range" id="rcb-wm-size" name="infinity_rcb[appearance][wm_size]" min="8" max="48" value="<?php echo (int) $options['appearance']['wm_size']; ?>" oninput="document.getElementById('rcb-wm-size-out').value=this.value;">
+							<p class="rcb-muted">8 px = petit · 48 px = très grand</p>
+						</div>
+					</div>
+					<?php endif; ?>
 				<?php endif; ?>
 				<div class="rcb-field-row">
 					<div class="rcb-field-label"><strong>Anti-clickjacking (X-Frame-Options)</strong><p>Interdit l'affichage de votre site dans une iframe d'un autre site — empêche le détournement de votre contenu et les attaques par clic trompeur.</p></div>

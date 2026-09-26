@@ -369,6 +369,16 @@ $compat = array(
 		<div class="rcb-card rcb-changelog-card" style="margin-top:14px;">
 		<div class="rcb-changelog">
 			<div class="rcb-changelog-entry">
+				<span class="rcb-pill rcb-pill-soft">2.27.0</span>
+				<div>
+					<strong>Options Pro (canal vendeur)</strong>
+					<ul>
+						<li>La licence à vie débloque en plus : logo personnalisé du message, filigrane d'images réglable et CSS personnalisé — avec pastille PRO et carte de déverrouillage élégante.</li>
+						<li>L'édition WordPress.org reste 100 % gratuite et complète (module exclu de ce build).</li>
+					</ul>
+				</div>
+			</div>
+			<div class="rcb-changelog-entry">
 				<span class="rcb-pill rcb-pill-soft">2.26.0</span>
 				<div>
 					<strong>Modale d'achat détaillée</strong>

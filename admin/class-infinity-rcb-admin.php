@@ -446,6 +446,15 @@ class Infinity_RCB_Admin {
 		}
 	}
 
+	/**
+	 * Options Pro verrouillées ? Vrai uniquement sur le canal vendeur
+	 * (module Pro présent) sans licence active — le build WordPress.org
+	 * ne contient pas le module, donc rien n'y est jamais verrouillé.
+	 */
+	private function pro_locked() {
+		return class_exists( 'Infinity_RCB_Pro' ) && ! Infinity_RCB_Pro::unlocked();
+	}
+
 	private function sanitize_settings( $input ) {
 		$defaults = infinity_rcb_default_options();
 		$types    = array_keys( Infinity_RCB_Stats::types() );
@@ -473,7 +482,7 @@ class Infinity_RCB_Admin {
 			'custom_bg'        => $custom_on ? infinity_rcb_sanitize_hex( $input['appearance']['custom_bg'] ?? '' ) : '',
 			'custom_text'      => $custom_on ? infinity_rcb_sanitize_hex( $input['appearance']['custom_text'] ?? '' ) : '',
 			'show_icon'        => ! empty( $input['appearance']['show_icon'] ),
-			'custom_icon'      => esc_url_raw( wp_unslash( $input['appearance']['custom_icon'] ?? '' ) ),
+			'custom_icon'      => ( $this->pro_locked() ) ? '' : esc_url_raw( wp_unslash( $input['appearance']['custom_icon'] ?? '' ) ),
 			'sound'            => ! empty( $input['appearance']['sound'] ),
 			'copyright_enable' => ! empty( $input['appearance']['copyright_enable'] ),
 			'copyright_text'   => sanitize_text_field( $input['appearance']['copyright_text'] ?? $defaults['appearance']['copyright_text'] ),
@@ -482,10 +491,10 @@ class Infinity_RCB_Admin {
 			'radius'           => min( 24, max( 0, absint( $input['appearance']['radius'] ?? 12 ) ) ),
 			'font_size'        => min( 22, max( 11, absint( $input['appearance']['font_size'] ?? 15 ) ) ),
 			'shadow'           => ! empty( $input['appearance']['shadow'] ),
-			'custom_css'       => wp_strip_all_tags( (string) ( $input['appearance']['custom_css'] ?? '' ) ),
-			'wm_text'          => sanitize_text_field( $input['appearance']['wm_text'] ?? $defaults['appearance']['wm_text'] ),
-			'wm_opacity'       => min( 100, max( 10, absint( $input['appearance']['wm_opacity'] ?? 55 ) ) ),
-			'wm_size'          => min( 48, max( 8, absint( $input['appearance']['wm_size'] ?? 13 ) ) ),
+			'custom_css'       => ( $this->pro_locked() ) ? '' : wp_strip_all_tags( (string) ( $input['appearance']['custom_css'] ?? '' ) ),
+			'wm_text'          => ( $this->pro_locked() ) ? $defaults['appearance']['wm_text'] : sanitize_text_field( $input['appearance']['wm_text'] ?? $defaults['appearance']['wm_text'] ),
+			'wm_opacity'       => ( $this->pro_locked() ) ? 55 : min( 100, max( 10, absint( $input['appearance']['wm_opacity'] ?? 55 ) ) ),
+			'wm_size'          => ( $this->pro_locked() ) ? 13 : min( 48, max( 8, absint( $input['appearance']['wm_size'] ?? 13 ) ) ),
 		);
 
 		// Avancé.
@@ -510,7 +519,7 @@ class Infinity_RCB_Admin {
 			'touch_guard'     => ! empty( $input['advanced']['touch_guard'] ),
 			'image_pointer'   => ! empty( $input['advanced']['image_pointer'] ),
 			'noscript_warn'   => ! empty( $input['advanced']['noscript_warn'] ),
-			'watermark'       => ! empty( $input['advanced']['watermark'] ),
+			'watermark'       => ( $this->pro_locked() ) ? false : ! empty( $input['advanced']['watermark'] ),
 			'xfo'             => ! empty( $input['advanced']['xfo'] ),
 			'frame_bust'      => ! empty( $input['advanced']['frame_bust'] ),
 			'alert_threshold' => min( 100000, max( 0, absint( $input['advanced']['alert_threshold'] ?? 0 ) ) ),

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Right Click Blocker PRO – Right Click & Content Protection
  * Description:       Bloque le clic droit, la copie, la sélection, le glisser-déposer, l'impression, les captures d'écran et les outils de développement — avec messages personnalisés, statistiques temps réel et journaux. Tout est inclus, gratuitement.
- * Version:           2.26.2
+ * Version:           2.27.0
  * Author:            Infinity Coder
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'INFINITY_RCB_VERSION', '2.26.2' );
+define( 'INFINITY_RCB_VERSION', '2.27.0' );
 define( 'INFINITY_RCB_FILE', __FILE__ );
 define( 'INFINITY_RCB_DIR', plugin_dir_path( __FILE__ ) );
 define( 'INFINITY_RCB_URL', plugin_dir_url( __FILE__ ) );
@@ -43,6 +43,12 @@ require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-antispam.php';
 // interdite) — il n'est chargé que s'il est présent (distribution GitHub).
 if ( is_readable( INFINITY_RCB_DIR . 'includes/class-infinity-rcb-updater.php' ) ) {
 	require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-updater.php';
+}
+// Module Pro (options premium débloquées par licence à vie) : distribué
+// UNIQUEMENT dans le build vendeur (GitHub) — EXCLU du build WordPress.org,
+// qui reste 100 % gratuit et sans restriction (guides 5-6, pas de trialware).
+if ( is_readable( INFINITY_RCB_DIR . 'includes/class-infinity-rcb-pro.php' ) ) {
+	require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-pro.php';
 }
 require_once INFINITY_RCB_DIR . 'includes/class-infinity-rcb-shop.php';
 require_once INFINITY_RCB_DIR . 'admin/class-infinity-rcb-admin.php';

@@ -699,6 +699,25 @@
 	.rcb-buy-plans { grid-template-columns: 1fr; }
 }
 
+/* ===== Module Pro (canal vendeur uniquement) : verrous + pastilles ===== */
+.rcb-pro-lock {
+	display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+	border: 1.5px dashed #c7d2fe; background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 100%);
+	border-radius: 12px; padding: 14px 16px; margin: 6px 0 12px;
+}
+.rcb-pro-lock > div { flex: 1 1 260px; min-width: 200px; }
+.rcb-pro-lock strong { font-size: 13.5px; color: #3730a3; }
+.rcb-pro-lock p { margin: 3px 0 0; font-size: 12.5px; color: #4f46e5; line-height: 1.45; }
+.rcb-pro-lock .rcb-btn { margin-left: auto; }
+.rcb-pro-pill {
+	display: inline-flex; align-items: center;
+	background: linear-gradient(135deg, #1E6FF0 0%, #7C3AED 100%);
+	color: #fff; border-radius: 6px; padding: 1px 8px;
+	font-size: 10.5px; font-weight: 800; letter-spacing: .8px; vertical-align: middle;
+}
+.rcb-pro-lock .rcb-pro-pill { font-size: 13px; padding: 4px 10px; border-radius: 8px; flex: 0 0 auto; }
+.rcb-pro-pill-ok { background: #e0e7ff; color: #4338ca; }
+
 /* ===== Réglages : nav chips + bouton sauvegarde flottant ===== */
 /* La barre collante participe au flux : la marge basse réserve le dégagement
  * pour qu'elle ne recouvre jamais les dernières lignes en fin de défilement. */

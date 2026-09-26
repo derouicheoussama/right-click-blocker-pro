@@ -68,7 +68,7 @@ foreach ( $types as $type => $meta ) {
 		<span style="font-size:24px;">💡</span>
 		<div style="flex:1;">
 			<strong style="font-size:14px;color:#92400e;">Installation non-licenciée — support non inclus</strong>
-			<p style="margin:2px 0 0;font-size:13px;color:#64748B;">Toutes les protections fonctionnent librement. Une licence à vie (dès 2 900 DA) ajoute le support prioritaire et les alertes e-mail. <a href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-rcb-pro-license' ) ); ?>#rcb-commande">Obtenir une licence</a></p>
+			<p style="margin:2px 0 0;font-size:13px;color:#64748B;">Toutes les protections fonctionnent librement. Une licence à vie (dès 2 900 DA) ajoute le support prioritaire, les alertes e-mail<?php echo class_exists( 'Infinity_RCB_Pro' ) ? ' et les options Pro (logo personnalisé, filigrane, CSS avancé)' : ''; ?>. <a href="<?php echo esc_url( admin_url( 'admin.php?page=infinity-rcb-pro-license' ) ); ?>#rcb-commande">Obtenir une licence</a></p>
 		</div>
 		<form method="post" action="">
 			<?php wp_nonce_field( 'infinity_rcb_license', 'infinity_rcb_license_nonce' ); ?>
