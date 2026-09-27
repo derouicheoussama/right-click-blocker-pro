@@ -214,6 +214,7 @@ class Infinity_RCB {
 				'blur'     => ! empty( $options['advanced']['blur'] ),
 				'redirect' => esc_url_raw( $options['advanced']['redirect'] ),
 				'touch'    => ! empty( $options['advanced']['touch_guard'] ),
+				'cwarn'    => ! empty( $options['advanced']['console_warn'] ),
 			),
 			'fb'     => ! empty( $options['advanced']['frame_bust'] ),
 			'wm'     => array(

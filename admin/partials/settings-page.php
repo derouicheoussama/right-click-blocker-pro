@@ -447,6 +447,10 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<div class="rcb-field-label"><strong>Bandeau sans JavaScript</strong><p>Si un visiteur désactive JavaScript, un bandeau discret l'invite à le réactiver pour profiter du site.</p></div>
 					<label class="rcb-switch"><input type="checkbox" name="infinity_rcb[advanced][noscript_warn]" value="1" <?php checked( ! empty( $options['advanced']['noscript_warn'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>Avertissement console anti Self-XSS</strong><p>Affiche une grande alerte rouge dans la console de tous les navigateurs (à l'ouverture et dès que Ctrl+Maj+I / F12 détecte les outils de développement) : « ne collez jamais de code ici ». Protège vos visiteurs contre le vol de données.</p></div>
+					<label class="rcb-switch"><input type="checkbox" id="rcb-cwarn" name="infinity_rcb[advanced][console_warn]" value="1" <?php checked( ! empty( $options['advanced']['console_warn'] ) ); ?>><span class="rcb-slider"></span></label>
+				</div>
 				<?php if ( class_exists( 'Infinity_RCB_Pro' ) && ! Infinity_RCB_Pro::unlocked() ) : ?>
 					<?php Infinity_RCB_Pro::lock_card( 'watermark' ); ?>
 				<?php else : ?>

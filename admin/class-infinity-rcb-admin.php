@@ -519,6 +519,7 @@ class Infinity_RCB_Admin {
 			'touch_guard'     => ! empty( $input['advanced']['touch_guard'] ),
 			'image_pointer'   => ! empty( $input['advanced']['image_pointer'] ),
 			'noscript_warn'   => ! empty( $input['advanced']['noscript_warn'] ),
+			'console_warn'    => ! empty( $input['advanced']['console_warn'] ),
 			'watermark'       => ( $this->pro_locked() ) ? false : ! empty( $input['advanced']['watermark'] ),
 			'xfo'             => ! empty( $input['advanced']['xfo'] ),
 			'frame_bust'      => ! empty( $input['advanced']['frame_bust'] ),

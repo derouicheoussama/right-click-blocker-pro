@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.27.1
+Stable tag: 2.28.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.28.0 =
+* New: elevated anti Self-XSS console protection, working in all modern browsers. A large red "STOP" banner is printed to the console on page load and re-printed (after a console clear) every time the developer tools open (Ctrl+Shift+I / F12) — warning visitors never to paste code there. Toggle under Settings → Advanced ("Anti Self-XSS console warning"), enabled by default.
 
 = 2.27.1 =
 * Improved the "My license" section when no license is active: a friendly 3-step guide (order → email key → paste & activate) plus an express reactivation box — lost key, changed email, new domain or full quota? One WhatsApp message to the vendor's number (Settings → Payments) reactivates remotely, with tap-to-call phone and email fallback. Revoked keys get the same WhatsApp contact.

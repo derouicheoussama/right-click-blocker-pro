@@ -390,12 +390,31 @@
 	}
 
 	/* ------------------------------------------------------------------
-	 * Console : avertissement et nettoyage périodique
+	 * Console : grande bannière anti Self-XSS (tous navigateurs) —
+	 * affichée au chargement et à chaque ouverture des outils de
+	 * développement (Ctrl+Maj+I / F12), style « STOP » des grands sites.
 	 * ------------------------------------------------------------------ */
+	var consoleWarned = 0;
+	function consoleWarn(force) {
+		// Throttle : 1 bannière à l'ouverture + max 1 toutes les 10 s
+		// (sauf force = chaque détection des outils de développement).
+		var now = Date.now();
+		if (!force && consoleWarned && now - consoleWarned < 10000) { return; }
+		consoleWarned = now;
+		try {
+			console.log('%c⛔ STOP — NE CONTINUEZ PAS !', 'background:#dc2626;color:#ffffff;font-size:30px;font-weight:bold;padding:8px 18px;border-radius:6px;');
+			console.log('%cCette console est une fonctionnalité réservée aux développeurs.', 'color:#b91c1c;font-size:15px;font-weight:bold;');
+			console.log('%cSi quelqu’un vous a demandé d’ouvrir cet outil et de COLLER du code ici, c’est une ATTAQUE (Self-XSS) : votre session et vos données peuvent être volées.', 'color:#334155;font-size:12.5px;line-height:1.5;');
+			console.log('%c🛡️ Site protégé par Right Click Blocker PRO — les tentatives d’inspection sont enregistrées.', 'color:#1E6FF0;font-size:12px;font-weight:bold;');
+		} catch (e) { /* Console indisponible (rare). */ }
+	}
+
+	if (C.adv && C.adv.cwarn) {
+		consoleWarn();
+	}
 	if (t.console) {
 		try {
-			console.log('%c🛡 Infinity RCB Pro', 'color:#2E7BF6;font-size:16px;font-weight:bold');
-			console.log('%cLa console de ce site est sous surveillance. Toute tentative d’inspection est enregistrée.', 'color:#94a3b8;font-size:12px');
+			console.log('%c🛡 Infinity RCB Pro — la console de ce site est sous surveillance.', 'color:#64748b;font-size:11.5px;');
 		} catch (e) { /* Console bloquée par le navigateur. */ }
 	}
 
@@ -464,6 +483,12 @@
 					if (C.adv && C.adv.redirect && document.referrer !== C.adv.redirect) {
 						window.location.href = C.adv.redirect;
 					}
+				}
+				// Élévation : la console est nettoyée puis la grande alerte
+				// anti Self-XSS est réimprimée à CHAQUE ouverture des outils.
+				if (C.adv && C.adv.cwarn) {
+					try { console.clear(); } catch (e2) { /* refusée */ }
+					consoleWarn(true);
 				}
 				if (C.adv && C.adv.blur) {
 					document.body.classList.add('rcb-guard-blur');
