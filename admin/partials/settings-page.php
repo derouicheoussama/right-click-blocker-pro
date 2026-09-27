@@ -451,6 +451,27 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					<div class="rcb-field-label"><strong>Avertissement console anti Self-XSS</strong><p>Affiche une grande alerte rouge dans la console de tous les navigateurs (à l'ouverture et dès que Ctrl+Maj+I / F12 détecte les outils de développement) : « ne collez jamais de code ici ». Protège vos visiteurs contre le vol de données.</p></div>
 					<label class="rcb-switch"><input type="checkbox" id="rcb-cwarn" name="infinity_rcb[advanced][console_warn]" value="1" <?php checked( ! empty( $options['advanced']['console_warn'] ) ); ?>><span class="rcb-slider"></span></label>
 				</div>
+				<hr class="rcb-sep">
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>🌍 Blocage par pays</strong><p>Refuse l'accès au site selon le pays du visiteur (lu depuis votre hébergeur/CDN — Cloudflare, GeoIP : aucun appel externe). Les administrateurs restent autorisés si « Exclure les admins » est actif. Chaque blocage est journalisé et comptabilisé (🌍 dans les statistiques).</p></div>
+					<label class="rcb-switch"><input type="checkbox" id="rcb-country-on" name="infinity_rcb[advanced][country_block][on]" value="1" <?php checked( ! empty( $options['advanced']['country_block']['on'] ) ); ?>><span class="rcb-slider"></span></label>
+				</div>
+				<div class="rcb-field-row">
+					<div class="rcb-field-label"><strong>Mode</strong><p>Liste noire = bloque les pays listés. Liste blanche = n'autorise QUE les pays listés (le reste du monde est bloqué).</p></div>
+					<select name="infinity_rcb[advanced][country_block][mode]">
+						<option value="block" <?php selected( $options['advanced']['country_block']['mode'], 'block' ); ?>>⛔ Liste noire — bloquer ces pays</option>
+						<option value="allow" <?php selected( $options['advanced']['country_block']['mode'], 'allow' ); ?>>✅ Liste blanche — autoriser uniquement ces pays</option>
+					</select>
+				</div>
+				<div class="rcb-field">
+					<label for="rcb-country-codes">Codes pays (ISO 2 lettres, séparés par des virgules)</label>
+					<input type="text" id="rcb-country-codes" name="infinity_rcb[advanced][country_block][codes]" placeholder="DZ, MA, TN" value="<?php echo esc_attr( $options['advanced']['country_block']['codes'] ); ?>">
+					<p class="rcb-muted">Ex. <code>DZ, MA, TN, FR</code>. Si le pays du visiteur est indétectable, l'accès est autorisé (jamais de blocage à l'aveugle).</p>
+				</div>
+				<div class="rcb-field">
+					<label for="rcb-country-msg">Message affiché aux visiteurs bloqués</label>
+					<input type="text" id="rcb-country-msg" name="infinity_rcb[advanced][country_block][message]" value="<?php echo esc_attr( $options['advanced']['country_block']['message'] ); ?>">
+				</div>
 				<?php if ( class_exists( 'Infinity_RCB_Pro' ) && ! Infinity_RCB_Pro::unlocked() ) : ?>
 					<?php Infinity_RCB_Pro::lock_card( 'watermark' ); ?>
 				<?php else : ?>

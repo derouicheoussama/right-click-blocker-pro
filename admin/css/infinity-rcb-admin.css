@@ -699,6 +699,8 @@
 	.rcb-buy-plans { grid-template-columns: 1fr; }
 }
 
+.rcb-sep { border: 0; border-top: 1px dashed var(--rcb-border); margin: 16px 0 12px; }
+
 /* ===== Licence : état inactif riche + bloc réactivation mobile ===== */
 .rcb-license-empty { border: 1.5px dashed #e2e8f0; border-radius: 14px; overflow: hidden; }
 .rcb-license-empty-main { display: flex; gap: 15px; align-items: flex-start; padding: 16px 18px; flex-wrap: wrap; }

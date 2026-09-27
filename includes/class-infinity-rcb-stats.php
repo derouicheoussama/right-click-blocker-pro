@@ -30,6 +30,7 @@ class Infinity_RCB_Stats {
 			'source_code' => array( 'label' => 'Code source (Ctrl+U)',          'emoji' => '💻', 'color' => '#3b82f6' ),
 			'save_as'     => array( 'label' => 'Enregistrer sous (Ctrl+S)',     'emoji' => '💾', 'color' => '#14b8a6' ),
 			'console'     => array( 'label' => 'Console (Ctrl+Shift+J)',        'emoji' => '⚙️', 'color' => '#84cc16' ),
+			'country'     => array( 'label' => 'Blocage par pays',             'emoji' => '🌍', 'color' => '#f97316' ),
 		);
 	}
 

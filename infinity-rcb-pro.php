@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Right Click Blocker PRO – Right Click & Content Protection
  * Description:       Bloque le clic droit, la copie, la sélection, le glisser-déposer, l'impression, les captures d'écran et les outils de développement — avec messages personnalisés, statistiques temps réel et journaux. Tout est inclus, gratuitement.
- * Version:           2.28.0
+ * Version:           2.29.0
  * Author:            Infinity Coder
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'INFINITY_RCB_VERSION', '2.28.0' );
+define( 'INFINITY_RCB_VERSION', '2.29.0' );
 define( 'INFINITY_RCB_FILE', __FILE__ );
 define( 'INFINITY_RCB_DIR', plugin_dir_path( __FILE__ ) );
 define( 'INFINITY_RCB_URL', plugin_dir_url( __FILE__ ) );
@@ -120,6 +120,13 @@ function infinity_rcb_default_options() {
 			'noscript_warn'  => true,
 			// 2.28.0 : bannière anti Self-XSS dans la console des navigateurs.
 			'console_warn'   => true,
+			// 2.29.0 : blocage par pays (liste noire / liste blanche, en-têtes CDN).
+			'country_block'  => array(
+				'on'      => false,
+				'mode'    => 'block',
+				'codes'   => '',
+				'message' => 'L’accès à ce site n’est pas disponible depuis votre pays.',
+			),
 			// 2.11.0 : filigrane, anti-clickjacking, alertes pic d'attaques.
 			'watermark'      => false,
 			'xfo'            => true,

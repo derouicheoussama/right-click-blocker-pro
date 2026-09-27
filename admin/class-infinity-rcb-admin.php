@@ -520,6 +520,12 @@ class Infinity_RCB_Admin {
 			'image_pointer'   => ! empty( $input['advanced']['image_pointer'] ),
 			'noscript_warn'   => ! empty( $input['advanced']['noscript_warn'] ),
 			'console_warn'    => ! empty( $input['advanced']['console_warn'] ),
+			'country_block'   => array(
+				'on'      => ! empty( $input['advanced']['country_block']['on'] ),
+				'mode'    => in_array( $input['advanced']['country_block']['mode'] ?? '', array( 'block', 'allow' ), true ) ? $input['advanced']['country_block']['mode'] : 'block',
+				'codes'   => strtoupper( preg_replace( '/[^A-Za-z0-9,\s]/', '', sanitize_text_field( wp_unslash( $input['advanced']['country_block']['codes'] ?? '' ) ) ) ),
+				'message' => sanitize_text_field( wp_unslash( $input['advanced']['country_block']['message'] ?? '' ) ),
+			),
 			'watermark'       => ( $this->pro_locked() ) ? false : ! empty( $input['advanced']['watermark'] ),
 			'xfo'             => ! empty( $input['advanced']['xfo'] ),
 			'frame_bust'      => ! empty( $input['advanced']['frame_bust'] ),

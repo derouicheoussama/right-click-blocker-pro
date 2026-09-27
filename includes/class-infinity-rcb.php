@@ -16,6 +16,81 @@ class Infinity_RCB {
 		add_action( 'send_headers', array( $this, 'security_headers' ) );
 		add_action( 'rest_api_init', array( 'Infinity_RCB_Chargily', 'register_routes' ) );
 		add_action( 'init', array( $this, 'register_block' ), 25 );
+		add_action( 'template_redirect', array( $this, 'country_guard' ), 1 );
+	}
+
+	/**
+	 * Pays du visiteur (code ISO 2 lettres) lu depuis les en-têtes fournis
+	 * par l'hébergeur ou le CDN (Cloudflare, GeoIP…) — aucun appel externe.
+	 *
+	 * @return string Code pays (ex. DZ) ou '' si inconnu.
+	 */
+	private function visitor_country() {
+		foreach ( array( 'HTTP_CF_IPCOUNTRY', 'HTTP_GEOIP_COUNTRY_CODE', 'HTTP_X_COUNTRY_CODE', 'HTTP_X_GEOIP_COUNTRY', 'HTTP_X_VARNISH_COUNTRY' ) as $key ) {
+			if ( ! empty( $_SERVER[ $key ] ) && preg_match( '/^[A-Za-z]{2}$/', (string) $_SERVER[ $key ] ) ) {
+				return strtoupper( sanitize_text_field( wp_unslash( $_SERVER[ $key ] ) ) );
+			}
+		}
+		return '';
+	}
+
+	/**
+	 * Blocage par pays (liste noire ou liste blanche) — page 403 dédiée.
+	 * Échoue « ouvert » : pays indétectable = accès autorisé (aucun visiteur
+	 * légitime n'est jamais bloqué par erreur).
+	 */
+	public function country_guard() {
+		if ( is_admin() || wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) ) {
+			return;
+		}
+		$options = infinity_rcb_options();
+		$cb      = isset( $options['advanced']['country_block'] ) && is_array( $options['advanced']['country_block'] ) ? $options['advanced']['country_block'] : array();
+		if ( empty( $options['master_enable'] ) || empty( $cb['on'] ) ) {
+			return;
+		}
+		if ( ! empty( $options['advanced']['exclude_admins'] ) && current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$country = $this->visitor_country();
+		if ( '' === $country ) {
+			return; // Indétectable : on ne bloque jamais à l'aveugle.
+		}
+
+		$codes = array_values( array_filter( array_map( 'strtoupper', array_map( 'trim', (array) preg_split( '/[,\s]+/', (string) ( $cb['codes'] ?? '' ) ) ) ) ) );
+		if ( empty( $codes ) ) {
+			return;
+		}
+
+		$hit   = in_array( $country, $codes, true );
+		$block = ( 'allow' === ( $cb['mode'] ?? 'block' ) ) ? ! $hit : $hit;
+		if ( ! $block ) {
+			return;
+		}
+
+		// Journal + statistiques (même mécanisme que les protections JS).
+		if ( ! empty( $options['logging']['enabled'] ) && class_exists( 'Infinity_RCB_Logger' ) ) {
+			$logger = new Infinity_RCB_Logger();
+			$logger->log( 'country', 'warning' );
+		}
+		if ( ! empty( $options['advanced']['tracking'] ) && ! empty( $options['logging']['enabled'] ) && class_exists( 'Infinity_RCB_Stats' ) ) {
+			$stats = new Infinity_RCB_Stats();
+			$stats->track( 'country' );
+		}
+
+		$msg   = '' !== trim( (string) ( $cb['message'] ?? '' ) ) ? $cb['message'] : 'L’accès à ce site n’est pas disponible depuis votre pays.';
+		$title = get_bloginfo( 'name' );
+
+		nocache_headers();
+		status_header( 403 );
+		header( 'Content-Type: text/html; charset=utf-8' );
+		printf(
+			'<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>403 — %1$s</title><style>body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#f1f5f9;display:grid;place-items:center;min-height:100vh;color:#1e293b}.box{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:38px 42px;max-width:440px;text-align:center;box-shadow:0 12px 40px -14px rgba(15,23,42,.18)}.ico{width:62px;height:62px;border-radius:16px;background:linear-gradient(135deg,#1E6FF0,#7C3AED);display:inline-flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:16px}h1{font-size:17px;margin:0 0 8px}p{font-size:14px;line-height:1.6;color:#475569;margin:0}small{display:block;margin-top:16px;color:#94a3b8;font-size:11.5px}</style></head><body><div class="box"><span class="ico">🌍</span><h1>Accès refusé</h1><p>%2$s</p><small>%1$s — pays détecté : %3$s</small></div></body></html>',
+			esc_html( $title ),
+			esc_html( $msg ),
+			esc_html( $country )
+		);
+		exit;
 	}
 
 	public function run() {
