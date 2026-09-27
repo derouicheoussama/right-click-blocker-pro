@@ -1408,11 +1408,67 @@
 		}
 	}
 
+	/* ------------------------------------------------------------------
+	 * Sélecteur de pays (blocage par pays) : recherche, sélection,
+	 * synchronisation du champ codes (masqué) + compteur.
+	 * ------------------------------------------------------------------ */
+	function initCountryPicker() {
+		var grid = document.getElementById('rcb-country-grid');
+		var input = document.getElementById('rcb-country-codes');
+		if (!grid || !input) { return; }
+
+		var search = document.getElementById('rcb-country-search');
+		var count = document.getElementById('rcb-country-count');
+		var listed = document.getElementById('rcb-country-listed');
+		var clearBtn = document.getElementById('rcb-country-clear');
+
+		function codes() {
+			return input.value.split(/[,\s]+/).map(function (c) { return c.trim().toUpperCase(); }).filter(Boolean);
+		}
+		function sync() {
+			var sel = codes();
+			if (count) { count.textContent = sel.length; }
+			if (listed) { listed.textContent = sel.length ? sel.join(', ') : 'Aucun pays sélectionné'; }
+			grid.querySelectorAll('.rcb-country-chip').forEach(function (chip) {
+				chip.classList.toggle('is-on', sel.indexOf(chip.getAttribute('data-code')) !== -1);
+			});
+		}
+		grid.addEventListener('click', function (e) {
+			var chip = e.target.closest ? e.target.closest('.rcb-country-chip') : null;
+			if (!chip) { return; }
+			var sel = codes();
+			var code = chip.getAttribute('data-code');
+			var i = sel.indexOf(code);
+			if (i === -1) { sel.push(code); } else { sel.splice(i, 1); }
+			input.value = sel.join(', ');
+			sync();
+		});
+		if (search) {
+			search.addEventListener('input', function () {
+				var q = search.value.trim().toLowerCase();
+				grid.querySelectorAll('.rcb-country-chip').forEach(function (chip) {
+					var name = chip.getAttribute('data-name') || '';
+					var code = (chip.getAttribute('data-code') || '').toLowerCase();
+					chip.classList.toggle('is-hidden', '' !== q && name.indexOf(q) === -1 && code.indexOf(q) === -1);
+				});
+			});
+		}
+		if (clearBtn) {
+			clearBtn.addEventListener('click', function () {
+				input.value = '';
+				sync();
+				if (search) { search.value = ''; search.dispatchEvent(new Event('input')); }
+			});
+		}
+		sync();
+	}
+
 	function boot() {
 		initTabs();
 		initAboutPage();
 		initAboutBuyModal();
 		initLicensePrefill();
+		initCountryPicker();
 		initConfirms();
 		initCheckAll();
 		initPlanPicker();

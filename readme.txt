@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.29.0
+Stable tag: 2.29.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.29.1 =
+* Improved: country blocking now uses a full country picker — every country with its flag and ISO code in a searchable, scrollable grid. Click to toggle, live counter and selection summary; no more manual code typing.
 
 = 2.29.0 =
 * New: country blocking. Deny or allow visitors by country (blacklist or whitelist of ISO codes), detected from your host/CDN headers (Cloudflare, GeoIP) with zero external calls — unknown country never blocks. Blocked visitors get a branded 403 page with a custom message; every block is logged and counted as a new "Country" stat type. Admins stay exempt when the admin exclusion is enabled.

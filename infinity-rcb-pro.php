@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Right Click Blocker PRO – Right Click & Content Protection
  * Description:       Bloque le clic droit, la copie, la sélection, le glisser-déposer, l'impression, les captures d'écran et les outils de développement — avec messages personnalisés, statistiques temps réel et journaux. Tout est inclus, gratuitement.
- * Version:           2.29.0
+ * Version:           2.29.1
  * Author:            Infinity Coder
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'INFINITY_RCB_VERSION', '2.29.0' );
+define( 'INFINITY_RCB_VERSION', '2.29.1' );
 define( 'INFINITY_RCB_FILE', __FILE__ );
 define( 'INFINITY_RCB_DIR', plugin_dir_path( __FILE__ ) );
 define( 'INFINITY_RCB_URL', plugin_dir_url( __FILE__ ) );
@@ -238,6 +238,49 @@ function infinity_rcb_options() {
 		}
 	}
 	return $out;
+}
+
+/**
+ * Liste des pays (ISO 3166-1 alpha-2 → nom français) pour le sélecteur
+ * du blocage par pays. Le drapeau est dérivé du code (indicateurs régionaux).
+ */
+function infinity_rcb_countries() {
+	return array(
+		'AF' => 'Afghanistan', 'ZA' => 'Afrique du Sud', 'AL' => 'Albanie', 'DZ' => 'Algérie', 'DE' => 'Allemagne', 'AD' => 'Andorre', 'AO' => 'Angola', 'AI' => 'Anguilla', 'AG' => 'Antigua-et-Barbuda', 'SA' => 'Arabie saoudite', 'AR' => 'Argentine', 'AM' => 'Arménie', 'AW' => 'Aruba', 'AU' => 'Australie', 'AT' => 'Autriche', 'AZ' => 'Azerbaïdjan',
+		'BS' => 'Bahamas', 'BH' => 'Bahreïn', 'BD' => 'Bangladesh', 'BB' => 'Barbade', 'BE' => 'Belgique', 'BZ' => 'Belize', 'BJ' => 'Bénin', 'BM' => 'Bermudes', 'BT' => 'Bhoutan', 'BY' => 'Biélorussie', 'BO' => 'Bolivie', 'BA' => 'Bosnie-Herzégovine', 'BW' => 'Botswana', 'BR' => 'Brésil', 'BN' => 'Brunei', 'BG' => 'Bulgarie', 'BF' => 'Burkina Faso', 'BI' => 'Burundi',
+		'KH' => 'Cambodge', 'CM' => 'Cameroun', 'CA' => 'Canada', 'CV' => 'Cap-Vert', 'CL' => 'Chili', 'CN' => 'Chine', 'CY' => 'Chypre', 'CO' => 'Colombie', 'KM' => 'Comores', 'CG' => 'Congo', 'CD' => 'Congo (RD)', 'KR' => 'Corée du Sud', 'KP' => 'Corée du Nord', 'CR' => 'Costa Rica', 'CI' => "Côte d'Ivoire", 'HR' => 'Croatie', 'CU' => 'Cuba', 'CW' => 'Curaçao',
+		'DK' => 'Danemark', 'DJ' => 'Djibouti', 'DM' => 'Dominique',
+		'EG' => 'Égypte', 'AE' => 'Émirats arabes unis', 'EC' => 'Équateur', 'ER' => 'Érythrée', 'ES' => 'Espagne', 'EE' => 'Estonie', 'SZ' => 'Eswatini', 'US' => 'États-Unis', 'ET' => 'Éthiopie',
+		'FJ' => 'Fidji', 'FI' => 'Finlande', 'FR' => 'France',
+		'GA' => 'Gabon', 'GM' => 'Gambie', 'GE' => 'Géorgie', 'GH' => 'Ghana', 'GI' => 'Gibraltar', 'GR' => 'Grèce', 'GD' => 'Grenade', 'GL' => 'Groenland', 'GU' => 'Guam', 'GT' => 'Guatemala', 'GG' => 'Guernesey', 'GN' => 'Guinée', 'GW' => 'Guinée-Bissau', 'GQ' => 'Guinée équatoriale', 'GY' => 'Guyana',
+		'HT' => 'Haïti', 'HN' => 'Honduras', 'HK' => 'Hong Kong', 'HU' => 'Hongrie',
+		'IN' => 'Inde', 'ID' => 'Indonésie', 'IQ' => 'Irak', 'IR' => 'Iran', 'IE' => 'Irlande', 'IS' => 'Islande', 'IL' => 'Israël', 'IT' => 'Italie',
+		'JM' => 'Jamaïque', 'JP' => 'Japon', 'JE' => 'Jersey', 'JO' => 'Jordanie',
+		'KZ' => 'Kazakhstan', 'KE' => 'Kenya', 'KG' => 'Kirghizistan', 'KI' => 'Kiribati', 'KW' => 'Koweït',
+		'LA' => 'Laos', 'LS' => 'Lesotho', 'LV' => 'Lettonie', 'LB' => 'Liban', 'LR' => 'Liberia', 'LY' => 'Libye', 'LI' => 'Liechtenstein', 'LT' => 'Lituanie', 'LU' => 'Luxembourg',
+		'MK' => 'Macédoine du Nord', 'MG' => 'Madagascar', 'MY' => 'Malaisie', 'MW' => 'Malawi', 'MV' => 'Maldives', 'ML' => 'Mali', 'MT' => 'Malte', 'MA' => 'Maroc', 'MQ' => 'Martinique', 'MU' => 'Maurice', 'MR' => 'Mauritanie', 'MX' => 'Mexique', 'FM' => 'Micronésie', 'MD' => 'Moldavie', 'MC' => 'Monaco', 'MN' => 'Mongolie', 'ME' => 'Monténégro', 'MS' => 'Montserrat', 'MZ' => 'Mozambique',
+		'NA' => 'Namibie', 'NR' => 'Nauru', 'NP' => 'Népal', 'NI' => 'Nicaragua', 'NE' => 'Niger', 'NG' => 'Nigéria', 'NO' => 'Norvège', 'NC' => 'Nouvelle-Calédonie', 'NZ' => 'Nouvelle-Zélande',
+		'OM' => 'Oman', 'UG' => 'Ouganda', 'UZ' => 'Ouzbékistan',
+		'PK' => 'Pakistan', 'PW' => 'Palaos', 'PS' => 'Palestine', 'PA' => 'Panama', 'PG' => 'Papouasie-Nouvelle-Guinée', 'PY' => 'Paraguay', 'NL' => 'Pays-Bas', 'PE' => 'Pérou', 'PH' => 'Philippines', 'PL' => 'Pologne', 'PF' => 'Polynésie française', 'PT' => 'Portugal',
+		'QA' => 'Qatar', 'CF' => 'République centrafricaine', 'DO' => 'République dominicaine', 'CZ' => 'République tchèque', 'RO' => 'Roumanie', 'GB' => 'Royaume-Uni', 'RU' => 'Russie', 'RW' => 'Rwanda',
+		'EH' => 'Sahara occidental', 'BL' => 'Saint-Barthélemy', 'KN' => 'Saint-Kitts-et-Nevis', 'LC' => 'Sainte-Lucie', 'VC' => 'Saint-Vincent-et-les-Grenadines', 'MF' => 'Saint-Martin', 'PM' => 'Saint-Pierre-et-Miquelon', 'WS' => 'Samoa', 'AS' => 'Samoa américaines', 'SM' => 'Saint-Marin', 'ST' => 'Sao Tomé-et-Principe', 'SN' => 'Sénégal', 'RS' => 'Serbie', 'SC' => 'Seychelles', 'SL' => 'Sierra Leone', 'SG' => 'Singapour', 'SK' => 'Slovaquie', 'SI' => 'Slovénie', 'SO' => 'Somalie', 'SD' => 'Soudan', 'SS' => 'Soudan du Sud', 'LK' => 'Sri Lanka', 'SE' => 'Suède', 'CH' => 'Suisse', 'SR' => 'Suriname', 'SJ' => 'Svalbard', 'SY' => 'Syrie',
+		'TJ' => 'Tadjikistan', 'TZ' => 'Tanzanie', 'TD' => 'Tchad', 'TH' => 'Thaïlande', 'TL' => 'Timor oriental', 'TG' => 'Togo', 'TO' => 'Tonga', 'TT' => 'Trinité-et-Tobago', 'TN' => 'Tunisie', 'TM' => 'Turkménistan', 'TR' => 'Turquie', 'TV' => 'Tuvalu',
+		'UA' => 'Ukraine', 'UY' => 'Uruguay',
+		'VU' => 'Vanuatu', 'VA' => 'Vatican', 'VE' => 'Venezuela', 'VN' => 'Viêt Nam', 'VG' => 'Îles Vierges britanniques', 'VI' => 'Îles Vierges américaines',
+		'YE' => 'Yémen',
+		'ZM' => 'Zambie', 'ZW' => 'Zimbabwe',
+	);
+}
+
+/**
+ * Drapeau emoji d'un code pays ISO 2 lettres (indicateurs régionaux).
+ */
+function infinity_rcb_country_flag( $code ) {
+	$code = strtoupper( substr( preg_replace( '/[^A-Za-z]/', '', (string) $code ), 0, 2 ) );
+	if ( 2 !== strlen( $code ) || ! function_exists( 'mb_chr' ) ) {
+		return '🏳️';
+	}
+	return mb_chr( 0x1F1E6 + ( ord( $code[0] ) - 65 ), 'UTF-8' ) . mb_chr( 0x1F1E6 + ( ord( $code[1] ) - 65 ), 'UTF-8' );
 }
 
 /**

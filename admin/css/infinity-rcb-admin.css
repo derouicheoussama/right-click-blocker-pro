@@ -701,6 +701,20 @@
 
 .rcb-sep { border: 0; border-top: 1px dashed var(--rcb-border); margin: 16px 0 12px; }
 
+/* ===== Sélecteur de pays (blocage par pays) ===== */
+.rcb-country-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 7px; max-height: 250px; overflow-y: auto; border: 1px solid var(--rcb-border); border-radius: 12px; padding: 10px; margin-top: 8px; background: #fbfcfe; scrollbar-width: thin; }
+.rcb-country-chip { display: flex; align-items: center; gap: 7px; border: 1.5px solid var(--rcb-border); background: #fff; border-radius: 9px; padding: 6px 9px; cursor: pointer; text-align: left; font-size: 12px; transition: border-color .12s ease, box-shadow .12s ease; }
+.rcb-country-chip:hover { border-color: #93c5fd; }
+.rcb-country-chip.is-on { border-color: #1E6FF0; background: #eff6ff; box-shadow: 0 0 0 2px rgba(30, 111, 240, .14); }
+.rcb-country-flag { font-size: 15px; flex: 0 0 auto; }
+.rcb-country-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #1e293b; }
+.rcb-country-chip.is-on .rcb-country-name { font-weight: 600; }
+.rcb-country-code { flex: 0 0 auto; font-size: 10px; font-weight: 700; color: #94a3b8; background: #f1f5f9; border-radius: 5px; padding: 1px 5px; }
+.rcb-country-chip.is-on .rcb-country-code { background: #dbeafe; color: #1d4ed8; }
+.rcb-country-chip.is-hidden { display: none; }
+.rcb-country-tools { display: flex; align-items: center; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+.rcb-country-tools .rcb-muted { font-size: 11.5px; }
+
 /* ===== Licence : état inactif riche + bloc réactivation mobile ===== */
 .rcb-license-empty { border: 1.5px dashed #e2e8f0; border-radius: 14px; overflow: hidden; }
 .rcb-license-empty-main { display: flex; gap: 15px; align-items: flex-start; padding: 16px 18px; flex-wrap: wrap; }

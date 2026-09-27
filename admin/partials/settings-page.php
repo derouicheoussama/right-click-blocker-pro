@@ -464,9 +464,25 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 					</select>
 				</div>
 				<div class="rcb-field">
-					<label for="rcb-country-codes">Codes pays (ISO 2 lettres, séparés par des virgules)</label>
-					<input type="text" id="rcb-country-codes" name="infinity_rcb[advanced][country_block][codes]" placeholder="DZ, MA, TN" value="<?php echo esc_attr( $options['advanced']['country_block']['codes'] ); ?>">
-					<p class="rcb-muted">Ex. <code>DZ, MA, TN, FR</code>. Si le pays du visiteur est indétectable, l'accès est autorisé (jamais de blocage à l'aveugle).</p>
+					<label for="rcb-country-search">Pays — cliquez pour sélectionner <?php
+					$rcb_selected_countries = array_values( array_filter( array_map( 'strtoupper', array_map( 'trim', (array) preg_split( '/[,\s]+/', (string) $options['advanced']['country_block']['codes'] ) ) ) ) );
+					?>(<span id="rcb-country-count"><?php echo count( $rcb_selected_countries ); ?></span> sélectionné<?php echo count( $rcb_selected_countries ) > 1 ? 's' : ''; ?>)</label>
+					<input type="search" id="rcb-country-search" placeholder="🔎 Rechercher un pays (ex. Algérie, France…)" autocomplete="off">
+					<div class="rcb-country-grid" id="rcb-country-grid">
+						<?php foreach ( infinity_rcb_countries() as $cc => $cname ) : ?>
+							<button type="button" class="rcb-country-chip<?php echo in_array( $cc, $rcb_selected_countries, true ) ? ' is-on' : ''; ?>" data-code="<?php echo esc_attr( $cc ); ?>" data-name="<?php echo esc_attr( function_exists( 'mb_strtolower' ) ? mb_strtolower( $cname, 'UTF-8' ) : strtolower( $cname ) ); ?>">
+								<span class="rcb-country-flag"><?php echo esc_html( infinity_rcb_country_flag( $cc ) ); ?></span>
+								<span class="rcb-country-name"><?php echo esc_html( $cname ); ?></span>
+								<span class="rcb-country-code"><?php echo esc_html( $cc ); ?></span>
+							</button>
+						<?php endforeach; ?>
+					</div>
+					<input type="hidden" id="rcb-country-codes" name="infinity_rcb[advanced][country_block][codes]" value="<?php echo esc_attr( $options['advanced']['country_block']['codes'] ); ?>">
+					<div class="rcb-country-tools">
+						<button type="button" class="rcb-btn rcb-btn-ghost rcb-btn-xs" id="rcb-country-clear">✕ Tout désélectionner</button>
+						<span class="rcb-muted" id="rcb-country-listed"><?php echo esc_html( '' !== implode( ', ', $rcb_selected_countries ) ? implode( ', ', $rcb_selected_countries ) : 'Aucun pays sélectionné' ); ?></span>
+					</div>
+					<p class="rcb-muted">Si le pays du visiteur est indétectable, l'accès est autorisé (jamais de blocage à l'aveugle).</p>
 				</div>
 				<div class="rcb-field">
 					<label for="rcb-country-msg">Message affiché aux visiteurs bloqués</label>
