@@ -91,7 +91,7 @@ foreach ( $types as $type => $meta ) {
 			<div class="rcb-step">
 				<span class="rcb-step-n">1</span>
 				<strong>Votre site est déjà protégé</strong>
-				<p>L'installation a activé les 11 protections recommandées : clic droit, raccourcis, copie, DevTools, impression… Testez votre site public pour voir le message d'avertissement.</p>
+				<p>L'installation a activé les 11 protections recommandées : clic droit, raccourcis, copie, DevTools, impression… (une 12ᵉ — le 🌍 blocage par pays — s'active dans l'onglet Avancé). Testez votre site public pour voir le message d'avertissement.</p>
 			</div>
 			<div class="rcb-step">
 				<span class="rcb-step-n">2</span>
@@ -194,7 +194,12 @@ foreach ( $types as $type => $meta ) {
 		</div>
 		<div class="rcb-status-grid">
 			<?php foreach ( $types as $type => $meta ) : ?>
-				<div class="rcb-status-chip <?php echo ! empty( $options['protections'][ $type ] ) ? 'is-on' : 'is-off'; ?>">
+				<?php
+				// Le pays se règle dans Avancé (pas dans l'onglet Protections).
+				$country_on = ! empty( $options['advanced']['country_block']['on'] );
+				$type_on    = 'country' === $type ? $country_on : ! empty( $options['protections'][ $type ] );
+				?>
+				<div class="rcb-status-chip <?php echo $type_on ? 'is-on' : 'is-off'; ?>">
 					<span class="rcb-dot"></span>
 					<span class="rcb-status-emoji"><?php echo esc_html( $meta['emoji'] ); ?></span>
 					<?php echo esc_html( $meta['label'] ); ?>

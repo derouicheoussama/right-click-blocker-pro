@@ -203,11 +203,14 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 						'console'     => 'Affiche un avertissement dans la console et bloque Ctrl+Shift+J / K.',
 					);
 					foreach ( $types as $type => $meta ) :
+						// 'country' est une protection serveur : réglée dans
+						// l'onglet Avancé (elle n'a ni interrupteur ni message ici).
+						if ( 'country' === $type ) { continue; }
 						?>
 						<div class="rcb-field-row">
 							<div class="rcb-field-label">
 								<strong><span class="rcb-status-emoji"><?php echo esc_html( $meta['emoji'] ); ?></span> <?php echo esc_html( $meta['label'] ); ?></strong>
-								<p><?php echo esc_html( $descriptions[ $type ] ); ?></p>
+								<p><?php echo esc_html( $descriptions[ $type ] ?? '' ); ?></p>
 							</div>
 							<label class="rcb-switch">
 								<input type="checkbox" name="infinity_rcb[protections][<?php echo esc_attr( $type ); ?>]" value="1" <?php checked( ! empty( $options['protections'][ $type ] ) ); ?>>
@@ -226,6 +229,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 				<p class="rcb-muted" style="margin:0 0 14px;">Personnalisez le texte de chaque avertissement — notamment celui du <strong>clic droit</strong>. La mention copyright (onglet Apparence) est ajoutée automatiquement sous chaque message.</p>
 				<div class="rcb-fields">
 					<?php foreach ( $types as $type => $meta ) : ?>
+						<?php if ( 'country' === $type ) { continue; } // pas de message visiteur pour le blocage pays. ?>
 						<div class="rcb-field">
 							<label for="rcb-msg-<?php echo esc_attr( $type ); ?>"><span class="rcb-status-emoji"><?php echo esc_html( $meta['emoji'] ); ?></span> <?php echo esc_html( $meta['label'] ); ?></label>
 							<input type="text" class="regular-text" id="rcb-msg-<?php echo esc_attr( $type ); ?>" name="infinity_rcb[messages][<?php echo esc_attr( $type ); ?>]" value="<?php echo esc_attr( $options['messages'][ $type ] ); ?>">

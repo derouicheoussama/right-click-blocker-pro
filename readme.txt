@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.29.1
+Stable tag: 2.29.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Disable right click, stop content theft, block copy-paste and spam comments — 
 
 **Stop content theft in 30 seconds.** Right Click Blocker PRO disables right click, copy-paste, text selection, drag & drop, keyboard shortcuts (F12, Ctrl+U, Ctrl+S, Ctrl+Shift+I), printing, screenshots and dev tools — **plus a 5-layer comment spam blocker** — all in one lightweight plugin.
 
-Your texts, photos, prices and product sheets are your work. One setup neutralizes **11 content protections + 5 antispam layers**, with a **live preview** so you see exactly what your visitors see. Real-time statistics show you who's trying to steal your content, when and how.
+Your texts, photos, prices and product sheets are your work. One setup neutralizes **12 content protections + 5 antispam layers** (including country blocking), with a **live preview** so you see exactly what your visitors see. Real-time statistics show you who's trying to steal your content, when and how.
 
 Unlike plugins that lock features behind a paid version, **everything is free**: dev tools detection, print blocking, image watermark, antispam, statistics, detailed logs, 10 message styles. No external dependency, no data collection, no slowdown.
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.29.2 =
+* Full functional audit release. Fix: the country blocking type no longer leaks into the Protections and Messages tabs (it had a no-op toggle there and triggered "undefined description" warnings) — it is configured solely under Advanced, and the dashboard status chip now reflects its real state. Protection counters updated everywhere (12 content protections + 5 antispam). Robustness verified: old options from earlier versions merge cleanly with all new defaults, legacy statistics keep working with the new type, and the full settings sanitization round-trip passes with boundary and hostile inputs (74 automated checks green across all suites).
 
 = 2.29.1 =
 * Improved: country blocking now uses a full country picker — every country with its flag and ISO code in a searchable, scrollable grid. Click to toggle, live counter and selection summary; no more manual code typing.

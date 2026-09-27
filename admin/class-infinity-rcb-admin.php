@@ -457,7 +457,9 @@ class Infinity_RCB_Admin {
 
 	private function sanitize_settings( $input ) {
 		$defaults = infinity_rcb_default_options();
-		$types    = array_keys( Infinity_RCB_Stats::types() );
+		// 'country' reste dans le registre stats (comptage) mais n'est pas un
+		// interrupteur Protections : son réglage vit dans advanced.country_block.
+		$types    = array_diff( array_keys( Infinity_RCB_Stats::types() ), array( 'country' ) );
 		$out      = $defaults;
 
 		$out['master_enable'] = ! empty( $input['master_enable'] );

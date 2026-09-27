@@ -109,7 +109,8 @@ if ( empty( $ap['shadow'] ) )        { $pv_inner_style .= 'box-shadow:none;'; }
 		<div class="rcb-preview-group" role="group" aria-label="Type de message">
 			<select id="rcb-dash-type" aria-label="Message à afficher">
 				<?php foreach ( $types as $type => $meta ) : ?>
-					<option value="<?php echo esc_attr( (string) $options['messages'][ $type ] ); ?>" <?php selected( $type, 'right_click' ); ?>><?php echo esc_html( $meta['emoji'] . ' ' . $meta['label'] ); ?></option>
+					<?php if ( 'country' === $type ) { continue; } // pas de message visiteur pour le blocage pays. ?>
+					<option value="<?php echo esc_attr( (string) ( $options['messages'][ $type ] ?? '' ) ); ?>" <?php selected( $type, 'right_click' ); ?>><?php echo esc_html( $meta['emoji'] . ' ' . $meta['label'] ); ?></option>
 				<?php endforeach; ?>
 			</select>
 		</div>
