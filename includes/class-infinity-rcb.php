@@ -229,7 +229,15 @@ class Infinity_RCB {
 		}
 
 		wp_enqueue_style( 'infinity-rcb-public', INFINITY_RCB_URL . 'assets/css/infinity-rcb-public.css', array(), INFINITY_RCB_VERSION );
-		wp_enqueue_script( 'infinity-rcb-public', INFINITY_RCB_URL . 'assets/js/infinity-rcb-public.js', array(), INFINITY_RCB_VERSION, true );
+		// Performance (2.30.0) : script différé quand WordPress le permet.
+		$args = true;
+		if ( version_compare( get_bloginfo( 'version' ), '6.3', '>=' ) ) {
+			$args = array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			);
+		}
+		wp_enqueue_script( 'infinity-rcb-public', INFINITY_RCB_URL . 'assets/js/infinity-rcb-public.js', array(), INFINITY_RCB_VERSION, $args );
 
 		// Garde sans JavaScript : bandeau d'avertissement si JS est désactivé.
 		if ( ! empty( $options['advanced']['noscript_warn'] ) ) {

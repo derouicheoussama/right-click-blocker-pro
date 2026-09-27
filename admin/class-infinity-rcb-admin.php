@@ -141,25 +141,42 @@ class Infinity_RCB_Admin {
 		}
 
 		wp_enqueue_style( 'infinity-rcb-admin', INFINITY_RCB_URL . 'admin/css/infinity-rcb-admin.css', array(), $this->version, 'all' );
-		wp_enqueue_script( 'infinity-rcb-admin', INFINITY_RCB_URL . 'admin/js/infinity-rcb-admin.js', array(), $this->version, true );
+
+		// Performance (2.30.0) : script admin différé quand WordPress le
+		// permet (≥ 6.3) — le rendu des pages n'attend plus le JavaScript.
+		$args = true;
+		if ( version_compare( get_bloginfo( 'version' ), '6.3', '>=' ) ) {
+			$args = array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			);
+		}
+		wp_enqueue_script( 'infinity-rcb-admin', INFINITY_RCB_URL . 'admin/js/infinity-rcb-admin.js', array(), $this->version, $args );
 
 		$page = isset( $_GET['page'] ) && isset( $this->pages[ sanitize_key( wp_unslash( $_GET['page'] ) ) ] ) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- lecture d'affichage (choix des assets).
 			? $this->pages[ sanitize_key( wp_unslash( $_GET['page'] ) ) ] // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- idem.
 			: '';
 
-		wp_localize_script( 'infinity-rcb-admin', 'RCBAdmin', array(
-			'ajax'      => admin_url( 'admin-ajax.php' ),
-			'nonce'     => wp_create_nonce( 'infinity_rcb_admin' ),
-			'page'      => $page,
-			'live'      => (bool) infinity_rcb_options()['master_enable'],
-			'chart'     => $this->stats->chart( 'stats' === $page ? 30 : 14 ),
-			'donut'     => $this->stats->donut(),
-			'types'     => Infinity_RCB_Stats::types(),
-			'i18n'      => array(
+		// Performance (2.30.0) : les données graphiques (14/30 jours × tous
+		// les types) ne sont sérialisées QUE sur les pages qui les dessinent
+		// (tableau de bord et statistiques) — les autres pages s'allègent
+		// d'autant en HTML et en travail PHP.
+		$payload = array(
+			'ajax'  => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'infinity_rcb_admin' ),
+			'page'  => $page,
+			'live'  => (bool) infinity_rcb_options()['master_enable'],
+			'i18n'  => array(
 				'confirmReset' => 'Réinitialiser toutes les statistiques ? Cette action est irréversible.',
 				'confirmClear' => 'Supprimer tous les fichiers de journal ? Cette action est irréversible.',
 			),
-		) );
+		);
+		if ( in_array( $page, array( 'stats', 'dashboard' ), true ) ) {
+			$payload['chart'] = $this->stats->chart( 'stats' === $page ? 30 : 14 );
+			$payload['donut'] = $this->stats->donut();
+			$payload['types'] = Infinity_RCB_Stats::types();
+		}
+		wp_localize_script( 'infinity-rcb-admin', 'RCBAdmin', $payload );
 
 		// La feuille publique est chargée sur les réglages (aperçu du message)
 		// et sur le tableau de bord (carte « Aperçu du message »).

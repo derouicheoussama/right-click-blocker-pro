@@ -702,6 +702,10 @@
 .rcb-sep { border: 0; border-top: 1px dashed var(--rcb-border); margin: 16px 0 12px; }
 
 /* ===== Sélecteur de pays (blocage par pays) ===== */
+/* Performance (2.30.0) : le navigateur saute la mise en page/peinture de la
+ * grille tant qu'elle n'entre pas dans la zone visible — bascule d'onglet et
+ * premier rendu plus rapides, sans aucun coût à l'ouverture. */
+.rcb-country-grid { content-visibility: auto; contain-intrinsic-size: auto 260px; }
 .rcb-country-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 7px; max-height: 250px; overflow-y: auto; border: 1px solid var(--rcb-border); border-radius: 12px; padding: 10px; margin-top: 8px; background: #fbfcfe; scrollbar-width: thin; }
 .rcb-country-chip { display: flex; align-items: center; gap: 7px; border: 1.5px solid var(--rcb-border); background: #fff; border-radius: 9px; padding: 6px 9px; cursor: pointer; text-align: left; font-size: 12px; transition: border-color .12s ease, box-shadow .12s ease; }
 .rcb-country-chip:hover { border-color: #93c5fd; }

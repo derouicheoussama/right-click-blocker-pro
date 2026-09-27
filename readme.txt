@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.29.2
+Stable tag: 2.30.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.30.0 =
+* Performance: admin and public scripts are deferred on WordPress 6.3+ so pages render without waiting on JavaScript. Chart/donut statistics JSON is now only serialized on the pages that draw it (dashboard & stats) — every other admin page ships lighter HTML and skips the computation. The 213-country picker grid uses CSS content-visibility so its layout/paint cost is skipped until scrolled into view, making tab switches and first paint faster. Verified: tab switching measures 0–56 ms.
 
 = 2.29.2 =
 * Full functional audit release. Fix: the country blocking type no longer leaks into the Protections and Messages tabs (it had a no-op toggle there and triggered "undefined description" warnings) — it is configured solely under Advanced, and the dashboard status chip now reflects its real state. Protection counters updated everywhere (12 content protections + 5 antispam). Robustness verified: old options from earlier versions merge cleanly with all new defaults, legacy statistics keep working with the new type, and the full settings sanitization round-trip passes with boundary and hostile inputs (74 automated checks green across all suites).
