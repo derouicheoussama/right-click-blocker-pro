@@ -191,6 +191,16 @@ $status_badge = array(
 			<?php endif; ?>
 		</div>
 
+		<?php
+		// Contact de reactivation (mobile/WhatsApp du vendeur).
+		$wa_digits = preg_replace( '/[^0-9]/', '', (string) ( $options['payment']['whatsapp'] ?? '' ) );
+		$wa_link   = '';
+		if ( 8 <= strlen( $wa_digits ) ) {
+			$wa_msg = 'Bonjour, je souhaite réactiver ma licence Right Click Blocker PRO sur « ' . $lic_status['domain'] . ' ». Clé / e-mail d’achat : ';
+			$wa_link = 'https://wa.me/' . $wa_digits . '?text=' . rawurlencode( $wa_msg );
+		}
+		?>
+
 		<?php if ( $active || 'quota' === $lic_status['code'] ) : ?>
 			<ul class="rcb-syslist">
 				<li><span>Clé de licence</span><strong><code id="rcb-key-value" class="rcb-selall"><?php echo esc_html( $lic_status['key'] ); ?></code> <button type="button" class="rcb-btn rcb-btn-ghost rcb-btn-xs" data-copy="#rcb-key-value">Copier</button></strong></li>
@@ -261,9 +271,38 @@ $status_badge = array(
 				<div class="rcb-notice rcb-notice-ok" style="margin-top:14px;">✅ Licence maximale active : jusqu’à 20 noms de domaine avec la même clé.</div>
 			<?php endif; ?>
 		<?php elseif ( 'revoked' === $lic_status['code'] ) : ?>
-			<p class="rcb-notice rcb-notice-warn">⛔ Cette clé a été révoquée par le vendeur. Contactez <?php echo $seller_mail ? '<a href="mailto:' . esc_attr( $seller_mail ) . '">' . esc_html( $seller_mail ) . '</a>' : 'le vendeur'; ?> pour en comprendre la raison.</p>
+			<p class="rcb-notice rcb-notice-warn">⛔ Cette clé a été révoquée par le vendeur. <?php if ( '' !== $wa_link ) : ?><a href="<?php echo esc_url( $wa_link ); ?>" target="_blank" rel="noopener noreferrer">📱 Réactiver par WhatsApp (<?php echo esc_html( '+' . $wa_digits ); ?>)</a> — ou contactez <?php endif; ?><?php echo $seller_mail ? '<a href="mailto:' . esc_attr( $seller_mail ) . '">' . esc_html( $seller_mail ) . '</a>' : 'le vendeur'; ?> pour en comprendre la raison.</p>
 		<?php else : ?>
-			<p class="rcb-muted">Aucune licence active sur ce domaine. Collez la clé reçue par e-mail après votre achat.</p>
+			<div class="rcb-license-empty">
+				<div class="rcb-license-empty-main">
+					<span class="rcb-license-empty-ico">🔑</span>
+					<div>
+						<strong>Aucune licence active sur ce domaine</strong>
+						<ol class="rcb-license-steps">
+							<li><a href="#rcb-commande">Commandez votre licence</a> (à partir de 2 900 DA, à vie)</li>
+							<li>Recevez votre clé signée <em>automatiquement par e-mail</em></li>
+							<li>Collez-la ci-dessous avec l'e-mail d'achat → <strong>Activer</strong></li>
+						</ol>
+						<p class="rcb-muted" style="margin:4px 0 0;">Le plugin reste 100 % fonctionnel sans licence — celle-ci ajoute le support prioritaire, les alertes e-mail et les options Pro (logo, filigrane, CSS).</p>
+					</div>
+				</div>
+				<div class="rcb-reactivate">
+					<div class="rcb-reactivate-head"><span class="rcb-reactivate-ico">📱</span><strong>Déjà acheté ? Réactivation express</strong></div>
+					<p>Clé perdue, e-mail changé, <strong>nouveau domaine</strong> ou quota atteint ? Un message suffit — le vendeur réactive votre plugin à distance, gratuitement et à vie.</p>
+					<div class="rcb-reactivate-actions">
+						<?php if ( '' !== $wa_link ) : ?>
+							<a class="rcb-btn rcb-btn-whatsapp" href="<?php echo esc_url( $wa_link ); ?>" target="_blank" rel="noopener noreferrer">💬 WhatsApp — réactiver maintenant</a>
+							<a class="rcb-reactivate-num" href="tel:+<?php echo esc_attr( $wa_digits ); ?>">📞 +<?php echo esc_html( $wa_digits ); ?></a>
+						<?php endif; ?>
+						<?php if ( $seller_mail ) : ?>
+							<a class="rcb-btn rcb-btn-ghost" href="mailto:<?php echo esc_attr( $seller_mail ); ?>?subject=R%C3%A9activation%20licence%20Right%20Click%20Blocker%20PRO">📩 E-mail</a>
+						<?php endif; ?>
+					</div>
+					<?php if ( '' === $wa_link && ! $seller_mail ) : ?>
+						<p class="rcb-muted" style="margin:0;">Coordonnées du vendeur non configurées (Réglages → Paiement → WhatsApp).</p>
+					<?php endif; ?>
+				</div>
+			</div>
 		<?php endif; ?>
 
 		<form method="post" action="" class="rcb-license-form">
