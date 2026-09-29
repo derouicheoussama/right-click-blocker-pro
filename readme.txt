@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.30.0
+Stable tag: 2.30.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.30.1 =
+* CSS hygiene pass (verified across all four stylesheets): the save bar had two conflicting root declarations (merged into one block — sticky, clearance margin, glass blur, all preserved), the country picker grid had a split rule (merged), a redundant responsive line was removed and an orphan nav-chips override was folded into its base rule. Full context-aware scan now reports zero duplicate root selectors, zero exact-duplicate blocks and zero root-level conflicts in every stylesheet; responsive media queries remain intentionally distinct.
 
 = 2.30.0 =
 * Performance: admin and public scripts are deferred on WordPress 6.3+ so pages render without waiting on JavaScript. Chart/donut statistics JSON is now only serialized on the pages that draw it (dashboard & stats) — every other admin page ships lighter HTML and skips the computation. The 213-country picker grid uses CSS content-visibility so its layout/paint cost is skipped until scrolled into view, making tab switches and first paint faster. Verified: tab switching measures 0–56 ms.
