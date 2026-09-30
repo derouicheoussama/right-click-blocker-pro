@@ -1463,12 +1463,53 @@
 		sync();
 	}
 
+	/* ------------------------------------------------------------------
+	 * Bouton © : insère le symbole copyright au curseur du champ visé
+	 * (onglet Messages). data-for = champ dédié, data-global = dernier
+	 * champ de message ayant le focus.
+	 * ------------------------------------------------------------------ */
+	function insertSymbol(input, sym) {
+		if (!input) { return; }
+		var start = input.selectionStart !== undefined ? input.selectionStart : input.value.length;
+		var end = input.selectionEnd !== undefined ? input.selectionEnd : start;
+		var before = input.value.slice(0, start);
+		var after = input.value.slice(end);
+		var sep = (before && !/\s$/.test(before) && before.slice(-1) !== '©') ? ' ' : '';
+		input.value = before + sep + sym + after;
+		var pos = (before + sep + sym).length;
+		try { input.focus(); input.setSelectionRange(pos, pos); } catch (e) { /* type non texte */ }
+		input.dispatchEvent(new Event('input', { bubbles: true }));
+		input.dispatchEvent(new Event('change', { bubbles: true }));
+	}
+
+	function initSymbolInsert() {
+		var lastFocused = null;
+		// focusin (capture, bouillant) capte le focus programmatique ET clavier.
+		document.addEventListener('focusin', function (e) {
+			if (e.target && e.target.matches && e.target.matches('.rcb-msg-row input')) {
+				lastFocused = e.target;
+			}
+		});
+		document.addEventListener('click', function (e) {
+			var btn = e.target.closest ? e.target.closest('.rcb-sym') : null;
+			if (!btn) { return; }
+			var active = document.activeElement;
+			var target = btn.getAttribute('data-for')
+				? document.getElementById(btn.getAttribute('data-for'))
+				: (lastFocused
+					|| (active && active.matches && active.matches('.rcb-msg-row input') ? active : null)
+					|| document.querySelector('.rcb-msg-row input'));
+			insertSymbol(target, btn.getAttribute('data-sym') || '©');
+		});
+	}
+
 	function boot() {
 		initTabs();
 		initAboutPage();
 		initAboutBuyModal();
 		initLicensePrefill();
 		initCountryPicker();
+		initSymbolInsert();
 		initConfirms();
 		initCheckAll();
 		initPlanPicker();

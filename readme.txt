@@ -4,7 +4,7 @@ Tags: right click, content protection, copy protection, anti spam, image protect
 Requires at least: 4.9
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 2.30.2
+Stable tag: 2.30.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,6 +163,9 @@ Yes: Settings, Export (JSON), then Import on the target site. Perfect for agenci
 6. Professional structured HTML emails (order confirmation, license key)
 
 == Changelog ==
+
+= 2.30.3 =
+* New: copyright symbol quick-insert in Settings → Messages. Each of the eleven message fields has a "©" button that inserts the symbol right at the text cursor, and a global "©" in the card intro targets the last focused field (falls back to the active or first field).
 
 = 2.30.2 =
 * Improved Settings → Messages: the eleven warning-message fields now flow in two columns (single column below 900px), making the card a third shorter and every message visible at a glance.

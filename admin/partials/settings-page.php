@@ -226,13 +226,16 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 		<section class="rcb-tab-panel" id="rcb-tab-messages" <?php echo 'messages' !== $tab ? 'hidden' : ''; ?>>
 			<div class="rcb-card">
 				<div class="rcb-card-head"><h2>Messages affichés au visiteur</h2></div>
-				<p class="rcb-muted" style="margin:0 0 14px;">Personnalisez le texte de chaque avertissement — notamment celui du <strong>clic droit</strong>. La mention copyright (onglet Apparence) est ajoutée automatiquement sous chaque message.</p>
+				<p class="rcb-muted" style="margin:0 0 14px;">Personnalisez le texte de chaque avertissement — notamment celui du <strong>clic droit</strong>. Le bouton <button type="button" class="rcb-sym" data-sym="©" data-global="1" title="Insérer le symbole copyright dans le champ actif">©</button> insère le symbole copyright au curseur. La mention copyright (onglet Apparence) est ajoutée automatiquement sous chaque message.</p>
 				<div class="rcb-fields rcb-fields-2">
 					<?php foreach ( $types as $type => $meta ) : ?>
 						<?php if ( 'country' === $type ) { continue; } // pas de message visiteur pour le blocage pays. ?>
 						<div class="rcb-field">
 							<label for="rcb-msg-<?php echo esc_attr( $type ); ?>"><span class="rcb-status-emoji"><?php echo esc_html( $meta['emoji'] ); ?></span> <?php echo esc_html( $meta['label'] ); ?></label>
-							<input type="text" class="regular-text" id="rcb-msg-<?php echo esc_attr( $type ); ?>" name="infinity_rcb[messages][<?php echo esc_attr( $type ); ?>]" value="<?php echo esc_attr( $options['messages'][ $type ] ); ?>">
+							<div class="rcb-msg-row">
+								<input type="text" class="regular-text" id="rcb-msg-<?php echo esc_attr( $type ); ?>" name="infinity_rcb[messages][<?php echo esc_attr( $type ); ?>]" value="<?php echo esc_attr( $options['messages'][ $type ] ); ?>">
+								<button type="button" class="rcb-sym" data-for="rcb-msg-<?php echo esc_attr( $type ); ?>" data-sym="©" title="Insérer © dans ce champ">©</button>
+							</div>
 						</div>
 					<?php endforeach; ?>
 				</div>

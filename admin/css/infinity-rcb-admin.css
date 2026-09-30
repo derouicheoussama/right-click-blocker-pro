@@ -277,6 +277,17 @@
 /* Onglet Messages : champs sur deux colonnes (moitié de hauteur). */
 .rcb-fields-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
 @media (max-width: 900px) { .rcb-fields-2 { grid-template-columns: 1fr; } }
+
+/* Bouton d'insertion du symbole copyright (onglet Messages). */
+.rcb-msg-row { display: flex; gap: 8px; align-items: center; }
+.rcb-msg-row .regular-text { flex: 1 1 auto; min-width: 0; }
+.rcb-sym {
+	flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+	width: 30px; height: 30px; border: 1px solid var(--rcb-border); border-radius: 8px;
+	background: #fff; color: var(--rcb-text); font-size: 15px; font-weight: 700;
+	cursor: pointer; transition: background .12s ease, border-color .12s ease;
+}
+.rcb-sym:hover { background: #eef2ff; border-color: #93c5fd; color: #1d4ed8; }
 .rcb-field label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 6px; }
 .rcb-field input[type="text"], .rcb-field input[type="url"], .rcb-field input[type="email"],
 .rcb-field input[type="number"], .rcb-field input[type="search"], .rcb-field select, .rcb-field textarea {
