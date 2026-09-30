@@ -227,7 +227,7 @@ if ( ! in_array( $tab, $allowed, true ) ) {
 			<div class="rcb-card">
 				<div class="rcb-card-head"><h2>Messages affichés au visiteur</h2></div>
 				<p class="rcb-muted" style="margin:0 0 14px;">Personnalisez le texte de chaque avertissement — notamment celui du <strong>clic droit</strong>. La mention copyright (onglet Apparence) est ajoutée automatiquement sous chaque message.</p>
-				<div class="rcb-fields">
+				<div class="rcb-fields rcb-fields-2">
 					<?php foreach ( $types as $type => $meta ) : ?>
 						<?php if ( 'country' === $type ) { continue; } // pas de message visiteur pour le blocage pays. ?>
 						<div class="rcb-field">

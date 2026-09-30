@@ -274,6 +274,9 @@
 .rcb-field-label strong { font-size: 13.5px; }
 .rcb-field-label p { margin: 3px 0 0; color: var(--rcb-muted); font-size: 12.5px; }
 .rcb-fields { display: grid; gap: 4px; }
+/* Onglet Messages : champs sur deux colonnes (moitié de hauteur). */
+.rcb-fields-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+@media (max-width: 900px) { .rcb-fields-2 { grid-template-columns: 1fr; } }
 .rcb-field label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 6px; }
 .rcb-field input[type="text"], .rcb-field input[type="url"], .rcb-field input[type="email"],
 .rcb-field input[type="number"], .rcb-field input[type="search"], .rcb-field select, .rcb-field textarea {
