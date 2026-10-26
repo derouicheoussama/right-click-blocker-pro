@@ -1,8 +1,9 @@
-# Fichiers de développement locaux (jamais dans le dépôt)
+# Fichiers locaux à ne JAMAIS versionner ni distribuer.
+# (Mantenue dans le dépôt pour que tout clone reste propre.)
 .mimosa/
-.zcode/
 .zcodeignore
-SOUMISSION-WPORG.md
-*.zip
-.DS_Store
+__pycache__/
+*.log
 Thumbs.db
+.DS_Store
+desktop.ini

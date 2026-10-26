@@ -32,6 +32,8 @@ jobs:
             --exclude='LICENSE.md' \
             --exclude='SECURITY.md' \
             --exclude='.gitignore' \
+            --exclude='.zcodeignore' \
+            --exclude='.mimosa' \
             ./ build/right-click-blocker-pro/
           cd build/right-click-blocker-pro
           python3 - <<'PY'
