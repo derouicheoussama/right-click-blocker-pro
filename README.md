@@ -117,6 +117,10 @@ git tag vX.Y.Z && git push origin main vX.Y.Z
 
 Signalement de vulnérabilité : [SECURITY.md](SECURITY.md) — divulgation responsable par e-mail, jamais en issue public.
 
+## ☕ Soutenir
+
+Le plugin reste **gratuit et complet** sans rien payer. Si tu l'utilises au quotidien, [![Ko-fi](https://img.shields.io/badge/%E2%98%95%20Soutenir-Ko--fi-FF5E5B?style=flat-square&logo=kofi&logoColor=white)](https://ko-fi.com/derouicheoussama) **[un café sur Ko-fi](https://ko-fi.com/derouicheoussama)** aide à financer les mises à jour — ou choisis la licence de support à vie ci-dessous.
+
 ## 🤝 Contribuer
 
 Les contributions sont bienvenues ! Consultez [CONTRIBUTING.md](CONTRIBUTING.md) :
