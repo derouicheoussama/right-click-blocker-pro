@@ -2,9 +2,9 @@
 # (Mantenue dans le dépôt pour que tout clone reste propre.)
 .mimosa/
 .zcodeignore
+SOUMISSION-WPORG.md
 __pycache__/
 *.log
 Thumbs.db
 .DS_Store
 desktop.ini
-SOUMISSION-WPORG.md

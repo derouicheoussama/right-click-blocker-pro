@@ -283,7 +283,7 @@ $compat = array(
 				<li><span>Site officiel</span><strong><a href="<?php echo esc_url( $options['developer']['website'] ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $options['developer']['website'] ); ?></a></strong></li>
 				<?php endif; ?>
 				<li><span>Licence</span><strong>GPL v2 ou ultérieure</strong></li>
-				<li><span>WordPress compatible</span><strong>4.9 → 6.8</strong> <em class="rcb-muted">(installé : <?php echo esc_html( get_bloginfo( 'version' ) ); ?>)</em></li>
+				<li><span>WordPress compatible</span><strong>4.9 → 7.1</strong> <em class="rcb-muted">(installé : <?php echo esc_html( get_bloginfo( 'version' ) ); ?>)</em></li>
 				<li><span>PHP compatible</span><strong>7.0 → 8.3</strong> <em class="rcb-muted">(installé : <?php echo esc_html( PHP_VERSION ); ?>)</em></li>
 				<li><span>Text domain</span><strong>infinity-rcb-pro</strong></li>
 				<li><span>Dossier des journaux</span><strong class="rcb-ua"><?php echo esc_html( $log_stats['dir'] ); ?></strong></li>

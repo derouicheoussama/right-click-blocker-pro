@@ -11,13 +11,17 @@
  * Requires PHP:      7.0
  *
  * COMPLIANCE NOTE (WordPress.org Guidelines 5 & 6 — no trialware):
- * every feature of this plugin is free and fully functional without any
- * license key. The optional "License & Purchase" page only handles
- * symbolic, lifetime support licenses; it never gates, restricts,
- * disables or unlocks any functionality. The optional Chargily Pay
- * gateway (vendor site only) makes NO outbound request unless the
- * vendor explicitly configures their own API key; all protections and
- * telemetry-free features work fully offline.
+ * THIS WordPress.org build is free and fully functional without any
+ * license key: nothing in this distribution is gated, restricted,
+ * disabled or unlocked by a license. The optional "License & Purchase"
+ * page only handles symbolic, lifetime support licenses (priority
+ * support, email alerts). The separately distributed vendor edition
+ * (GitHub channel) additionally limits three cosmetic extras (custom
+ * message logo, image watermark, custom CSS) to license holders; the 12
+ * content protections and 5 antispam layers stay free in EVERY edition.
+ * The optional Chargily Pay gateway (vendor site only) makes NO outbound
+ * request unless the vendor explicitly configures their own API key; all
+ * protections and telemetry-free features work fully offline.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

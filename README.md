@@ -23,11 +23,11 @@
 > ### ✅ Conformité WordPress.org
 > Ce plugin respecte les directives du répertoire officiel : **guides 5 & 6 (pas de trialware)** — chaque fonctionnalité est gratuite et pleinement fonctionnelle sans aucune clé de licence. Les licences à vie mentionnées ci-dessous sont **symboliques et optionnelles** : elles financent le support, ne verrouillent rien et n'activent rien. Le canal de mise à jour GitHub de ce dépôt est **exclu du build WordPress.org** et se désactive automatiquement dès que le répertoire officiel gère l'extension.
 >
-> **Édition duale** : la version **WordPress.org** est l'édition complète et 100 % gratuite. La version distribuée ici (canal vendeur) ajoute un **module Pro** — options cosmétiques avancées débloquées par la licence à vie : **logo personnalisé du message, filigrane d'images réglable, CSS personnalisé** (+ support prioritaire et alertes e-mail). Les 16 protections restent intégralement libres dans les deux éditions.
+> **Édition duale** : la version **WordPress.org** est l'édition complète et 100 % gratuite. La version distribuée ici (canal vendeur) ajoute un **module Pro** — options cosmétiques avancées débloquées par la licence à vie : **logo personnalisé du message, filigrane d'images réglable, CSS personnalisé** (+ support prioritaire et alertes e-mail). Les 17 protections restent intégralement libres dans les deux éditions.
 
 ## ✨ Fonctionnalités
 
-### 16 protections actives
+### 17 protections actives (12 contenu + 5 antispam)
 
 | Protection | Incluse |
 |---|---|
@@ -42,6 +42,7 @@
 | 💧 Filigrane d'images (texte, opacité et taille réglables) | ✅ * 🔓 |
 | 🖼️ Anti-clickjacking (X-Frame-Options + frame busting) | ✅ |
 | 📱 Protection tactile iOS/Android (long-press) | ✅ |
+| 🌍 Blocage par pays (liste noire / liste blanche) | ✅ |
 | 🍯 Antispam commentaires — honeypot | ✅ |
 | ⏱️ Antispam — délai minimal de saisie | ✅ |
 | 🚦 Antispam — limite de débit par IP | ✅ |
@@ -116,10 +117,6 @@ git tag vX.Y.Z && git push origin main vX.Y.Z
 - Nonces, capacités, échappement, `ABSPATH` sur tous les points d'entrée — **aucune donnée sortante, aucun cookie**
 
 Signalement de vulnérabilité : [SECURITY.md](SECURITY.md) — divulgation responsable par e-mail, jamais en issue public.
-
-## ☕ Soutenir
-
-Le plugin reste **gratuit et complet** sans rien payer. Si tu l'utilises au quotidien, [![Ko-fi](https://img.shields.io/badge/%E2%98%95%20Soutenir-Ko--fi-FF5E5B?style=flat-square&logo=kofi&logoColor=white)](https://ko-fi.com/derouicheoussama) **[un café sur Ko-fi](https://ko-fi.com/derouicheoussama)** aide à financer les mises à jour — ou choisis la licence de support à vie ci-dessous.
 
 ## 🤝 Contribuer
 
